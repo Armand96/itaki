@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('name', 100);
             $table->string('image', 200);
             $table->string('image_thumb', 200);
+            $table->text('description');
             $table->boolean('is_active')->default(true);
             $table->timestamps();
         });

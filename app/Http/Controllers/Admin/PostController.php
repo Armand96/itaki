@@ -23,7 +23,7 @@ class PostController extends Controller
         $dataPerPage = $req->input('data_per_page', 10);
 
         $posts = Post::query()
-            ->when($req->filled('title'), fn($q) => $q->where('title', 'like', "%{$req->name}%"))
+            ->when($req->filled('title'), fn($q) => $q->where('title', 'like', "%{$req->title}%"))
             ->orderBy('id', 'desc')
             ->paginate($dataPerPage);
 
@@ -49,7 +49,7 @@ class PostController extends Controller
             if ($request->hasFile('image')) {
                 $file = $request->file('image');
                 $imageName = time() . '.' . $file->extension();
-                $path = $file->storeAs('products', $imageName, 'public');
+                $path = $file->storeAs('post', $imageName, 'public');
                 array_push($imagePaths, $path);
                 $validated['cover_image'] = $path;
             }
@@ -90,11 +90,9 @@ class PostController extends Controller
             if ($request->hasFile('image')) {
                 $file = $request->file('image');
                 $imageName = time() . '.' . $file->extension();
-                $path = $file->storeAs('products', $imageName, 'public');
+                $path = $file->storeAs('post', $imageName, 'public');
                 array_push($imagePaths, $path);
                 $validated['cover_image'] = $path;
-
-                $post->delete();
                 Storage::disk('public')->delete($post->cover_image);
             }
 
