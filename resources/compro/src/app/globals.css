@@ -1,0 +1,17 @@
+  
+@import url('https://fonts.googleapis.com/css2?family=Fira+Sans:ital,wght@0,100..900;1,100..900&family=Instrument+Sans:ital,wght@0,400..700;1,400..700&family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&family=Ubuntu:ital,wght@0,300..700;1,300..700&display=swap');
+
+@import "bootstrap/dist/css/bootstrap.min.css";
+
+
+@import "../../public/assets/css/animate.css";
+@import "../../public/assets/css/aos.css";
+@import "../../public/assets/css/app.css"; 
+@import "../../public/assets/css/fontawesome.css";
+@import "../../public/assets/css/magnific-popup.css";
+@import "../../public/assets/css/niceselect.css";
+@import "../../public/assets/css/remixicon.css"; 
+ 
+
+@import "../../public/assets/css/main.css";
+@import "../../public/assets/css/app.min.css";
