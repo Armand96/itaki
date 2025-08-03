@@ -1,4 +1,4 @@
- 
+
 
 
 
@@ -4994,7 +4994,7 @@ button#luminix-search-btn i {
 	width: 100%;
 	height: 100%;
 	object-fit: cover;
-	transition: all 0.4s; 
+	transition: all 0.4s;
 }
 .luminix-recent-post-data h6 {
 	font-family: Inter, sans-serif;
@@ -5217,26 +5217,17 @@ blockquote img {
 }
 .luminix-hero-section {
 	padding: 180px 0;
-	margin-top: 150px;
 	position: relative;
 	z-index: 0;
 }
-@media (max-width: 1199px) {
-	.luminix-hero-section {
-		margin-top: 60px;
-	}
-}
-@media (max-width: 991px) {
-	.luminix-hero-section {
-		padding: 160px 0;
-	}
-}
+
+
 @media (max-width: 767px) {
 	.luminix-hero-section {
-		margin-top: 36px;
 		padding: 130px 0 100px;
 	}
 }
+
 .luminix-hero-section::before {
 	content: "";
 	top: 0;

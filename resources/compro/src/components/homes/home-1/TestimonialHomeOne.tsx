@@ -1,9 +1,9 @@
 "use client";
 import React from 'react'
 import Slider from 'react-slick'
- 
+
 import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css"; 
+import "slick-carousel/slick/slick-theme.css";
 import Image from 'next/image';
 
 interface StyleProps {
@@ -12,12 +12,12 @@ interface StyleProps {
 
 
 
-// images import  
+// images import
 import rating_img from "@/assets/images/v1/rating.svg";
 import quote1_img from "@/assets/images/v1/quote1.svg";
-import test2_img from "@/assets/images/v1/test2.png";  
-import test1_img from "@/assets/images/v1/test1.png"; 
-import test3_img from "@/assets/images/v1/test3.png";  
+import test2_img from "@/assets/images/v1/test2.png";
+import test1_img from "@/assets/images/v1/test1.png";
+import test3_img from "@/assets/images/v1/test3.png";
 import test4_img from "@/assets/images/v1/test4.png";
 
 
@@ -28,7 +28,7 @@ export default function TestimonialHomeOne({style_2 }: StyleProps) {
       <div className="luminix-padding-section3 light-bg1">
         <div className="container">
           <div className="luminix-section-title center">
-            {style_2 ?  null : <h6>[Client Reviews]</h6>}            
+            {style_2 ?  null : <h6>[Client Reviews]</h6>}
             <h2 className="title">Hear what our happy clients say</h2>
             <p className="text2">We have completed our projects seriously and have many positive client reviews that prove our expertise. Some of them are also mentioned here.</p>
           </div>
@@ -40,7 +40,7 @@ export default function TestimonialHomeOne({style_2 }: StyleProps) {
           autoplay={true}
           dots={true}
           centerMode={true}
-          speed={500}          
+          speed={500}
           centerPadding="180px"
           lazyLoad="progressive"
           responsive={[
@@ -48,26 +48,24 @@ export default function TestimonialHomeOne({style_2 }: StyleProps) {
               breakpoint: 1349,
               settings: {
                 slidesToShow: 2,
+                centerMode: true,
+                centerPadding: "120px",
               },
             },
             {
               breakpoint: 991,
               settings: {
                 slidesToShow: 1,
+                centerMode: true,
+                centerPadding: "80px",
               },
             },
             {
-              breakpoint: 767,
+              breakpoint: 600,
               settings: {
                 slidesToShow: 1,
-                centerPadding: "100px",
-              },
-            },
-            {
-              breakpoint: 0,
-              settings: {
-                slidesToShow: 1,
-                centerPadding: "0px",
+                centerMode: true,
+                centerPadding: "40px",
               },
             },
           ]}

@@ -13,10 +13,9 @@ const plusJakarta = Plus_Jakarta_Sans({
 
 export const metadata: Metadata = {
   title: {
-    default: "Luminix - IT Solution & Technology Next JS Template",
+    default: "ITAKI ",
     template: "%s | Luminix",
   },
-  description: "Luminix is a cutting-edge Next.js template designed for IT solutions and tech businesses.",
   icons: {
     icon: "/favicon.ico",
   },
