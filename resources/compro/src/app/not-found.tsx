@@ -1,5 +1,3 @@
-
-// app/not-found.tsx
 export default function NotFound() {
   return (
     <div className="not-found-page">

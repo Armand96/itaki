@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "postexport": "node move-build.js",
+    "build:laravel": "npm run build && npm run postexport"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.1.1",
@@ -14,6 +15,7 @@
     "animate.css": "^4.1.1",
     "aos": "^2.3.4",
     "bootstrap": "^5.3.6",
+    "fs-extra": "^11.3.0",
     "next": "15.3.2",
     "react": "^19.0.0",
     "react-countup": "^6.5.3",

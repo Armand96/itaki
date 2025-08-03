@@ -10,7 +10,7 @@ const nextConfig = (phase) => {
     output: 'export',
     reactStrictMode: false,
     distDir: 'dist',
-    // assetPrefix: dev === phase ?  '/'  :'/compro',
+    assetPrefix: dev === phase ?  ''  :'/compro',
     eslint: {
       ignoreDuringBuilds: true,
     },
