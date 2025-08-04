@@ -3,7 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Post\DocumentCreateReq;
+use App\Http\Requests\Document\DocumentCreateReq;
+use App\Http\Requests\Document\DocumentUpdateReq;
 use App\Http\Requests\ResponseFail;
 use App\Http\Requests\ResponseSuccess;
 use App\Models\Document;
@@ -81,7 +82,7 @@ class DocumentController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Document $document)
+    public function update(DocumentUpdateReq $request, Document $document)
     {
         try {
             $validated = $request->validated();

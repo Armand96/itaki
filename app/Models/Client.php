@@ -10,6 +10,7 @@ class Client extends Model
         'name',
         'image',
         'image_thumb',
+        'description',
         'is_active',
     ];
 

@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Http\Requests\Document;
+namespace App\Http\Requests\Client;
 
 use App\Http\Requests\ApiRequest;
 
-class DocumentCreateReq extends ApiRequest
+class ClientCreateReq extends ApiRequest
 {
-    public string $title;
-    public mixed $file;
-    public string $description;
+    public string $category;
+    public mixed $image;
+
     /**
      * Get the validation rules that apply to the request.
      *
@@ -17,9 +17,8 @@ class DocumentCreateReq extends ApiRequest
     public function rules(): array
     {
         return [
-            'title' => 'string|required',
-            'file' => 'file',
-            'description' => 'string'
+            'category' => 'required|string',
+            'image' => 'image',
         ];
     }
 }

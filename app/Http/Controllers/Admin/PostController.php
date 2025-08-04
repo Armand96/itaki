@@ -91,7 +91,6 @@ class PostController extends Controller
                 $file = $request->file('image');
                 $imageName = time() . '.' . $file->extension();
                 $path = $file->storeAs('post', $imageName, 'public');
-                array_push($imagePaths, $path);
                 $validated['cover_image'] = $path;
                 Storage::disk('public')->delete($post->cover_image);
             }

@@ -47,7 +47,7 @@ class GalleryController extends Controller
             if ($request->hasFile('image')) {
                 $file = $request->file('image');
                 $imageName = time() . '.' . $file->extension();
-                $path = $file->storeAs('products', $imageName, 'public');
+                $path = $file->storeAs('gallery', $imageName, 'public');
                 array_push($imagePaths, $path);
                 $validated['image'] = $path;
                 $validated['image_thumb'] = $path;
@@ -87,15 +87,14 @@ class GalleryController extends Controller
             if ($request->hasFile('image')) {
                 $file = $request->file('image');
                 $imageName = time() . '.' . $file->extension();
-                $path = $file->storeAs('products', $imageName, 'public');
-                array_push($imagePaths, $path);
+                $path = $file->storeAs('gallery', $imageName, 'public');
                 $validated['image'] = $path;
                 $validated['image_thumb'] = $path;
                 Storage::disk('public')->delete($gallery->image);
                 Storage::disk('public')->delete($gallery->image_thumb);
-                $gallery->update($validated);
-                return response()->json(new ResponseSuccess($gallery, "Success", "Success Upload Image"));
             }
+            $gallery->update($validated);
+            return response()->json(new ResponseSuccess($gallery, "Success", "Success Upload Image"));
         } catch (\Throwable $th) {
             Log::error($th);
             //throw $th;
