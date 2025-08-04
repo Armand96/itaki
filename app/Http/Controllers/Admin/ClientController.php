@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Client\ClientCreateReq;
+use App\Http\Requests\Client\ClientUpdateReq;
 use App\Http\Requests\ResponseFail;
 use App\Http\Requests\ResponseSuccess;
 use App\Models\Client;
@@ -52,9 +53,9 @@ class ClientController extends Controller
                 array_push($imagePaths, $path);
                 $validated['image'] = $path;
                 $validated['image_thumb'] = $path;
-                $client = Client::create($validated);
-                return response()->json(new ResponseSuccess($client, "Success", "Success Create Client"));
             }
+            $client = Client::create($validated);
+            return response()->json(new ResponseSuccess($client, "Success", "Success Create Client"));
         } catch (\Throwable $th) {
             Log::error($th);
             //throw $th;
@@ -81,7 +82,7 @@ class ClientController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Client $client)
+    public function update(ClientUpdateReq $request, Client $client)
     {
         try {
             $validated = $request->validated();

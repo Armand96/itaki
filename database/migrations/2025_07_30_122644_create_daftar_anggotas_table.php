@@ -15,6 +15,8 @@ return new class extends Migration
             $table->id();
             $table->string("nama", 150);
             $table->string("jabatan", 50);
+            $table->string("image", 200);
+            $table->string("image_thumb", 200);
             $table->text("deskripsi_jabatan");
             $table->timestamps();
         });

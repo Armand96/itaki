@@ -51,9 +51,9 @@ class GalleryController extends Controller
                 array_push($imagePaths, $path);
                 $validated['image'] = $path;
                 $validated['image_thumb'] = $path;
-                $gallery = Gallery::create($validated);
-                return response()->json(new ResponseSuccess($gallery, "Success", "Success Upload Image"));
             }
+            $gallery = Gallery::create($validated);
+            return response()->json(new ResponseSuccess($gallery, "Success", "Success Upload Image"));
         } catch (\Throwable $th) {
             Log::error($th);
             //throw $th;
