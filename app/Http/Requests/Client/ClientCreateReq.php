@@ -4,10 +4,12 @@ namespace App\Http\Requests\Client;
 
 use App\Http\Requests\ApiRequest;
 
-class ClientUpdateReq extends ApiRequest
+class ClientCreateReq extends ApiRequest
 {
-    public string $category;
+    public string $name;
     public mixed $image;
+    public string $description;
+    public bool $is_active;
 
     /**
      * Get the validation rules that apply to the request.
@@ -17,8 +19,10 @@ class ClientUpdateReq extends ApiRequest
     public function rules(): array
     {
         return [
-            'category' => 'required|string',
+            'name' => 'required|string',
             'image' => 'image',
+            'description' => 'string',
+            'is_active' => 'bool',
         ];
     }
 }
