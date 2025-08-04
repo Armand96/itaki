@@ -9,7 +9,7 @@ type BreadcrumbProps = {
 
 
 const Breadcrumb = ({ title, subtitle, bg_img }: BreadcrumbProps) => {
-  
+
   return (
     <>
       <div className={`breadcrumb-wrapper ${bg_img}`}>
@@ -21,8 +21,6 @@ const Breadcrumb = ({ title, subtitle, bg_img }: BreadcrumbProps) => {
               <div className="breadcrumb-menu-wrap">
                 <div className="breadcrumb-menu">
                   <ul>
-                    <li><Link href="/">Home</Link></li>
-                    <li><Image width={9} height={16} src="/assets/images/breadcrumb/right-arrow.svg" alt="right-arrow" /></li>
                     <li aria-current="page">{subtitle}</li>
                   </ul>
                 </div>

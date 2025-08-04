@@ -14,7 +14,7 @@ const plusJakarta = Plus_Jakarta_Sans({
 export const metadata: Metadata = {
   title: {
     default: "ITAKI ",
-    template: "%s | Luminix",
+    template: "%s | ITAKI",
   },
   icons: {
     icon: "/favicon.ico",

@@ -1,6 +1,6 @@
-import HomeOne from "@/components/homes/home-1";
+import HomeOne from "@/components/homes";
 
- 
+
 
 const Index = () => {
   return <HomeOne />;

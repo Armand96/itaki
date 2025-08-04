@@ -84,8 +84,7 @@ const OffCanvas = ({ setOpenMenu, openMenu }: OffCanvasProps) => {
             </ul>
           </div>
           <div className="luminix-mobile-menu-btn">
-            <Link className="luminix-default-btn sm-size" href="/contact-us" data-text="Get in Touch"><span className="btn-wraper">Get in Touch</span></Link>
-            <Link className="luminix-default-btn sm-size" href="/about-us" data-text="Get in Touch"><span className="btn-wraper">About Us</span></Link>
+            <Link className="luminix-default-btn sm-size" href="/about-us" data-text="Get in Touch"><span className="btn-wraper">Kontak Kami</span></Link>
           </div>
         </div>
       </div>

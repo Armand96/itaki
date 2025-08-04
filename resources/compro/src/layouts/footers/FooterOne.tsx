@@ -6,12 +6,11 @@ import React from 'react'
 
 
 
-// images import   
+// images import
 import logo_white1_img from "@/assets/images/logo/logo-white1.svg";
 import location_img from "@/assets/images/iconbox/location.svg";
 import mail_img from "@/assets/images/iconbox/mail.svg";
 import call_img from "@/assets/images/iconbox/call.svg";
-import clock_img from "@/assets/images/iconbox/clock.svg";
 
 export default function FooterOne() {
   return (
@@ -38,34 +37,10 @@ export default function FooterOne() {
                   </div>
                 </div>
               </div>
-              <div className="col-xxl-2 col-xl-6 col-md-6">
-                <div className="luminix-footer-menu ml-15 ml-50">
-                  <div className="luminix-footer-title">
-                    <h5>Our Services</h5>
-                  </div>
-                  <ul>
-                    <li>
-                      <Link href="/about-us">Business Strategy</Link>
-                    </li>
-                    <li>
-                      <Link href="/single-service">Customer Experience</Link>
-                    </li>
-                    <li>
-                      <Link href="/portfolio">Financial Advices</Link>
-                    </li>
-                    <li>
-                      <Link href="/team">Business Planning</Link>
-                    </li>
-                    <li>
-                      <Link href="/blog">Manage Investment</Link>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-              <div className="col-xxl-3 col-xl-6 col-md-6">
+              <div className="col-xxl-4 col-xl-6 col-md-6">
                 <div className="luminix-footer-menu2 ml-24">
                   <div className="luminix-footer-title">
-                    <h5>Contact Info</h5>
+                    <h5>Temui kami di</h5>
                   </div>
                   <ul>
                     <li>
@@ -84,31 +59,23 @@ export default function FooterOne() {
                         +088-748-7888
                       </a>
                     </li>
-                    <li>
-                      <Image width={25} height={26} src={clock_img} alt="here is theme image" />
-                      Mon - Sat: 10.00 - 18.00
-                    </li>
                   </ul>
                 </div>
               </div>
-              <div className="col-xxl-3 col-xl-6 col-md-6">
+              <div className="col-xxl-4 col-xl-6 col-md-6">
                 <div className="luminix-footer-menu2 ml-50 mb-0">
                   <div className="luminix-footer-title">
-                    <h5>Newsletter</h5>
+                    <h5>Maps</h5>
                   </div>
                   <div className="luminix-subscription-field">
-                    <p>Stay updated with our latest news</p>
-                    <form>
-                      <input type="email" placeholder="Your Email Address" />
-                      <button className="subcription-btn2 pill" type="submit">Subscribe now</button>
-                    </form>
+                      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2281.604530215675!2d106.89787305970734!3d-6.213541190080683!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69f4a5a0f1df47%3A0x256f95253d9a3a62!2sKlender!5e1!3m2!1sid!2sid!4v1754321798666!5m2!1sid!2sid" style={{border: "0", width: "100%", height: "300px"}}  loading="lazy" referrerPolicy="no-referrer-when-downgrade" ></iframe>
                   </div>
                 </div>
               </div>
             </div>
           </div>
           <div className="luminix-footer-bottom-text">
-            <p>© Copyright {new Date().getFullYear()} <span id="current-year"></span>, All Rights Reserved by WebArwa</p>
+            <p>© Copyright {new Date().getFullYear()} <span id="current-year"></span>, All Rights Reserved by itaki</p>
           </div>
         </div>
       </footer>
