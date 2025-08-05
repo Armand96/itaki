@@ -11,14 +11,49 @@ interface StyleProps {
 }
 
 
+const settings = {
+  slidesToShow: 7,
+  slidesToScroll: 1,
+  autoplay: true,
+  autoplaySpeed: 0,
+  speed: 8000,
+  arrows: false,
+  pauseOnHover: false,
+  cssEase: 'linear',
+  responsive: [{
+    breakpoint: 1399,
+    settings: {
+      slidesToShow: 5
+    }
+  }, {
+    breakpoint: 1199,
+    settings: {
+      slidesToShow: 4
+    }
+  }, {
+    breakpoint: 991,
+    settings: {
+      slidesToShow: 3
+    }
+  }, {
+    breakpoint: 0,
+    settings: {
+      slidesToShow: 2
+    }
+  }]
+}
+
+interface StyleProps {
+  style_2?: boolean;
+}
+
 
 // images import
-import rating_img from "@/assets/images/v1/rating.svg";
-import quote1_img from "@/assets/images/v1/quote1.svg";
-import test2_img from "@/assets/images/v1/test2.png";
-import test1_img from "@/assets/images/v1/test1.png";
-import test3_img from "@/assets/images/v1/test3.png";
-import test4_img from "@/assets/images/v1/test4.png";
+import brand1_img from "@/assets/images/brand/brand1.svg";
+import brand2_img from "@/assets/images/brand/brand2.svg";
+import brand3_img from "@/assets/images/brand/brand3.svg";
+import brand4_img from "@/assets/images/brand/brand4.svg";
+import brand5_img from "@/assets/images/brand/brand5.svg";
 
 
 
@@ -28,141 +63,92 @@ export default function TestimonialHomeOne({style_2 }: StyleProps) {
       <div className="luminix-padding-section3 light-bg1">
         <div className="container">
           <div className="luminix-section-title center">
-            {style_2 ?  null : <h6>Klien Kami</h6>}
-            <h2 className="title">berikut testimoni dari klien kami</h2>
+            <h2 className="title">klien kami</h2>
             <p className="text2"></p>
           </div>
         </div>
-        <Slider
-          slidesToShow={3}
-          slidesToScroll={1}
-          arrows={false}
-          autoplay={true}
-          autoplaySpeed={1500}
-          dots={true}
-          centerMode={true}
-          speed={400}
-          infinite={true}
-          centerPadding="180px"
-          lazyLoad="progressive"
-          responsive={[
-            {
-              breakpoint: 1349,
-              settings: {
-            slidesToShow: 2,
-            centerMode: true,
-            centerPadding: "120px",
-              },
-            },
-            {
-              breakpoint: 991,
-              settings: {
-            slidesToShow: 1,
-            centerMode: true,
-            centerPadding: "80px",
-              },
-            },
-            {
-              breakpoint: 600,
-              settings: {
-            slidesToShow: 1,
-            centerMode: true,
-            centerPadding: "40px",
-              },
-            },
-          ]}
-          className="luminix-testimonial-slider">
-          <div className="luminix-t-wrap">
-            <div className="luminix-t-header">
-              <Image width={140} height={24} src={rating_img} alt="here is theme image" />
-              <Image width={56} height={42} src={quote1_img} alt="here is theme image" />
-            </div>
-            <div className="luminix-t-content">
-              <p>“Working with luminix was a game-changer for our company. Extremely recommended for businesses looking for transformative solutions.”</p>
-            </div>
-            <div className="luminix-t-author">
-              <div className="luminix-t-author-thumb">
-            <Image width={60} height={60} src={test2_img} alt="here is theme image" />
-              </div>
-              <div className="luminix-t-author-data">
-            <h6>Bonsey Johnson</h6>
-            <p>Businessman</p>
-              </div>
-            </div>
+          <div className={`${style_2 ? 'luminix-brand-section2' : 'luminix-brand-section'}`}>
+        <Slider {...settings} className="luminix-brand-slider-wrap">
+          <div className="luminix-brand-item">
+            <Image width={190} height={41} src={brand1_img} alt="here is theme image" />
           </div>
-          <div className="luminix-t-wrap">
-            <div className="luminix-t-header">
-              <Image width={140} height={24} src={rating_img} alt="here is theme image" />
-              <Image width={56} height={42} src={quote1_img} alt="here is theme image" />
-            </div>
-            <div className="luminix-t-content">
-              <p>“Our experience was characterized by a results-driven approach that really made a difference. They are a reliable partner for driving success.”</p>
-            </div>
-            <div className="luminix-t-author">
-              <div className="luminix-t-author-thumb">
-            <Image width={60} height={60} src={test1_img} alt="here is theme image" />
-              </div>
-              <div className="luminix-t-author-data">
-            <h6>Daniel Turner</h6>
-            <p>Founder@ XYZ Comapny</p>
-              </div>
-            </div>
+          <div className="luminix-brand-item">
+            <Image width={190} height={41} src={brand2_img} alt="here is theme image" />
           </div>
-          <div className="luminix-t-wrap">
-            <div className="luminix-t-header">
-              <Image width={140} height={24} src={rating_img} alt="here is theme image" />
-              <Image width={56} height={42} src={quote1_img} alt="here is theme image" />
-            </div>
-            <div className="luminix-t-content">
-              <p>“Working with luminix was a game-changer for our company. Extremely recommended for businesses looking for transformative solutions.”</p>
-            </div>
-            <div className="luminix-t-author">
-              <div className="luminix-t-author-thumb">
-            <Image width={60} height={60} src={test3_img} alt="here is theme image" />
-              </div>
-              <div className="luminix-t-author-data">
-            <h6>Michael Ramirez</h6>
-            <p>Director Of ZuBaz</p>
-              </div>
-            </div>
+          <div className="luminix-brand-item">
+            <Image width={190} height={41} src={brand3_img} alt="here is theme image" />
           </div>
-          <div className="luminix-t-wrap">
-            <div className="luminix-t-header">
-              <Image width={140} height={24} src={rating_img} alt="here is theme image" />
-              <Image width={56} height={42} src={quote1_img} alt="here is theme image" />
-            </div>
-            <div className="luminix-t-content">
-              <p>“Working with luminix was a game-changer for our company. Extremely recommended for businesses looking for transformative solutions.”</p>
-            </div>
-            <div className="luminix-t-author">
-              <div className="luminix-t-author-thumb">
-            <Image width={60} height={60} src={test2_img} alt="here is theme image" />
-              </div>
-              <div className="luminix-t-author-data">
-            <h6>Bonsey Johnson</h6>
-            <p>Businessman</p>
-              </div>
-            </div>
+          <div className="luminix-brand-item">
+            <Image width={190} height={41} src={brand4_img} alt="here is theme image" />
           </div>
-          <div className="luminix-t-wrap">
-            <div className="luminix-t-header">
-              <Image width={140} height={24} src={rating_img} alt="here is theme image" />
-              <Image width={56} height={42} src={quote1_img} alt="here is theme image" />
-            </div>
-            <div className="luminix-t-content">
-              <p>"What impressed us the most about was their commitment to transparent communication. A trusted navigating complex business landscapes."</p>
-            </div>
-            <div className="luminix-t-author">
-              <div className="luminix-t-author-thumb">
-            <Image width={60} height={60} src={test4_img} alt="here is theme image" />
-              </div>
-              <div className="luminix-t-author-data">
-            <h6>Rick Ferrari</h6>
-            <p>Manager</p>
-              </div>
-            </div>
+          <div className="luminix-brand-item">
+            <Image width={190} height={41} src={brand5_img} alt="here is theme image" />
+          </div>
+          <div className="luminix-brand-item">
+            <Image width={190} height={41} src={brand4_img} alt="here is theme image" />
+          </div>
+          <div className="luminix-brand-item">
+            <Image width={190} height={41} src={brand3_img} alt="here is theme image" />
+          </div>
+          <div className="luminix-brand-item">
+            <Image width={190} height={41} src={brand2_img} alt="here is theme image" />
+          </div>
+          <div className="luminix-brand-item">
+            <Image width={190} height={41} src={brand3_img} alt="here is theme image" />
+          </div>
+          <div className="luminix-brand-item">
+            <Image width={190} height={41} src={brand4_img} alt="here is theme image" />
+          </div>
+          <div className="luminix-brand-item">
+            <Image width={190} height={41} src={brand5_img} alt="here is theme image" />
+          </div>
+          <div className="luminix-brand-item">
+            <Image width={190} height={41} src={brand4_img} alt="here is theme image" />
+          </div>
+          <div className="luminix-brand-item">
+            <Image width={190} height={41} src={brand3_img} alt="here is theme image" />
+          </div>
+          <div className="luminix-brand-item">
+            <Image width={190} height={41} src={brand2_img} alt="here is theme image" />
+          </div>
+          <div className="luminix-brand-item">
+            <Image width={190} height={41} src={brand3_img} alt="here is theme image" />
+          </div>
+          <div className="luminix-brand-item">
+            <Image width={190} height={41} src={brand4_img} alt="here is theme image" />
+          </div>
+          <div className="luminix-brand-item">
+            <Image width={190} height={41} src={brand5_img} alt="here is theme image" />
+          </div>
+          <div className="luminix-brand-item">
+            <Image width={190} height={41} src={brand4_img} alt="here is theme image" />
+          </div>
+          <div className="luminix-brand-item">
+            <Image width={190} height={41} src={brand3_img} alt="here is theme image" />
+          </div>
+          <div className="luminix-brand-item">
+            <Image width={190} height={41} src={brand2_img} alt="here is theme image" />
+          </div>
+          <div className="luminix-brand-item">
+            <Image width={190} height={41} src={brand3_img} alt="here is theme image" />
+          </div>
+          <div className="luminix-brand-item">
+            <Image width={190} height={41} src={brand4_img} alt="here is theme image" />
+          </div>
+          <div className="luminix-brand-item">
+            <Image width={190} height={41} src={brand5_img} alt="here is theme image" />
+          </div>
+          <div className="luminix-brand-item">
+            <Image width={190} height={41} src={brand4_img} alt="here is theme image" />
+          </div>
+          <div className="luminix-brand-item">
+            <Image width={190} height={41} src={brand3_img} alt="here is theme image" />
+          </div>
+          <div className="luminix-brand-item">
+            <Image width={190} height={41} src={brand2_img} alt="here is theme image" />
           </div>
         </Slider>
+      </div>
       </div>
     </>
   )

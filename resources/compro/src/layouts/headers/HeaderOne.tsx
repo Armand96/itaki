@@ -8,7 +8,7 @@ import Link from 'next/link';
 import { useState } from 'react';
 
 // images import
-import logo_dark from "@/assets/images/logo/logo-dark.svg";
+import logo_dark from "@/assets/images/logo/logo-ori.jpg";
 
 
 export default function HeaderOne() {
@@ -23,11 +23,11 @@ export default function HeaderOne() {
           <div className="container">
             <div className="row align-items-center justify-content-between">
               <div className="col-8 col-sm-auto ">
-                <div className="header-logo1 py-3 ">
-                  <Link href="/">
-                    <Image width={139} height={36} src={logo_dark} alt="logo" />
+                  <Link href="/" className="header-logo1 py-3 " style={{ display: "flex", alignItems: "center" }}>
+                     <Image width={55} height={49} src={logo_dark} alt="logo" />
+                  <p className='ps-4' style={{ fontSize: "28px", fontWeight: "bold", marginLeft: "-10px"}}>ITAKI</p>
                   </Link>
-                </div>
+
               </div>
               <div className="col">
                 <div className="luminix-main-menu-item">

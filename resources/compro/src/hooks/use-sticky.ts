@@ -1,4 +1,4 @@
- 
+
 'use client';
 import { useEffect, useState } from "react";
 
@@ -11,7 +11,7 @@ const useSticky = (): StickyState => {
   const [hasMounted, setHasMounted] = useState(false);
 
   useEffect(() => {
-    setHasMounted(true);  
+    setHasMounted(true);
   }, []);
 
   useEffect(() => {
@@ -22,7 +22,7 @@ const useSticky = (): StickyState => {
     };
 
     window.addEventListener("scroll", stickyHeader);
-    stickyHeader(); // Initialize on mount
+    stickyHeader();
 
     return () => {
       window.removeEventListener("scroll", stickyHeader);

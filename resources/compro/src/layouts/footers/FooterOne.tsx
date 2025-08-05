@@ -7,7 +7,7 @@ import React from 'react'
 
 
 // images import
-import logo_white1_img from "@/assets/images/logo/logo-white1.svg";
+import logo_white1_img from "@/assets/images/logo/logo.png";
 import location_img from "@/assets/images/iconbox/location.svg";
 import mail_img from "@/assets/images/iconbox/mail.svg";
 import call_img from "@/assets/images/iconbox/call.svg";
@@ -22,9 +22,9 @@ export default function FooterOne() {
               <div className="col-xxl-4 col-xl-6 col-md-6">
                 <div className="luminix-footer-textarea">
                   <Link href="/">
-                    <Image width={139} height={60} src={logo_white1_img} alt="here is theme image" />
+                    <Image width={200} height={200} src={logo_white1_img} alt="here is theme image" />
                   </Link>
-                  <p>To achieve sustainable growth and success, we run businesses that must consistently adapt to competitive innovations, operational efficiencies and client-centric strategies.</p>
+                  {/* <p>To achieve sustainable growth and success, we run businesses that must consistently adapt to competitive innovations, operational efficiencies and client-centric strategies.</p> */}
                   <div className="luminix-social-wrap wrap2">
                     <ul>
                       {socialLinksFooter.map((link, index) => (
