@@ -98,6 +98,9 @@ const menu_data = [
             { link: "/sertifikasi", title: "Sertifikasi" },
         ],
     },
+        {
+        title: "Publikasi Ilmiah", link: "/publikasi-ilmiah",
+    },
      {
         title: "Regulasi", link: "/regulasi",
     },
