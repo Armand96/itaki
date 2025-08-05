@@ -68,7 +68,7 @@ export default function FooterOne() {
                     <h5>Maps</h5>
                   </div>
                   <div className="luminix-subscription-field">
-                      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2281.604530215675!2d106.89787305970734!3d-6.213541190080683!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69f4a5a0f1df47%3A0x256f95253d9a3a62!2sKlender!5e1!3m2!1sid!2sid!4v1754321798666!5m2!1sid!2sid" style={{border: "0", width: "100%", height: "300px"}}  loading="lazy" referrerPolicy="no-referrer-when-downgrade" ></iframe>
+                      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d628.1966717975447!2d106.9104643110313!3d-6.226632972546737!2m3!1f14.85127841696043!2f44.7536264577681!3f0!3m2!1i1024!2i768!4f35!3m3!1m2!1s0x2e698cacea1ef84f%3A0xd71689c1e0d8040e!2sDPN%20ITAKI!5e1!3m2!1sid!2sid!4v1754411381419!5m2!1sid!2sid" style={{border: "0", width: "100%", height: "300px"}}  loading="lazy" referrerPolicy="no-referrer-when-downgrade" ></iframe>
                   </div>
                 </div>
               </div>
