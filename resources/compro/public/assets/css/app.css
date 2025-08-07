@@ -2710,23 +2710,24 @@ a.white-color {
 .luminix-footer-title2 h5 {
   color: var(--white-color);
 }
+
 .luminix-footer-bottom-text {
   font-size: 16px;
   line-height: 24px;
-  margin-top: 100px;
   padding: 30px 0;
+  margin-top: 30px;
   text-align: center;
   color: var(--white-color);
   border-top: 1px solid rgba(255, 255, 255, 0.1019607843);
 }
 @media (max-width: 1199px) {
   .luminix-footer-bottom-text {
-    margin-top: 60px;
+    /* margin-top: 60px; */
   }
 }
 @media (max-width: 767px) {
   .luminix-footer-bottom-text {
-    margin-top: 30px;
+    margin-top: 10px;
   }
 }
 .luminix-footer-bottom-text p {
@@ -4679,8 +4680,16 @@ img.plasicon {
   background-color: var(--accent-color);
 }
 
-.luminix-social-wrap ul li {
-  display: inline-block;
+.luminix-social-wrap {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 40px;
+}
+
+.luminix-social-wrap ul {
+  display: flex;
+  flex-direction: row !important;
   margin-left: 10px;
 }
 .luminix-social-wrap ul li a {
