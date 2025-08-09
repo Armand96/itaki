@@ -3023,15 +3023,27 @@ a.white-color {
   }
 }
 .luminix-contact-us-info-wrap {
-  gap: 24px;
   display: flex;
-  background-color: var(--accent-bg);
-  padding: 30px 0;
-  justify-content: center;
+  align-items: flex-start; /* supaya icon dan teks sejajar di atas */
+  gap: 12px;
+  background-color: #2715e8; /* contoh warna seperti gambar */
+  color: white;
   border-radius: 10px;
-  margin-bottom: 24px;
-  transition: all 0.4s;
+  padding: 20px;
+margin-bottom: 10px ;
 }
+
+.luminix-contact-us-info-data h5 {
+  margin: 0 0 8px 0;
+}
+
+.luminix-contact-us-info-data a,
+.luminix-contact-us-info-data span {
+  display: block;
+  color: white;
+  text-decoration: none;
+}
+
 .luminix-contact-us-info-wrap:hover {
   box-shadow: 0px 4px 80px 0px rgba(0, 0, 0, 0.0784313725);
 }
@@ -3937,16 +3949,19 @@ a.white-color {
     padding-top: 24px;
   }
 }
+
 .luminix-counter-item p {
   padding-top: 12px;
   font-weight: 600;
   color: var(--heading-color);
 }
+
 @media (max-width: 767px) {
   .luminix-counter-item p {
     padding-top: 0;
   }
 }
+
 .luminix-counter-data {
   position: relative;
   display: flex;
@@ -3954,11 +3969,13 @@ a.white-color {
   align-items: center;
   height: 75px;
 }
+
 @media (max-width: 1199px) {
   .luminix-counter-data {
     height: 50px;
   }
 }
+
 @media (max-width: 767px) {
   .luminix-counter-data {
     justify-content: center;
@@ -4087,7 +4104,7 @@ a.white-color {
 .luminix-p-wrap {
   position: relative;
 }
-.luminix-p-wrap:hover .luminix-p-content {
+ .luminix-p-content {
   opacity: 1;
   bottom: 30px;
 }
@@ -4140,12 +4157,12 @@ a.white-color {
   border-radius: 10px;
   padding: 20px 27px;
   position: absolute;
-  bottom: 0;
   left: 30px;
   transition: all 0.4s;
-  opacity: 0;
+  opacity: 1;
   justify-content: center;
 }
+
 @media (max-width: 991px) {
   .luminix-p-content {
     left: 15px;

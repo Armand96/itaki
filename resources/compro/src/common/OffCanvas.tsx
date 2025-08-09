@@ -44,7 +44,8 @@ const OffCanvas = ({ setOpenMenu, openMenu }: OffCanvasProps) => {
           <div className="luminix-menu-mobile-top">
             <div className="mobile-logo">
               <Link href="/">
-                <Image width={120} height={31} src="/assets/images/logo/logo-dark.svg" alt="logo" />
+                {/* <Image width={120} height={31} src="/assets/images/logo/logo-ori.jpg" alt="logo" /> */}
+                <p style={{ fontWeight: "bold"}}>ITAKI</p>
               </Link>
             </div>
             <button className="luminix-menu-toggle mobile" onClick={() => setOpenMenu(false)}>
@@ -84,7 +85,7 @@ const OffCanvas = ({ setOpenMenu, openMenu }: OffCanvasProps) => {
             </ul>
           </div>
           <div className="luminix-mobile-menu-btn">
-            <Link className="luminix-default-btn sm-size" href="/about-us" data-text="Get in Touch"><span className="btn-wraper">Kontak Kami</span></Link>
+            <Link className="luminix-default-btn sm-size" href="/kontak-kami" data-text="Get in Touch"><span className="btn-wraper">Kontak Kami</span></Link>
           </div>
         </div>
       </div>

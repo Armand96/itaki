@@ -73,7 +73,7 @@ export default function HeaderOne() {
               <div className="col-auto d-flex align-items-center">
                 <div className="luminix-header-info-wraper2">
 
-                  <Link className="luminix-default-btn luminix-header-btn" href="#">Kontak Kami
+                  <Link className="luminix-default-btn luminix-header-btn" href="/kontak-kami">Kontak Kami
                     <RightArrawIcon />
                   </Link>
                 </div>

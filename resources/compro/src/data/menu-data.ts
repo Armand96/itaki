@@ -85,37 +85,44 @@ const menu_data = [
     {
         title: "Home", link: "/",
     },
-    {
-        title: "Tentang Perusahaan", link: "/tentang-perusahaan",
-    },
-    {
-        title: "Keanggotaan",
+     {
+        title: "Tentang Kami",
         has_dropdown: true,
         link: "#",
         sub_menus: [
+            { link: "/visi-misi", title: "Visi & Misi" },
+            { link: "/kode-etik", title: "Kode Etik" },
             { link: "/struktur-organisasi", title: "Struktur Organisasi" },
-            { link: "/daftar-anggota", title: "Daftar Anggota" },
-            { link: "/sertifikasi", title: "Sertifikasi" },
         ],
-    },
-        {
-        title: "Publikasi Ilmiah", link: "/publikasi-ilmiah",
     },
      {
         title: "Regulasi", link: "/regulasi",
     },
-      {
+     {
+        title: "Publikasi", link: "/publikasi-ilmiah",
+    },
+    {
+        title: "Keanggotaan & Sertifikasi",
+        has_dropdown: true,
+        link: "#",
+        sub_menus: [
+            { link: "/daftar-anggota", title: "List Anggota" },
+            { link: "/sertifikasi", title: "Skema Sertifikasi" },
+        ],
+    },
+
+
+    {
         title: "Kegiatan",
         has_dropdown: true,
         link: "#",
         sub_menus: [
             { link: "/seminar", title: "Seminar" },
             { link: "/webinar", title: "Webinar" },
+             {link: "/galleri",  title: "Galleri"},
         ],
     },
-     {
-        title: "Galleri", link: "/galleri",
-    },
+
 ];
 
 export default menu_data;

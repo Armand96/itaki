@@ -11,7 +11,7 @@ const Aboutus = () => {
 	return (
 		<Wrapper>
 			<HeaderOne />
-			<Breadcrumb title="Tentang Perusahaan" subtitle="Tentang Perusahaan" bg_img="about-breadcrumb-bg" />
+			<Breadcrumb title="Visi Misi" subtitle="Visi Misi" bg_img="about-breadcrumb-bg" />
             <AboutArea />
             <AboutCounterArea />
 			<TeamHomeOne style_2={true} />
