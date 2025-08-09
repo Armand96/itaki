@@ -16,7 +16,7 @@ export default function AboutHomeOne() {
                     <div className="row">
                         <div className="col-lg-6">
                             <div className="luminix-about-thumb" data-aos="fade-up" data-aos-duration="700">
-                                <Image width={500} height={400} style={{ objectFit: "cover", objectPosition: "top"}} src={about_img} alt="here is theme image" />
+                                <Image width={500} height={600} style={{ objectFit: "cover", objectPosition: "top"}} src={about_img} alt="here is theme image" />
                                 <div className="luminix-about-card">
                                     <h4 className="text-white">KETUA UMUM</h4>
                                     <h5>HEBER LOLO SIMBOLON, ST, SE, M.Sc</h5>

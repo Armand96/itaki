@@ -6,7 +6,6 @@ export const metadata = {
 };
 
 const Regulasi = dynamic(() => import('@/components/publikasiIlmiah'), {
-  ssr: true,
   loading: () => <Loading />
 });
 

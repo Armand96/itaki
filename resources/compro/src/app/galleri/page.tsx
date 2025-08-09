@@ -6,7 +6,6 @@ export const metadata = {
 };
 
 const Galeri = dynamic(() => import('@/components/galeri'), {
-  ssr: true,
   loading: () => <Loading />
 });
 

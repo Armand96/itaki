@@ -6,7 +6,6 @@ export const metadata = {
 };
 
 const Regulasi = dynamic(() => import('@/components/regulasi'), {
-  ssr: true,
   loading: () => <Loading />
 });
 

@@ -6,7 +6,6 @@ export const metadata = {
 };
 
 const Sertifikasi = dynamic(() => import('@/components/Sertifikasi'), {
-  ssr: true,
   loading: () => <Loading />
 });
 

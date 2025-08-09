@@ -7,7 +7,6 @@ export const metadata = {
 
 const Contactus = dynamic(() => import('@/components/ContactUs'), {
   loading: () => <Loading />,
-  ssr: true,
 });
 
 export default function Index() {

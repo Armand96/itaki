@@ -6,7 +6,6 @@ export const metadata = {
 };
 
 const WebBinar = dynamic(() => import('@/components/webinar'), {
-  ssr: true,
   loading: () => <Loading />
 });
 

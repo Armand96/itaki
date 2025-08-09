@@ -6,7 +6,6 @@ export const metadata = {
 };
 
 const StrukturOrganisasi = dynamic(() => import('@/components/StrukturOrganisasi'), {
-  ssr: true,
   loading: () => <Loading />
 });
 

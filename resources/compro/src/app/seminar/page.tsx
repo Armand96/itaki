@@ -6,7 +6,6 @@ export const metadata = {
 };
 
 const Seminar = dynamic(() => import('@/components/seminar'), {
-  ssr: true,
   loading: () => <Loading />
 });
 

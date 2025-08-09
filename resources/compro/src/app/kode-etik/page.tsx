@@ -6,7 +6,6 @@ export const metadata = {
 };
 
 const KodeEtik = dynamic(() => import('@/components/KodeEtik'), {
-  ssr: true,
   loading: () => <Loading />
 });
 

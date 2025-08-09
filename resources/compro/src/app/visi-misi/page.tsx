@@ -6,7 +6,6 @@ export const metadata = {
 };
 
 const TentangPerusahaan = dynamic(() => import('@/components/TentangPerusahaan'), {
-  ssr: true,
   loading: () => <Loading />
 });
 
