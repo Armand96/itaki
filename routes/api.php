@@ -8,7 +8,9 @@ use App\Http\Controllers\Admin\PostController;
 use App\Http\Controllers\Admin\SosmedController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\WebSettingController;
+use App\Http\Controllers\KaryaIlmiahController;
 use App\Http\Controllers\KategoriController;
+use App\Http\Controllers\RegulasiController;
 use App\Http\Requests\ResponseFail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -32,6 +34,8 @@ Route::middleware(['auth:sanctum'])->group(function () {
 
 Route::prefix('admin')->group(
     function () {
+        Route::resource('regulasi', RegulasiController::class);
+        Route::resource('karya_ilmiah', KaryaIlmiahController::class);
         Route::resource('kategori', KategoriController::class);
         Route::resource('sosmed', SosmedController::class);
         Route::resource('user', UserController::class);
