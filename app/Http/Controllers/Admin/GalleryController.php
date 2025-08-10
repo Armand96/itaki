@@ -3,12 +3,14 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Gallery\GalleryCreateMultipleReq;
 use App\Http\Requests\Gallery\GalleryCreateReq;
 use App\Http\Requests\Gallery\GalleryUpdateReq;
 use App\Http\Requests\ResponseFail;
 use App\Http\Requests\ResponseSuccess;
 use App\Models\Gallery;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 use Symfony\Component\Translation\Exception\NotFoundResourceException;
@@ -58,6 +60,45 @@ class GalleryController extends Controller
             Log::error($th);
             //throw $th;
             return response()->json(new ResponseFail((object) null, "Server Error", $th->getMessage()));
+        }
+    }
+
+    public function multiple(GalleryCreateMultipleReq $request)
+    {
+        $galleryImages = [];
+        $imagePaths = [];
+        try {
+            DB::beginTransaction();
+            $galleryImage = array();
+            $validated = $request->validated();
+            // dd($validated);
+            if ($request->hasFile('images')) {
+                $files = $request->file('images');
+
+                foreach ($files as $key => $file) {
+                    // dd($file);
+                    $imageName = time() . '_' . $key + 1 . '.' . $file->extension();
+                    $path = $file->storeAs('gallery', $imageName, 'public');
+                    array_push($imagePaths, $path);
+                    $validated['image'] = $path;
+                    $validated['image_thumb'] = $path;
+                    $galleryImage = Gallery::create($validated);
+                    array_push($galleryImages, $galleryImage);
+                }
+                DB::commit();
+                return response()->json(new ResponseSuccess($galleryImages, "Success", "Success Upload Images"));
+            } else {
+                return response()->json(new ResponseFail((object) null, "Bad Request", "Image File required"), 404);
+            }
+        } catch (\Throwable $th) {
+            Log::error($th->getMessage());
+            DB::rollBack();
+            //throw $th;
+            foreach ($imagePaths as $key => $value) {
+                $isExist = Storage::disk('public')->exists($value) ?? false;
+                if ($isExist) Storage::disk('public')->delete($value);
+            }
+            return response()->json(new ResponseFail((object) null, "Server Error", $th->getMessage()), 500);
         }
     }
 
