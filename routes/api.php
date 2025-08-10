@@ -45,6 +45,7 @@ Route::prefix('admin')->group(
         Route::resource('gallery', GalleryController::class);
         Route::resource('post', PostController::class);
         Route::resource('web_setting', WebSettingController::class);
+        Route::post('gallery_multiple_upload', [GalleryController::class, 'multiple']);
         Route::post('web_setting_with_upload', [WebSettingController::class, 'createWithUpload']);
         Route::put('web_setting_with_upload/{web_setting}', [WebSettingController::class, 'updateWithUpload']);
     }
