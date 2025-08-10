@@ -51,7 +51,6 @@ class DaftarAnggotaController extends Controller
                 $file = $request->file('image');
                 $imageName = time() . '.' . $file->extension();
                 $path = $file->storeAs('anggota', $imageName, 'public');
-                array_push($imagePaths, $path);
                 $validated['image'] = $path;
                 $validated['image_thumb'] = $path;
             }

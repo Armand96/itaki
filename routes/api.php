@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\DaftarAnggotaController;
 use App\Http\Controllers\Admin\DocumentController;
 use App\Http\Controllers\Admin\GalleryController;
 use App\Http\Controllers\Admin\PostController;
+use App\Http\Controllers\Admin\SosmedController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\WebSettingController;
 use App\Http\Requests\ResponseFail;
@@ -30,6 +31,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
 
 Route::prefix('admin')->group(
     function () {
+        Route::resource('sosmed', SosmedController::class);
         Route::resource('user', UserController::class);
         Route::resource('client', ClientController::class);
         Route::resource('daftar_anggota', DaftarAnggotaController::class);
