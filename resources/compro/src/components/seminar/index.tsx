@@ -1,11 +1,14 @@
+'use client';
 import Breadcrumb from "@/common/Breadcrumb";
 import HeaderOne from "@/layouts/headers/HeaderOne";
 import Wrapper from "@/layouts/Wrapper";
 import FooterTwo from "@/layouts/footers/FooterOne";
 import SeminarTable from "./SeminarTable";
+import { useSearchParams } from 'next/navigation';
 
 
 const Seminar = () => {
+
 	return (
 		<Wrapper>
 			<HeaderOne />

@@ -1,13 +1,24 @@
 import { defineConfig } from 'vite';
 import laravel from 'laravel-vite-plugin';
-import tailwindcss from '@tailwindcss/vite';
+import react from '@vitejs/plugin-react';
+import path from 'path'
 
 export default defineConfig({
     plugins: [
         laravel({
-            input: ['resources/css/app.css', 'resources/js/app.js'],
+            input: [
+                'resources/sass/app.scss',
+                'resources/js/app.js',
+                'resources/js/backoffice/src/index.tsx'
+            ],
             refresh: true,
         }),
-        tailwindcss(),
+        react()
     ],
+    define: { 'process.env': {} },
+    resolve: {
+        alias: {
+          "@": path.resolve(__dirname, "resources/js/backoffice/src"),
+        },
+      },
 });

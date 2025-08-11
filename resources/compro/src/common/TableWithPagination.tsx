@@ -27,10 +27,10 @@ export default function TableWithPagination({
   emptyMessage = "Tidak ada data",
 }: TableWithPaginationProps) {
   return (
-    <div className="table-responsive rounded">
-      <table className="table table-bordered align-middle mb-0">
-        <thead>
-          <tr style={{ whiteSpace: "nowrap"}}>
+      <div className="table-responsive ">
+        <table className="table table-hover table-bordered align-middle mb-0">
+          <thead style={{ }}>
+          <tr style={{ whiteSpace: "nowrap", backgroundColor: "#2920D2"}}>
             {columns.map((col) => (
               <th key={col.key}>{col.label}</th>
             ))}
@@ -81,20 +81,7 @@ export default function TableWithPagination({
         />
       </div>
 
-      <style jsx>{`
-        table thead {
-          background-color: #2920d2;
-          color: white;
-        }
-        .page-link {
-          color: white;
-          background-color: #2920d2;
-          border: none;
-        }
-        .page-item.active .page-link {
-          background-color: #150ea8;
-        }
-      `}</style>
+
     </div>
   );
 }

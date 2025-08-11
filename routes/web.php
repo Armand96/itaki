@@ -8,6 +8,15 @@ use Illuminate\Support\Facades\Response;
 //     return view('welcome');
 // });
 
+
+Route::prefix('/admin')->group(function () {
+    Route::get('/{any?}', function () {
+        return view('backoffice.dashboard');
+    })->where('any', '.*'); // Menangkap semua path setelah /admin
+});
+
+
+
 Route::get('/{any?}', function ($any = null) {
     // Jika $any null (akses "/"), fallback ke index.html
     if (!$any) {
