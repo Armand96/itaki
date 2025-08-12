@@ -19,6 +19,7 @@ class UserController extends Controller
         ]);
 
         $user = User::where('email', $request->email)->first();
+        // dd($user);
 
         if (!$user || !Hash::check($request->password, $user->password)) {
             throw ValidationException::withMessages([
