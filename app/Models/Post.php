@@ -21,7 +21,7 @@ class Post extends Model
         'updated_at'
     ];
 
-    public function setNameAttribute($value)
+    public function setTitleAttribute($value)
     {
         $this->attributes['title'] = $value;
         $slug = Str::slug($value);

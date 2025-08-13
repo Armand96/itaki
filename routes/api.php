@@ -32,21 +32,23 @@ Route::middleware(['auth:sanctum'])->group(function () {
     });
 });
 
-Route::prefix('admin')->group(
-    function () {
-        Route::resource('regulasi', RegulasiController::class);
-        Route::resource('karya_ilmiah', KaryaIlmiahController::class);
-        Route::resource('kategori', KategoriController::class);
-        Route::resource('sosmed', SosmedController::class);
-        Route::resource('user', UserController::class);
-        Route::resource('client', ClientController::class);
-        Route::resource('daftar_anggota', DaftarAnggotaController::class);
-        Route::resource('document', DocumentController::class);
-        Route::resource('gallery', GalleryController::class);
-        Route::resource('post', PostController::class);
-        Route::resource('web_setting', WebSettingController::class);
-        Route::post('gallery_multiple_upload', [GalleryController::class, 'multiple']);
-        Route::post('web_setting_with_upload', [WebSettingController::class, 'createWithUpload']);
-        Route::put('web_setting_with_upload/{web_setting}', [WebSettingController::class, 'updateWithUpload']);
-    }
-);
+Route::prefix('admin')
+    // ->middleware('auth:sanctum')
+    ->group(
+        function () {
+            Route::resource('regulasi', RegulasiController::class);
+            Route::resource('karya_ilmiah', KaryaIlmiahController::class);
+            Route::resource('kategori', KategoriController::class);
+            Route::resource('sosmed', SosmedController::class);
+            Route::resource('user', UserController::class);
+            Route::resource('client', ClientController::class);
+            Route::resource('daftar_anggota', DaftarAnggotaController::class);
+            Route::resource('document', DocumentController::class);
+            Route::resource('gallery', GalleryController::class);
+            Route::resource('post', PostController::class);
+            Route::resource('web_setting', WebSettingController::class);
+            Route::post('gallery_multiple_upload', [GalleryController::class, 'multiple']);
+            Route::post('web_setting_with_upload', [WebSettingController::class, 'createWithUpload']);
+            Route::put('web_setting_with_upload/{web_setting}', [WebSettingController::class, 'updateWithUpload']);
+        }
+    );

@@ -7,10 +7,9 @@ use App\Http\Requests\ApiRequest;
 class PostCreateReq extends ApiRequest
 {
     public string $title;
-    public string $slug;
     public string $category;
-    public string $cover_image;
-    public string $content;
+    public mixed $image;
+    public string $value;
     public bool $is_active;
 
     /**
@@ -22,10 +21,9 @@ class PostCreateReq extends ApiRequest
     {
         return [
             'title' => 'required|string',
-            'slug' => 'required|string',
             'category' => 'required|string',
-            'cover_image' => 'string',
-            'content' => 'required|string',
+            'image' => 'file',
+            'value' => 'required|string',
             'is_active' => 'boolean',
         ];
     }

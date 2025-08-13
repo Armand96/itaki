@@ -43,14 +43,16 @@ class PostController extends Controller
      */
     public function store(PostCreateReq $request)
     {
+        $path = "";
         try {
             $validated = $request->validated();
+            $validated['content'] = $validated['value'];
+            unset($validated['value']);
 
             if ($request->hasFile('image')) {
                 $file = $request->file('image');
                 $imageName = time() . '.' . $file->extension();
                 $path = $file->storeAs('post', $imageName, 'public');
-                array_push($imagePaths, $path);
                 $validated['cover_image'] = $path;
             }
 
@@ -58,6 +60,8 @@ class PostController extends Controller
             return response()->json(new ResponseSuccess($post, "Success", "Success Create post"));
         } catch (\Throwable $th) {
             Log::error($th->getMessage());
+            $isExist = Storage::disk('public')->exists($path) ?? false;
+            if ($isExist) Storage::disk('public')->delete($path);
             //throw $th;
             return response()->json(new ResponseFail((object) null, "Server Error", $th->getMessage()));
         }
@@ -86,6 +90,8 @@ class PostController extends Controller
     {
         try {
             $validated = $request->validated();
+            $validated['content'] = $validated['value'];
+            unset($validated['value']);
 
             if ($request->hasFile('image')) {
                 $file = $request->file('image');
