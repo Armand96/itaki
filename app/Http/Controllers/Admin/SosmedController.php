@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\ResponseFail;
 use App\Http\Requests\ResponseSuccess;
 use App\Http\Requests\Sosmed\SosmedCreateReq;
+use App\Http\Requests\Sosmed\SosmedUpdateReq;
 use App\Models\Sosmed;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
@@ -48,8 +49,7 @@ class SosmedController extends Controller
                 $file = $request->file('image');
                 $imageName = time() . '.' . $file->extension();
                 $path = $file->storeAs('sosmed', $imageName, 'public');
-                array_push($imagePaths, $path);
-                $validated['image'] = $path;
+                $validated['image_path'] = $path;
                 // $validated['image_thumb'] = $path;
             }
             $sosmed = Sosmed::create($validated);
@@ -79,7 +79,7 @@ class SosmedController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Sosmed $sosmed)
+    public function update(SosmedUpdateReq $request, Sosmed $sosmed)
     {
         try {
             $validated = $request->validated();
@@ -87,9 +87,9 @@ class SosmedController extends Controller
                 $file = $request->file('image');
                 $imageName = time() . '.' . $file->extension();
                 $path = $file->storeAs('sosmed', $imageName, 'public');
-                $validated['image'] = $path;
+                $validated['image_path'] = $path;
                 // $validated['image_thumb'] = $path;
-                Storage::disk('public')->delete($sosmed->image);
+                Storage::disk('public')->delete($sosmed->image_path);
             }
             $sosmed->update($validated);
             return response()->json(new ResponseSuccess($sosmed, "Success", "Success Update Sosmed"));
@@ -107,7 +107,7 @@ class SosmedController extends Controller
     {
         try {
             $sosmed->delete();
-            Storage::disk('public')->delete($sosmed->image);
+            Storage::disk('public')->delete($sosmed->image_path);
         } catch (\Throwable $th) {
             Log::error($th->getMessage());
             //throw $th;
