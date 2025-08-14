@@ -50,7 +50,6 @@ class GalleryController extends Controller
                 $file = $request->file('image');
                 $imageName = time() . '.' . $file->extension();
                 $path = $file->storeAs('gallery', $imageName, 'public');
-                array_push($imagePaths, $path);
                 $validated['image'] = $path;
                 $validated['image_thumb'] = $path;
             }
@@ -152,6 +151,7 @@ class GalleryController extends Controller
             $gallery->delete();
             Storage::disk('public')->delete($gallery->image);
             Storage::disk('public')->delete($gallery->image_thumb);
+            return response()->json(new ResponseSuccess($gallery, "Success", "Success Delete Image"));
         } catch (\Throwable $th) {
             Log::error($th->getMessage());
             //throw $th;

@@ -50,7 +50,6 @@ class DocumentController extends Controller
                 $file = $request->file('file');
                 $fileName = time() . '.' . $file->extension();
                 $path = $file->storeAs('document', $fileName, 'public');
-                array_push($filePaths, $path);
                 $validated['file_path'] = $path;
             }
 
@@ -91,7 +90,6 @@ class DocumentController extends Controller
                 $file = $request->file('file');
                 $fileName = time() . '.' . $file->extension();
                 $path = $file->storeAs('document', $fileName, 'public');
-                array_push($filePaths, $path);
                 $validated['file_path'] = $path;
             }
 
@@ -112,6 +110,7 @@ class DocumentController extends Controller
         try {
             $document->delete();
             Storage::disk('public')->delete($document->file_path);
+            return response()->json(new ResponseSuccess($document, "Success", "Success Delete Document"));
         } catch (\Throwable $th) {
             Log::error($th->getMessage());
             //throw $th;
