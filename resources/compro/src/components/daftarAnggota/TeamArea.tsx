@@ -40,7 +40,7 @@ const TeamArea = () => {
 
                 {/* Filter Section */}
                 <div
-                    className="filter-wrapper d-flex justify-content-center align-items-center mb-4 flex-wrap"
+                    className="filter-wrapper d-flex justify-content-center align-items-center mb-4"
                     style={{
                         border: "1px solid #ccc",
                         borderRadius: "6px",
@@ -49,7 +49,7 @@ const TeamArea = () => {
                         margin: "0 auto",
                     }}
                 >
-                    {/* Dropdown */}
+                    {/* Dropdown
                     <div style={{ flex: "1 1 50%", minWidth: "150px" }}>
                         <Select
                             options={wilayahOptions}
@@ -68,7 +68,7 @@ const TeamArea = () => {
                                 menuPortal: (base) => ({ ...base, zIndex: 9999 }), // pastikan di atas semua elemen
                             }}
                         />
-                    </div>
+                    </div> */}
 
                     {/* Input */}
                     <input
@@ -76,9 +76,24 @@ const TeamArea = () => {
                         className="form-control"
                         placeholder="Nama Anggota"
                         style={{
-                            flex: "1 1 50%",
+                            // flex: "1 1 50%",
                             border: "none",
                             height: "38px",
+                            padding: "0 10px",
+                        }}
+                        value={searchName}
+                        onChange={(e) => setSearchName(e.target.value)}
+                    />
+                    <input
+                        type="text"
+                        className="form-control"
+                        placeholder="Nama Jabatan"
+                        style={{
+                            // flex: "1 1 50%",
+                            border: "none",
+                            height: "38px",
+                                                        borderLeft: "1px solid #001A3D",
+                            padding: "0 10px",
                             boxShadow: "none",
                         }}
                         value={searchName}
