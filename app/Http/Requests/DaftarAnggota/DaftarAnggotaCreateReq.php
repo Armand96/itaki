@@ -10,6 +10,7 @@ class DaftarAnggotaCreateReq extends ApiRequest
     public mixed $image;
     public string $jabatan;
     public string $deskripsi_jabatan;
+    public string $urutan;
 
     /**
      * Get the validation rules that apply to the request.
@@ -20,9 +21,10 @@ class DaftarAnggotaCreateReq extends ApiRequest
     {
         return [
             'nama' => 'required|string',
-            'image' => 'image',
+            'image' => 'image|required',
             'jabatan' => 'string',
             'deskripsi_jabatan' => 'string',
+            'urutan' => 'string',
         ];
     }
 }

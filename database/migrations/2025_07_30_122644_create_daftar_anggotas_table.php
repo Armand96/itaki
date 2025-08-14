@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string("image", 200);
             $table->string("image_thumb", 200);
             $table->text("deskripsi_jabatan");
+            $table->integer("urutan", false, true);
             $table->timestamps();
         });
     }
