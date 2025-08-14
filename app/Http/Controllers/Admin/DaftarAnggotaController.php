@@ -113,7 +113,7 @@ class DaftarAnggotaController extends Controller
             $daftarAnggotum->delete();
             Storage::disk('public')->delete($daftarAnggotum->image);
             Storage::disk('public')->delete($daftarAnggotum->image_thumb);
-            return $daftarAnggotum;
+            return response()->json(new ResponseSuccess($daftarAnggotum, "Success", "Success Delete Anggota"));
         } catch (\Throwable $th) {
             Log::error($th);
             //throw $th;
