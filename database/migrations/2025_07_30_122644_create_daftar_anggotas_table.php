@@ -15,9 +15,10 @@ return new class extends Migration
             $table->id();
             $table->string("nama", 150);
             $table->string("jabatan", 50);
-            $table->string("image", 200);
-            $table->string("image_thumb", 200);
-            $table->text("deskripsi_jabatan");
+            $table->string("image", 200)->nullable();
+            $table->string("image_thumb", 200)->nullable();
+            $table->text("deskripsi_jabatan")->nullable();
+            $table->integer("urutan", false, true)->nullable();
             $table->timestamps();
         });
     }

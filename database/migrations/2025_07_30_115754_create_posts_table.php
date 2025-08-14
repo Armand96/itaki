@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('title', 200);
             $table->string('slug', 150);
             $table->string('category', 100);
-            $table->string('cover_image', 150);
+            $table->string('cover_image', 150)->nullable();
             $table->text('content');
             $table->boolean('is_active')->default(true);
             $table->timestamps();

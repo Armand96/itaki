@@ -108,6 +108,7 @@ class SosmedController extends Controller
         try {
             $sosmed->delete();
             Storage::disk('public')->delete($sosmed->image_path);
+            return response()->json(new ResponseSuccess($sosmed, "Success", "Success Update Sosmed"));
         } catch (\Throwable $th) {
             Log::error($th->getMessage());
             //throw $th;
