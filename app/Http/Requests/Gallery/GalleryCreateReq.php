@@ -7,6 +7,7 @@ use App\Http\Requests\ApiRequest;
 class GalleryCreateReq extends ApiRequest
 {
     public string $category;
+    public string $description;
     public mixed $image;
 
     /**
@@ -18,6 +19,7 @@ class GalleryCreateReq extends ApiRequest
     {
         return [
             'category' => 'required|string',
+            'description' => 'required|string',
             'image' => 'image',
         ];
     }

@@ -10,6 +10,7 @@ class Gallery extends Model
         'category',
         'image',
         'image_thumb',
+        'description'
     ];
 
     protected $hidden = [

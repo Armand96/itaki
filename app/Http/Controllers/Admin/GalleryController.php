@@ -24,7 +24,7 @@ class GalleryController extends Controller
     {
         $dataPerPage = $req->data_per_page ? $req->data_per_page : 10;
         $galleries = Gallery::query()
-            ->when($req->filled('name'), fn($q) => $q->where('name', 'like', "%{$req->name}%"))
+            ->when($req->filled('category'), fn($q) => $q->where('category', 'like', "%{$req->category}%"))
             ->orderBy('id', 'desc')
             ->paginate($dataPerPage);
 
@@ -70,12 +70,10 @@ class GalleryController extends Controller
             DB::beginTransaction();
             $galleryImage = array();
             $validated = $request->validated();
-            // dd($validated);
             if ($request->hasFile('images')) {
                 $files = $request->file('images');
 
                 foreach ($files as $key => $file) {
-                    // dd($file);
                     $imageName = time() . '_' . $key + 1 . '.' . $file->extension();
                     $path = $file->storeAs('gallery', $imageName, 'public');
                     array_push($imagePaths, $path);
