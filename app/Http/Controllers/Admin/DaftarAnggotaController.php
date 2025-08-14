@@ -54,8 +54,8 @@ class DaftarAnggotaController extends Controller
                 $validated['image'] = $path;
                 $validated['image_thumb'] = $path;
             }
-            $daftarAnggota = DaftarAnggota::create($validated);
-            return response()->json(new ResponseSuccess($daftarAnggota, "Success", "Success Create Anggota"));
+            $daftarAnggotum = DaftarAnggota::create($validated);
+            return response()->json(new ResponseSuccess($daftarAnggotum, "Success", "Success Create Anggota"));
         } catch (\Throwable $th) {
             Log::error($th);
             //throw $th;
@@ -66,7 +66,7 @@ class DaftarAnggotaController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(DaftarAnggota $daftarAnggota)
+    public function show(DaftarAnggota $daftarAnggotum)
     {
         //
     }
@@ -74,7 +74,7 @@ class DaftarAnggotaController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(DaftarAnggota $daftarAnggota)
+    public function edit(DaftarAnggota $daftarAnggotum)
     {
         throw new NotFoundHttpException();
     }
@@ -82,7 +82,7 @@ class DaftarAnggotaController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(DaftarAnggotaUpdateReq $request, DaftarAnggota $daftarAnggota)
+    public function update(DaftarAnggotaUpdateReq $request, DaftarAnggota $daftarAnggotum)
     {
         try {
             $validated = $request->validated();
@@ -90,14 +90,13 @@ class DaftarAnggotaController extends Controller
                 $file = $request->file('image');
                 $imageName = time() . '.' . $file->extension();
                 $path = $file->storeAs('anggota', $imageName, 'public');
-                array_push($imagePaths, $path);
                 $validated['image'] = $path;
                 $validated['image_thumb'] = $path;
-                Storage::disk('public')->delete($daftarAnggota->image);
-                Storage::disk('public')->delete($daftarAnggota->image_thumb);
+                Storage::disk('public')->delete($daftarAnggotum->image);
+                Storage::disk('public')->delete($daftarAnggotum->image_thumb);
             }
-            $daftarAnggota->update($validated);
-            return response()->json(new ResponseSuccess($daftarAnggota, "Success", "Success Update Anggota"));
+            $daftarAnggotum->update($validated);
+            return response()->json(new ResponseSuccess($daftarAnggotum, "Success", "Success Update Anggota"));
         } catch (\Throwable $th) {
             Log::error($th);
             //throw $th;
@@ -108,12 +107,13 @@ class DaftarAnggotaController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(DaftarAnggota $daftarAnggota)
+    public function destroy(DaftarAnggota $daftarAnggotum)
     {
         try {
-            $daftarAnggota->delete();
-            Storage::disk('public')->delete($daftarAnggota->image);
-            Storage::disk('public')->delete($daftarAnggota->image_thumb);
+            $daftarAnggotum->delete();
+            Storage::disk('public')->delete($daftarAnggotum->image);
+            Storage::disk('public')->delete($daftarAnggotum->image_thumb);
+            return response()->json(new ResponseSuccess($daftarAnggotum, "Success", "Success Delete Anggota"));
         } catch (\Throwable $th) {
             Log::error($th);
             //throw $th;
