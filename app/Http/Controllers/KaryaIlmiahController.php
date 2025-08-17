@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\KaryaIlmiah\KaryaIlmiahCreateReq;
+use App\Http\Requests\KaryaIlmiah\KaryaIlmiahUpdateReq;
 use App\Http\Requests\ResponseFail;
 use App\Http\Requests\ResponseSuccess;
 use App\Models\KaryaIlmiah;
@@ -48,7 +49,6 @@ class KaryaIlmiahController extends Controller
                 $file = $request->file('file');
                 $fileName = time() . '.' . $file->extension();
                 $path = $file->storeAs('karya_ilmiah', $fileName, 'public');
-                array_push($filePaths, $path);
                 $validated['file_path'] = $path;
             }
 
@@ -80,7 +80,7 @@ class KaryaIlmiahController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, KaryaIlmiah $karyaIlmiah)
+    public function update(KaryaIlmiahUpdateReq $request, KaryaIlmiah $karyaIlmiah)
     {
         try {
             $validated = $request->validated();
@@ -89,7 +89,6 @@ class KaryaIlmiahController extends Controller
                 $file = $request->file('file');
                 $fileName = time() . '.' . $file->extension();
                 $path = $file->storeAs('karya_ilmiah', $fileName, 'public');
-                array_push($filePaths, $path);
                 $validated['file_path'] = $path;
             }
 
@@ -110,6 +109,7 @@ class KaryaIlmiahController extends Controller
         try {
             $karyaIlmiah->delete();
             Storage::disk('public')->delete($karyaIlmiah->file_path);
+            return response()->json(new ResponseSuccess($karyaIlmiah, "Success", "Success Update Karya Ilmiah"));
         } catch (\Throwable $th) {
             Log::error($th->getMessage());
             //throw $th;
