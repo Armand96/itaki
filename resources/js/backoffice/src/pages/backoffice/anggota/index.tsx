@@ -2,8 +2,6 @@
 
 import { useEffect, useState } from 'react';
 import { FileUploader, FormInput, PageBreadcrumb } from '../../../components';
-import { LinkType } from '../../../dto/link_type';
-import { getLinkType, postLinkType } from '../../../helpers/api/linkType';
 import Swal from 'sweetalert2';
 import LoadingScreen from '../../../components/Loading/loading';
 import { ModalLayout } from '../../../components/HeadlessUI';
@@ -32,9 +30,8 @@ const Index = () => {
     }, []);
 
     const postData = async () => {
-        if (!isCreate) {
-            delete formData.image
-            delete formData.image_thumb
+        if(!formData?.show){
+            delete formData?.urutan
         }
         setLoading(true);
         const data = { ...formData, _method: formData.id ? 'PUT' : 'POST' };
@@ -57,11 +54,10 @@ const Index = () => {
 
 
     const columns = [
-        { name: 'Nama', row: (cell: LinkType) => <div>{cell.name}</div> },
-        { name: 'Section', row: (cell: LinkType) => <div>{cell.name}</div> },
-        { name: 'Status', row: (cell: LinkType) => <div>{cell.is_active ? 'Active' : 'Non Active'}</div> },
+        { name: 'Nama', row: (cell: any) => <div>{cell.nama}</div> },
+        { name: 'Jabatan', row: (cell: any) => <div>{cell.jabatan}</div> },
         {
-            name: 'Action', row: (cell: LinkType) => (
+            name: 'Action', row: (cell: any) => (
                 <button className='btn bg-primary text-white' onClick={() => { setModal(true); setFormData(cell); setIsCreate(false); }}>
                     Edit
                 </button>

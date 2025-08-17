@@ -1,0 +1,15 @@
+import { APICore } from "./apiCore";
+
+const api = new APICore()
+
+function PostGenerals(body: any, update: any = "") {
+    return api.createWithFile(`api/admin/post${update && `/${update}`}`, body)
+}
+
+
+function getGenerals(params:any = "") {
+    const baseUrl = `api/admin/post${params}`
+    return api.get(baseUrl).then((res) => res.data)
+}
+
+export { PostGenerals, getGenerals }

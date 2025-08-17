@@ -10,11 +10,11 @@ interface PageTitleProps {
 }
 
 const PageBreadcrumb = ({ subName, title, addedChild }: PageTitleProps) => {
-	const breadcrumbItems = ['Zhindaya', subName, title]
+	const breadcrumbItems = ['Itaki', subName, title]
 	return (
 		<>
 			<Helmet>
-				<title>{title} | Zhindaya Backoffice</title>
+				<title>{title} | Itaki Backoffice</title>
 			</Helmet>
 			{subName && (
 				<div className="flex justify-between items-center mb-6">
