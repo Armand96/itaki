@@ -16,6 +16,12 @@ const Error500 = React.lazy(() => import('../pages/error/Error500'))
 const Dashboard = React.lazy(() => import('../pages/backoffice/dashboard'))
 const Categories = React.lazy(() => import('../pages/backoffice/categories'))
 const Anggota = React.lazy(() => import('../pages/backoffice/anggota'))
+const Home = React.lazy(() => import('../pages/backoffice/home'))
+const TentangKami = React.lazy(() => import('../pages/backoffice/tentangKami'))
+const PublikasiIlmiah = React.lazy(() => import('../pages/backoffice/publikasiIlmiah'))
+const Regulasi = React.lazy(() => import('../pages/backoffice/regulasi'))
+const Sertifikasi = React.lazy(() => import('../pages/backoffice/sertifikasi'))
+
 
 const SosialMedia = React.lazy(() => import('../pages/backoffice/sosmed'))
 const Galleri = React.lazy(() => import('../pages/backoffice/galleri'))
@@ -52,6 +58,36 @@ const BackOffice: RoutesProps = {
 			path: '/backoffice/dashboard',
 			name: 'Dashboard',
 			element: <Dashboard />,
+			route: PrivateRoute,
+		},
+        {
+			path: '/backoffice/home',
+			name: 'Home',
+			element: <Home />,
+			route: PrivateRoute,
+		},
+        {
+			path: '/backoffice/tentang-kami',
+			name: 'Tentang Kami',
+			element: <TentangKami />,
+			route: PrivateRoute,
+		},
+          {
+			path: '/backoffice/publikasi-ilmiah',
+			name: 'Publikasi Ilmiah',
+			element: <PublikasiIlmiah />,
+			route: PrivateRoute,
+		},
+         {
+			path: '/backoffice/regulasi',
+			name: 'Regulasi',
+			element: <Regulasi />,
+			route: PrivateRoute,
+		},
+        {
+			path: '/backoffice/sertifikasi',
+			name: 'Sertifikasi',
+			element: <Sertifikasi />,
 			route: PrivateRoute,
 		},
         {

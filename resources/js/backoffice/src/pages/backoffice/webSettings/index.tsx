@@ -7,13 +7,11 @@ import { getWebSettings, postWebSettings, postWebSettingsWithFile } from '../../
 import Swal from 'sweetalert2';
 import { Size } from '../../../dto/size';
 import { WebSettings } from '../../../dto/web_settings';
-import { ModalTextRich } from './ModalTextRich';
 import 'react-quill/dist/quill.snow.css';
 import ReactQuill from "react-quill";
 
 const Index = () => {
     const [modal, setModal] = useState(false);
-    const [modalRichEditor, setModalRichEditor] = useState(false)
     const [loading, setLoading] = useState(false);
     const [formData, setFormData] = useState<any>({ name: '', value: '', is_active: true, type: 'text' });
     const [isCreate, setIsCreate] = useState<boolean>(false);

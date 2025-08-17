@@ -10,12 +10,13 @@ import { ModalLayout } from '../../../components/HeadlessUI';
 import TablePaginate from '../../../components/Table/tablePaginate';
 import ModalPreview from '../../../components/ModalPreviewImage/ModalPreview';
 import Select from 'react-select';
+import { getCategories, PostCategories } from '../../../helpers';
 
 const Index = () => {
 
     const [modal, setModal] = useState(false);
     const [loading, setLoading] = useState(false);
-    const [formData, setFormData] = useState<any>({ name: '', image_file: '', is_active: 1 });
+    const [formData, setFormData] = useState<any>({ nama_kategori: '', menu_tujuan: '', is_active: 1 });
     const [isCreate, setIsCreate] = useState<boolean>(false);
     const [dataPaginate, setDataPaginate] = useState<any>(null);
     const [sectionOptions, setSectionOptions] = useState([
@@ -23,12 +24,13 @@ const Index = () => {
         { label: "Regulasi", value: "Regulasi" }
 
     ])
+
     const [selectedSections, setSelectedSections] = useState<any>(null)
     const [previewImage, setPreviewImage] = useState(false)
 
     const fetchData = async (page = 1) => {
         setLoading(true);
-        const res: LinkType[] = await getLinkType(`?page=${page}`);
+        const res: LinkType[] = await getCategories(`?page=${page}`);
         setDataPaginate(res);
         setLoading(false);
     }
@@ -38,15 +40,12 @@ const Index = () => {
     }, []);
 
     const postData = async () => {
-        if (!isCreate) {
-            delete formData.image
-            delete formData.image_thumb
-        }
         setLoading(true);
-        const data = { ...formData, _method: formData.id ? 'PUT' : 'POST' };
-        await postLinkType(data, formData?.id).then(() => {
+        const data = { ...formData, menu_tujuan: selectedSections?.value, _method: formData.id ? 'PUT' : 'POST' };
+        await PostCategories(data, formData?.id).then(() => {
             setModal(false);
-            Swal.fire('Success', formData.id ? 'Update Link Type Berhasil' : 'Input Link Type Berhasil', 'success')
+            setSelectedSections(null)
+            Swal.fire('Success', formData.id ? 'Update Categories Berhasil' : 'Input Categories Berhasil', 'success')
         }).catch((err) => {
             setModal(false);
             console.log(err)
@@ -56,11 +55,10 @@ const Index = () => {
     };
 
     const columns = [
-        { name: 'Nama', row: (cell: LinkType) => <div>{cell.name}</div> },
-        { name: 'Section', row: (cell: LinkType) => <div>{cell.name}</div> },
-        { name: 'Status', row: (cell: LinkType) => <div>{cell.is_active ? 'Active' : 'Non Active'}</div> },
+        { name: 'Nama', row: (cell: any) => <div>{cell.nama_kategori}</div> },
+        { name: 'Section', row: (cell: any) => <div>{cell.menu_tujuan}</div> },
         {
-            name: 'Action', row: (cell: LinkType) => (
+            name: 'Action', row: (cell: any) => (
                 <button className='btn bg-primary text-white' onClick={() => { setModal(true); setFormData(cell); setIsCreate(false); }}>
                     Edit
                 </button>
@@ -73,7 +71,7 @@ const Index = () => {
             {loading && <LoadingScreen />}
             <ModalPreview toggleModal={() => setPreviewImage(false)} isOpen={previewImage} img={formData?.image} />
             {modal && (
-                <ModalLayout showModal={modal} toggleModal={() => setModal(false)} placement='justify-center items-start' >
+                <ModalLayout showModal={modal} toggleModal={() =>{ setModal(false);            setSelectedSections(null)}} placement='justify-center items-start' >
                     <div className='m-3 sm:mx-auto flex flex-col bg-white shadow-sm '>
                         <div className='flex justify-between items-center py-2.5 px-4 border-b'>
                             <h3 className='text-lg'>{isCreate ? 'Tambah Data' : 'Edit Data'}</h3>
@@ -82,14 +80,13 @@ const Index = () => {
                             </button>
                         </div>
                         <div className='p-4 h-[30vh] overflow-y-auto w-[70vw]'>
-                            <FormInput name='name' label='Nama' value={formData.name} onChange={(e) => setFormData({ ...formData, name: e.target.value })} className='form-input mb-3' />
+                            <FormInput name='name' label='Nama' value={formData.nama_kategori} onChange={(e) => setFormData({ ...formData, nama_kategori: e.target.value })} className='form-input mb-3' />
                             <div className='mb-2'>
                                 <label className="mb-2" htmlFor="choices-text-remove-button">
                                     Sections
                                 </label>
                                 <Select className="select2 z-5" options={sectionOptions} value={selectedSections} onChange={(e) => setSelectedSections(e)} />
                             </div>
-                            {/* <FormInput name='image' label='Format' value={formData.image} onChange={(e) => setFormData({ ...formData, image: e.target.value })} className='form-input mb-3' /> */}
                         </div>
                         <div className='flex justify-end p-4 border-t gap-x-4'>
                             <button className='btn bg-light text-gray-800' onClick={() => setModal(false)}>Close</button>
