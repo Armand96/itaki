@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('name', 150);
             $table->string('image_path', 200);
+            $table->string('link', 200);
             $table->boolean('is_active')->default(true);
             $table->timestamps();
         });

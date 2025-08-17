@@ -9,6 +9,7 @@ class Sosmed extends Model
     protected $fillable = [
         'name',
         'image_path',
+        'link',
         'is_active',
     ];
 

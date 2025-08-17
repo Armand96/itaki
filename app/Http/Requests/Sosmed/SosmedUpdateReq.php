@@ -7,6 +7,7 @@ use App\Http\Requests\ApiRequest;
 class SosmedUpdateReq extends ApiRequest
 {
     public string $name;
+    public string $link;
     public mixed $image;
     public bool $is_active;
 
@@ -19,6 +20,7 @@ class SosmedUpdateReq extends ApiRequest
     {
         return [
             'name' => 'required|string',
+            'link' => 'required|string',
             'image' => 'image',
             'is_active' => 'boolean'
         ];
