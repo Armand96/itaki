@@ -4,12 +4,13 @@ namespace App\Http\Requests\Client;
 
 use App\Http\Requests\ApiRequest;
 
-class ClientCreateReq extends ApiRequest
+class ClientCreateMultipleReq extends ApiRequest
 {
     public string $name;
-    public mixed $image;
+    public mixed $images;
     public string $description;
     public bool $is_active;
+
 
     /**
      * Get the validation rules that apply to the request.
@@ -20,7 +21,8 @@ class ClientCreateReq extends ApiRequest
     {
         return [
             'name' => 'required|string',
-            'image' => 'required|image',
+            'images' => 'required',
+            'images.*' => 'image',
             'description' => 'string',
             'is_active' => 'bool',
         ];
