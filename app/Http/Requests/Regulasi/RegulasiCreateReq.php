@@ -1,12 +1,13 @@
 <?php
 
-namespace App\Http\Requests\Document;
+namespace App\Http\Requests\Regulasi;
 
 use App\Http\Requests\ApiRequest;
 
 class RegulasiCreateReq extends ApiRequest
 {
     public string $judul;
+    public string $kategori;
     public string $no_regulasi;
     public string $tahun_terbit;
     public mixed $file;
@@ -20,6 +21,7 @@ class RegulasiCreateReq extends ApiRequest
     {
         return [
             'judul' => 'string|required',
+            'kategori' => 'string|required',
             'no_regulasi' => 'string|required',
             'tahun_terbit' => 'string|required',
             'file' => 'file',

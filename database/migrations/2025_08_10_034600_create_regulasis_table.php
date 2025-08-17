@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('regulasis', function (Blueprint $table) {
             $table->id();
             $table->string('judul', 150);
+            $table->string('kategori', 200);
             $table->string('no_regulasi', 150);
             $table->date('tahun_terbit');
             $table->string('pdf_path');

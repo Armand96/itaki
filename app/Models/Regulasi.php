@@ -8,6 +8,7 @@ class Regulasi extends Model
 {
     protected $fillable = [
         'judul',
+        'kategori',
         'no_regulasi',
         'tahun_terbit',
         'pdf_path',

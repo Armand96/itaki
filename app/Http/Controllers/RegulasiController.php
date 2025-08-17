@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\Document\DocumentUpdateReq;
-use App\Http\Requests\Document\RegulasiCreateReq;
+use App\Http\Requests\Regulasi\RegulasiUpdateReq;
+use App\Http\Requests\Regulasi\RegulasiCreateReq;
 use App\Http\Requests\ResponseFail;
 use App\Http\Requests\ResponseSuccess;
 use App\Models\Regulasi;
@@ -23,6 +23,7 @@ class RegulasiController extends Controller
 
         $posts = Regulasi::query()
             ->when($req->filled('judul'), fn($q) => $q->where('judul', 'like', "%{$req->judul}%"))
+            ->when($req->filled('kategori'), fn($q) => $q->where('kategori', 'like', "%{$req->kategori}%"))
             ->when($req->filled('no_regulasi'), fn($q) => $q->where('no_regulasi', 'like', "%{$req->no_regulasi}%"))
             ->when($req->filled('tahun_terbit'), fn($q) => $q->where('tahun_terbit', "$req->tahun_terbit"))
             ->when($req->filled('is_active'), fn($q) => $q->where('is_active', "$req->is_active"))
@@ -52,8 +53,7 @@ class RegulasiController extends Controller
                 $file = $request->file('file');
                 $fileName = time() . '.' . $file->extension();
                 $path = $file->storeAs('regulasi', $fileName, 'public');
-                array_push($filePaths, $path);
-                $validated['file_path'] = $path;
+                $validated['pdf_path'] = $path;
             }
 
             $regulasi = Regulasi::create($validated);
@@ -84,7 +84,7 @@ class RegulasiController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(DocumentUpdateReq $request, Regulasi $regulasi)
+    public function update(RegulasiUpdateReq $request, Regulasi $regulasi)
     {
         try {
             $validated = $request->validated();
@@ -93,8 +93,7 @@ class RegulasiController extends Controller
                 $file = $request->file('file');
                 $fileName = time() . '.' . $file->extension();
                 $path = $file->storeAs('regulasi', $fileName, 'public');
-                array_push($filePaths, $path);
-                $validated['file_path'] = $path;
+                $validated['pdf_path'] = $path;
             }
 
             $regulasi->update($validated);
@@ -113,7 +112,8 @@ class RegulasiController extends Controller
     {
         try {
             $regulasi->delete();
-            Storage::disk('public')->delete($regulasi->file_path);
+            Storage::disk('public')->delete($regulasi->pdf_path);
+            return response()->json(new ResponseSuccess($regulasi, "Success", "Success Delete Regulasi"));
         } catch (\Throwable $th) {
             Log::error($th->getMessage());
             //throw $th;
