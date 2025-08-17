@@ -8,8 +8,10 @@ use App\Http\Controllers\Admin\PostController;
 use App\Http\Controllers\Admin\SosmedController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\WebSettingController;
+use App\Http\Controllers\Client\WebSettingCController;
 use App\Http\Controllers\KaryaIlmiahController;
 use App\Http\Controllers\KategoriController;
+use App\Http\Controllers\KegiatanController;
 use App\Http\Controllers\RegulasiController;
 use App\Http\Requests\ResponseFail;
 use Illuminate\Http\Request;
@@ -32,23 +34,31 @@ Route::middleware(['auth:sanctum'])->group(function () {
     });
 });
 
-Route::prefix('admin')
-    // ->middleware('auth:sanctum')
-    ->group(
-        function () {
-            Route::resource('regulasi', RegulasiController::class);
-            Route::resource('karya_ilmiah', KaryaIlmiahController::class);
-            Route::resource('kategori', KategoriController::class);
-            Route::resource('sosmed', SosmedController::class);
-            Route::resource('user', UserController::class);
-            Route::resource('client', ClientController::class);
-            Route::resource('daftar_anggota', DaftarAnggotaController::class);
-            Route::resource('document', DocumentController::class);
-            Route::resource('gallery', GalleryController::class);
-            Route::resource('post', PostController::class);
-            Route::resource('web_setting', WebSettingController::class);
-            Route::post('gallery_multiple_upload', [GalleryController::class, 'multiple']);
-            Route::post('web_setting_with_upload', [WebSettingController::class, 'createWithUpload']);
-            Route::put('web_setting_with_upload/{web_setting}', [WebSettingController::class, 'updateWithUpload']);
-        }
-    );
+Route::get("/kegiatan_enum", [KegiatanController::class, 'getEnum']);
+
+// ->middleware('auth:sanctum') // add this to admin before deploying
+Route::prefix('admin')->group(
+    function () {
+        Route::resource('kegiatan', KegiatanController::class);
+        Route::resource('regulasi', RegulasiController::class);
+        Route::resource('karya_ilmiah', KaryaIlmiahController::class);
+        Route::resource('kategori', KategoriController::class);
+        Route::resource('sosmed', SosmedController::class);
+        Route::resource('user', UserController::class);
+        Route::resource('client', ClientController::class);
+        Route::resource('daftar_anggota', DaftarAnggotaController::class);
+        Route::resource('document', DocumentController::class);
+        Route::resource('gallery', GalleryController::class);
+        Route::resource('post', PostController::class);
+        Route::resource('web_setting', WebSettingController::class);
+        Route::post('gallery_multiple_upload', [GalleryController::class, 'multiple']);
+        Route::post('web_setting_with_upload', [WebSettingController::class, 'createWithUpload']);
+        Route::put('web_setting_with_upload/{web_setting}', [WebSettingController::class, 'updateWithUpload']);
+    }
+);
+
+Route::middleware(['throttle:global'])->group(function () {
+    //WEB SETTING
+    Route::get('web_setting', [WebSettingCController::class, 'index']);
+    Route::get('web_setting/{web_setting}', [WebSettingCController::class, 'show']);
+});
