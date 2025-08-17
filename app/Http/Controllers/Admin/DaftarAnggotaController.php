@@ -86,6 +86,7 @@ class DaftarAnggotaController extends Controller
     {
         try {
             $validated = $request->validated();
+            $validated['urutan'] = $validated['urutan'] == "null" ? null : $validated['urutan'];
             if ($request->hasFile('image')) {
                 $file = $request->file('image');
                 $imageName = time() . '.' . $file->extension();
@@ -119,5 +120,20 @@ class DaftarAnggotaController extends Controller
             //throw $th;
             return response()->json(new ResponseFail((object) null, "Server Error", $th->getMessage()));
         }
+    }
+
+    public function displayTeam(Request $req)
+    {
+        $dataPerPage = $req->input('data_per_page', 10);
+
+        $anggotas = DaftarAnggota::query()
+            ->when($req->filled('name'), fn($q) => $q->where('name', 'like', "%{$req->name}%"))
+            ->when($req->filled('description'), fn($q) => $q->where('description', 'like', "%{$req->description}%"))
+            ->when($req->filled('is_active'), fn($q) => $q->where('is_active', '=', "{$req->description}"))
+            ->where('urutan', '!=', null)
+            ->orderBy('urutan', 'desc')
+            ->paginate($dataPerPage);
+
+        return $anggotas;
     }
 }

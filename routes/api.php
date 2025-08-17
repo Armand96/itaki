@@ -55,6 +55,7 @@ Route::prefix('admin')->group(
         Route::post('client_multiple_upload', [ClientController::class, 'multiple']);
         Route::post('web_setting_with_upload', [WebSettingController::class, 'createWithUpload']);
         Route::put('web_setting_with_upload/{web_setting}', [WebSettingController::class, 'updateWithUpload']);
+        Route::get('display_tim',  [DaftarAnggotaController::class, 'displayTeam']);
     }
 );
 
