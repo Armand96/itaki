@@ -21,7 +21,7 @@ class DaftarAnggotaCreateReq extends ApiRequest
     {
         return [
             'nama' => 'required|string',
-            'image' => 'image|required',
+            'image' => 'image',
             'jabatan' => 'string',
             'deskripsi_jabatan' => 'string',
             'urutan' => 'string',
