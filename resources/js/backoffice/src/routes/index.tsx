@@ -12,15 +12,13 @@ const Logout = React.lazy(() => import('../pages/auth/Logout'))
 const Error404 = React.lazy(() => import('../pages/error/Error404'))
 const Error500 = React.lazy(() => import('../pages/error/Error500'))
 
-// 
+//
 const Dashboard = React.lazy(() => import('../pages/backoffice/dashboard'))
-const Produk = React.lazy(() => import('../pages/backoffice/Products'))
 const Categories = React.lazy(() => import('../pages/backoffice/categories'))
-const Variants = React.lazy(() => import('../pages/backoffice/variants'))
-const Discounts = React.lazy(() => import('../pages/backoffice/Discount'))
-const Size = React.lazy(() => import('../pages/backoffice/sizes'))
-const LinkType = React.lazy(() => import('../pages/backoffice/linkTypes'))
-const Banners = React.lazy(() => import('../pages/backoffice/banners'))
+const Anggota = React.lazy(() => import('../pages/backoffice/anggota'))
+
+const SosialMedia = React.lazy(() => import('../pages/backoffice/sosmed'))
+const Galleri = React.lazy(() => import('../pages/backoffice/galleri'))
 const WebSettings = React.lazy(() => import('../pages/backoffice/webSettings'))
 
 
@@ -56,10 +54,10 @@ const BackOffice: RoutesProps = {
 			element: <Dashboard />,
 			route: PrivateRoute,
 		},
-		{
-			path: '/backoffice/products',
-			name: 'products',
-			element: <Produk />,
+        {
+			path: '/backoffice/list-anggota',
+			name: 'anggota',
+			element: <Anggota />,
 			route: PrivateRoute,
 		},
 		{
@@ -69,33 +67,15 @@ const BackOffice: RoutesProps = {
 			route: PrivateRoute,
 		},
 		{
-			path: '/backoffice/variants',
-			name: 'Variants',
-			element: <Variants />,
+			path: '/backoffice/sosial-media',
+			name: 'sosial-media',
+			element: <SosialMedia />,
 			route: PrivateRoute,
 		},
 		{
-			path: '/backoffice/sizes',
-			name: 'Size',
-			element: <Size />,
-			route: PrivateRoute,
-		},
-		{
-			path: '/backoffice/link-types',
-			name: 'link-type',
-			element: <LinkType />,
-			route: PrivateRoute,
-		},
-		{
-			path: '/backoffice/discounts',
-			name: 'discounts',
-			element: <Discounts />,
-			route: PrivateRoute,
-		},
-		{
-			path: '/backoffice/banners',
-			name: 'banners',
-			element: <Banners />,
+			path: '/backoffice/galleri',
+			name: 'galleri',
+			element: <Galleri />,
 			route: PrivateRoute,
 		},
 		{

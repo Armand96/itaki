@@ -16,4 +16,5 @@ function getWebSettings(params:any = "") {
     return api.get(baseUrl).then((res) => res.data)
 }
 
+
 export { postWebSettings, getWebSettings, postWebSettingsWithFile }
