@@ -24,6 +24,7 @@ class PostController extends Controller
 
         $posts = Post::query()
             ->when($req->filled('title'), fn($q) => $q->where('title', 'like', "%{$req->title}%"))
+            ->when($req->filled('category'), fn($q) => $q->where('category', 'like', "%{$req->category}%"))
             ->orderBy('id', 'desc')
             ->paginate($dataPerPage);
 

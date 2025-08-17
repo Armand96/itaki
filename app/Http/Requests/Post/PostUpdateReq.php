@@ -22,7 +22,7 @@ class PostUpdateReq extends ApiRequest
         return [
             'title' => 'required|string',
             'category' => 'required|string',
-            'image' => 'file',
+            'image' => 'image',
             'value' => 'required|string',
             'is_active' => 'boolean',
         ];
