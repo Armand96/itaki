@@ -26,7 +26,7 @@ class KegiatanCreateReq extends ApiRequest
             'short_desc' => 'required|string',
             'detail' => 'required|string',
             'tgl_event' => 'required|date',
-            'status_event' => 'required|string',
+            'status_event' => 'required|boolean',
         ];
     }
 }

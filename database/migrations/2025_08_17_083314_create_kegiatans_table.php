@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('short_desc', 200);
             $table->text('detail');
             $table->date('tgl_event');
-            $table->string('status_event', 30)->nullable();
+            $table->boolean('status_event')->nullable();
             $table->timestamps();
         });
     }
