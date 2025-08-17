@@ -1,29 +1,28 @@
 // components
 
-import React, { useEffect, useState } from 'react'
-import { FileUploader, FormInput, PageBreadcrumb } from '../../../components'
+import { useEffect, useState } from 'react';
+import { FileUploader, FormInput, PageBreadcrumb } from '../../../components';
 import { LinkType } from '../../../dto/link_type';
+import { getLinkType, postLinkType } from '../../../helpers/api/linkType';
 import Swal from 'sweetalert2';
 import LoadingScreen from '../../../components/Loading/loading';
 import { ModalLayout } from '../../../components/HeadlessUI';
 import TablePaginate from '../../../components/Table/tablePaginate';
-import { Banners } from '../../../dto/banners';
-import { getBanner, postBanner } from '../../../helpers';
 import ModalPreview from '../../../components/ModalPreviewImage/ModalPreview';
+import { getAnggota, PostAnggota } from '../../../helpers';
 
 const Index = () => {
 
     const [modal, setModal] = useState(false);
     const [loading, setLoading] = useState(false);
-    const [formData, setFormData] = useState<any>({ name: '', image_file: '', is_active: 1, caption: "" });
+    const [formData, setFormData] = useState<any>({ name: '', image_file: '', is_active: 1 });
     const [isCreate, setIsCreate] = useState<boolean>(false);
     const [dataPaginate, setDataPaginate] = useState<any>(null);
     const [previewImage, setPreviewImage] = useState(false)
 
-
     const fetchData = async (page = 1) => {
         setLoading(true);
-        const res: LinkType[] = await getBanner(`?page=${page}`);
+        const res: any[]= await getAnggota(`?page=${page}`);
         setDataPaginate(res);
         setLoading(false);
     }
@@ -33,34 +32,36 @@ const Index = () => {
     }, []);
 
     const postData = async () => {
-        setLoading(true);
         if (!isCreate) {
             delete formData.image
             delete formData.image_thumb
         }
+        setLoading(true);
         const data = { ...formData, _method: formData.id ? 'PUT' : 'POST' };
-        await postBanner(data, formData?.id).then(() => {
+        await PostAnggota(data, formData?.id).then(() => {
             setModal(false);
-            Swal.fire('Success', formData.id ? 'Update Banner Berhasil' : 'Input Banner Berhasil', 'success');
+            Swal.fire('Success', formData.id ? 'Update Anggota Berhasil' : 'Input Anggota Berhasil', 'success')
         }).catch((err) => {
             setModal(false);
+            setLoading(false)
             console.log(err)
             Swal.fire('Error', err.name[0], 'error');
         })
         await fetchData();
-        setModal(false);
     };
 
+    const onFileUpload = (val: any) => {
+        console.log(val)
+        setFormData({ ...formData, image: val[0] })
+    }
+
+
     const columns = [
-        { name: 'Nama Link', row: (cell: Banners) => <div>{cell.name}</div> },
+        { name: 'Nama', row: (cell: LinkType) => <div>{cell.name}</div> },
+        { name: 'Section', row: (cell: LinkType) => <div>{cell.name}</div> },
+        { name: 'Status', row: (cell: LinkType) => <div>{cell.is_active ? 'Active' : 'Non Active'}</div> },
         {
-            name: 'Image', row: (cell: LinkType) => <button className='btn bg-success text-white' onClick={() => { setPreviewImage(true); setFormData(cell) }}>
-                Preview image
-            </button>
-        },
-        { name: 'Status', row: (cell: Banners) => <div>{cell.is_active ? 'Active' : 'Non Active'}</div> },
-        {
-            name: 'Action', row: (cell: Banners) => (
+            name: 'Action', row: (cell: LinkType) => (
                 <button className='btn bg-primary text-white' onClick={() => { setModal(true); setFormData(cell); setIsCreate(false); }}>
                     Edit
                 </button>
@@ -68,51 +69,54 @@ const Index = () => {
         }
     ];
 
-    const onFileUpload = (val: any) => {
-        setFormData({ ...formData, image_file: val[0] })
-    }
-
     return (
         <>
             {loading && <LoadingScreen />}
             <ModalPreview toggleModal={() => setPreviewImage(false)} isOpen={previewImage} img={formData?.image} />
             {modal && (
-                <ModalLayout showModal={modal} toggleModal={() => setModal(false)} placement='justify-center items-start'>
-                    <div className='m-3 sm:mx-auto flex flex-col bg-white shadow-sm rounded'>
+                <ModalLayout showModal={modal} toggleModal={() => setModal(false)} placement='justify-center items-start' >
+                    <div className='m-3 sm:mx-auto flex flex-col bg-white shadow-sm '>
                         <div className='flex justify-between items-center py-2.5 px-4 border-b'>
                             <h3 className='text-lg'>{isCreate ? 'Tambah Data' : 'Edit Data'}</h3>
                             <button className='h-8 w-8' onClick={() => setModal(false)}>
                                 <i className='ri-close-line text-2xl' />
                             </button>
                         </div>
-                        <div className='p-4 max-h-screen overflow-y-auto w-[70vw]'>
-                            <FormInput name='name' label='Caption' value={formData.name} onChange={(e) => setFormData({ ...formData, name: e.target.value })} className='form-input mb-3' />
-                            <div className="flex justify-between items-center">
+                        <div className='p-4 h-[70vh] overflow-y-auto w-[70vw]'>
+                            <FormInput name='nama' label='Nama' value={formData.nama} onChange={(e) => setFormData({ ...formData, nama: e.target.value })} className='form-input mb-3' />
+                            <FormInput name='jabatan' label='Jabatan' value={formData.jabatan} onChange={(e) => setFormData({ ...formData, jabatan: e.target.value })} className='form-input mb-3' />
+                            <FormInput name='deskripsi_jabatan' label='Deksripsi Jabatan' value={formData.deskripsi_jabatan}  type="textarea" onChange={(e) => setFormData({ ...formData, deskripsi_jabatan: e.target.value })} className='form-input mb-3' />
+
+                            <div className='mt-5'>
+                                <h6 className='text-sm mb-2'>Munculkan di team</h6>
+                                <input type='checkbox' checked={formData.is_show === 1 ? true : false} onChange={(e) => setFormData({ ...formData, is_show: e.target.checked ? 1 : 0 })} />
+                                <label className='ml-2'>Aktif</label>
+                            </div>
+
+                            <div className="mt-4">
+                                {
+                                    formData?.is_show === 1 && <FormInput name='urut' label='Urut di list' value={formData.urut} onChange={(e) => setFormData({ ...formData, urut: e.target.value })} className='form-input mb-3' />
+                                }
+                            </div>
+
+                              <div className="flex justify-between items-center">
                                 <h4 className="card-title mb-1">Image</h4>
                             </div>
                             <FileUploader singleFile multipleUploads={false} onFileUpload={onFileUpload} icon="ri-upload-cloud-line text-4xl text-gray-300 dark:text-gray-200" text=" klik untuk upload." />
 
-                            {/* <FormInput name='image' label='Format' value={formData.image} onChange={(e) => setFormData({ ...formData, image: e.target.value })} className='form-input mb-3' /> */}
-
-                            {!isCreate && (
-                                <div className='mt-5'>
-                                    <h6 className='text-sm mb-2'>Status</h6>
-                                    <input type='checkbox' checked={formData.is_active === 1 ? true : false} onChange={(e) => setFormData({ ...formData, is_active: e.target.checked ? 1 : 0 })} />
-                                    <label className='ml-2'>Aktif</label>
-                                </div>
-                            )}
                         </div>
                         <div className='flex justify-end p-4 border-t gap-x-4'>
                             <button className='btn bg-light text-gray-800' onClick={() => setModal(false)}>Close</button>
-                            <button className='btn bg-primary text-white' onClick={postData}>Submit</button>
+                            <button className='btn bg-primary text-white'  onClick={postData}>Submit</button>
                         </div>
+
                     </div>
                 </ModalLayout>
             )}
-            <PageBreadcrumb title="Banners" subName="Backoffice" />
+            <PageBreadcrumb title="Anggota" subName="Backoffice" />
             <div className='bg-white p-4'>
                 <div className='flex justify-between'>
-                    <h3 className='text-2xl font-bold'>Banners</h3>
+                    <h3 className='text-2xl font-bold'>Anggota</h3>
                     <button className='btn bg-primary mb-4 text-white' onClick={() => { setModal(true); setIsCreate(true); setFormData({ name: '', image_file: '', is_active: 1 }); }}>Tambah Data</button>
                 </div>
                 <p className='mb-2'>Total Data : {dataPaginate?.total}</p>

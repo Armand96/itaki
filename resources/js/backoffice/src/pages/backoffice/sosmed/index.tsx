@@ -49,7 +49,8 @@ const Index = () => {
     };
 
     const columns = [
-        { name: 'Nama Link', row: (cell: LinkType) => <div>{cell.name}</div> },
+        { name: 'Nama', row: (cell: LinkType) => <div>{cell.name}</div> },
+        { name: 'Link', row: (cell: LinkType) => <div>{cell.name}</div> },
         {
             name: 'Image', row: (cell: LinkType) => <button className='btn bg-success text-white' onClick={() => { setPreviewImage(true); setFormData(cell) }}>
                 Preview image
@@ -84,11 +85,12 @@ const Index = () => {
                             </button>
                         </div>
                         <div className='p-4 max-h-screen overflow-y-auto w-[70vw]'>
-                            <FormInput name='name' label='Nama Link' value={formData.name} onChange={(e) => setFormData({ ...formData, name: e.target.value })} className='form-input mb-3' />
+                            <FormInput name='name' label='Nama' value={formData.name} onChange={(e) => setFormData({ ...formData, name: e.target.value })} className='form-input mb-3' />
+                            <FormInput name='name' label='Link' value={formData.name} onChange={(e) => setFormData({ ...formData, name: e.target.value })} className='form-input mb-3' />
                             <div className="flex justify-between items-center">
                                 <h4 className="card-title mb-1">Image</h4>
                             </div>
-                            <FileUploader onFileDelete={() => null} detailData={null}  handleDeletePrevImage={() => null} prevData={null} singleFile multipleUploads={false} onFileUpload={onFileUpload} icon="ri-upload-cloud-line text-4xl text-gray-300 dark:text-gray-200" text=" klik untuk upload." />
+                            <FileUploader onFileDelete={() => null} detailData={null} handleDeletePrevImage={() => null} prevData={null} singleFile multipleUploads={false} onFileUpload={onFileUpload} icon="ri-upload-cloud-line text-4xl text-gray-300 dark:text-gray-200" text=" klik untuk upload." />
 
                             {/* <FormInput name='image' label='Format' value={formData.image} onChange={(e) => setFormData({ ...formData, image: e.target.value })} className='form-input mb-3' /> */}
 

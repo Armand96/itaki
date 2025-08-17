@@ -66,7 +66,7 @@ const FileUploader = ({
     };
 
 
-  
+
     return (
         <>
             <Dropzone
@@ -159,7 +159,7 @@ const FileUploader = ({
                                         ></i>
                                     </Link>
                                 </div>
-                        
+
                                 <div className="flex items-center gap-3">
                                     {file.image && (
                                         <img
@@ -170,10 +170,10 @@ const FileUploader = ({
                                             src={HelperFunction.GetImage(file.image)}
                                         />
                                     )}
-                                    
+
                                 <div>
                                         <Link to="" className="font-semibold">
-                                            Foto {detailData?.name}  { idx + 1 } 
+                                            Foto {detailData?.name}  { idx + 1 }
                                         </Link>
                                     </div>
                                 </div>
