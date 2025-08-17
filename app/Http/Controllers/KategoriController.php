@@ -23,7 +23,7 @@ class KategoriController extends Controller
 
         $kategoris = Kategori::query()
             ->when($req->filled('nama_kategori'), fn($q) => $q->where('nama_kategori', 'like', "%{$req->nama_kategori}%"))
-            ->when($req->filled('tujuan_menu'), fn($q) => $q->where('tujuan_menu', 'like', "%{$req->tujuan_menu}%"))
+            ->when($req->filled('menu_tujuan'), fn($q) => $q->where('menu_tujuan', 'like', "%{$req->menu_tujuan}%"))
             ->orderBy('id', 'desc')
             ->paginate($dataPerPage);
 
