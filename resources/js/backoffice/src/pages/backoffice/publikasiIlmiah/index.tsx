@@ -36,7 +36,7 @@ const Index = () => {
         const data = { ...formData, tahun_terbit: dayjs(formData?.tahun_terbit).format("YYYY-MM-DD"),  _method: formData.id ? 'PUT' : 'POST' };
         await PostPublikasiIlmiah(data, formData?.id).then(() => {
             setModal(false);
-            Swal.fire('Success', formData.id ? 'Update Galleri Berhasil' : 'Input Galleri Berhasil', 'success');
+            Swal.fire('Success', formData.id ? 'Update Publikasi Ilmiah Berhasil' : 'Input Publikasi Ilmiah Berhasil', 'success');
         }).catch((err) => {
             setModal(false);
             console.log(err)
@@ -55,6 +55,8 @@ const Index = () => {
                 Link
             </button>
         },
+                        { name: 'Status', row: (cell: any) => <div>{cell?.is_active ? "aktif" : "Tidak Aktif"}</div> },
+
         {
             name: 'Action', row: (cell: any) => (
                 <button className='btn bg-primary text-white' onClick={() => handleEdit(cell)}>
@@ -103,7 +105,18 @@ const Index = () => {
                                 throw new Error('Function not implemented.');
                             } } detailData={undefined} />
 
+                             <div className="mt-4">
+                                 {!isCreate && (
+                                <div className='mb-2'>
+                                    <h6 className='text-sm mb-2'>Status</h6>
+                                    <input type='checkbox' checked={formData.is_active === 1 ? true : false} onChange={(e) => setFormData({ ...formData, is_active: e.target.checked ? 1 : 0 })} />
+                                    <label className='ml-2'>Aktif</label>
+                                </div>
+                            )}
+                              </div>
                         </div>
+
+
                         <div className='flex justify-end p-4 border-t gap-x-4'>
                             <button className='btn bg-light text-gray-800' onClick={() => setModal(false)}>Close</button>
                             <button className='btn bg-primary text-white' onClick={postData}>Submit</button>

@@ -21,6 +21,7 @@ const TentangKami = React.lazy(() => import('../pages/backoffice/tentangKami'))
 const PublikasiIlmiah = React.lazy(() => import('../pages/backoffice/publikasiIlmiah'))
 const Regulasi = React.lazy(() => import('../pages/backoffice/regulasi'))
 const Sertifikasi = React.lazy(() => import('../pages/backoffice/sertifikasi'))
+const Kegiatan = React.lazy(() => import('../pages/backoffice/kegiatan'))
 
 
 const SosialMedia = React.lazy(() => import('../pages/backoffice/sosmed'))
@@ -88,6 +89,12 @@ const BackOffice: RoutesProps = {
 			path: '/backoffice/sertifikasi',
 			name: 'Sertifikasi',
 			element: <Sertifikasi />,
+			route: PrivateRoute,
+		},
+        {
+			path: '/backoffice/kegiatan',
+			name: 'Kegiatan',
+			element: <Kegiatan />,
 			route: PrivateRoute,
 		},
         {

@@ -13,7 +13,7 @@ const Index = () => {
 
     const [modal, setModal] = useState(false);
     const [loading, setLoading] = useState(false);
-    const [formData, setFormData] = useState<any>({ name: '', image_file: '', is_active: 1 });
+    const [formData, setFormData] = useState<any>({ name: '', is_active: 1 });
     const [isCreate, setIsCreate] = useState<boolean>(false);
     const [dataPaginate, setDataPaginate] = useState<any>(null);
     const [previewImage, setPreviewImage] = useState(false)
@@ -30,8 +30,11 @@ const Index = () => {
     }, []);
 
     const postData = async () => {
-        if(!formData?.show){
+        if(!formData?.is_show){
             delete formData?.urutan
+        }
+         if(!formData?.image){
+            delete formData?.image
         }
         setLoading(true);
         const data = { ...formData, _method: formData.id ? 'PUT' : 'POST' };
@@ -58,7 +61,7 @@ const Index = () => {
         { name: 'Jabatan', row: (cell: any) => <div>{cell.jabatan}</div> },
         {
             name: 'Action', row: (cell: any) => (
-                <button className='btn bg-primary text-white' onClick={() => { setModal(true); setFormData(cell); setIsCreate(false); }}>
+                <button className='btn bg-primary text-white' onClick={() => { setModal(true); setFormData({...cell, is_show: cell?.urutan }); setIsCreate(false); }}>
                     Edit
                 </button>
             )
@@ -85,13 +88,13 @@ const Index = () => {
 
                             <div className='mt-5'>
                                 <h6 className='text-sm mb-2'>Munculkan di team</h6>
-                                <input type='checkbox' checked={formData.is_show === 1 ? true : false} onChange={(e) => setFormData({ ...formData, is_show: e.target.checked ? 1 : 0 })} />
+                                <input type='checkbox' checked={formData.is_show ? true : false} onChange={(e) => setFormData({ ...formData, is_show: e.target.checked ? 1 : 0 })} />
                                 <label className='ml-2'>Aktif</label>
                             </div>
 
                             <div className="mt-4">
                                 {
-                                    formData?.is_show === 1 && <FormInput name='urut' label='Urut di list' value={formData.urut} onChange={(e) => setFormData({ ...formData, urut: e.target.value })} className='form-input mb-3' />
+                                    formData?.is_show  && <FormInput name='urut' label='Urut di list' value={formData.urutan} onChange={(e) => setFormData({ ...formData, urutan: e.target.value })} className='form-input mb-3' />
                                 }
                             </div>
 

@@ -1,22 +1,23 @@
 // components
 
-import React, { useEffect, useState } from 'react'
-import { FileUploader, FormInput, PageBreadcrumb } from '../../../components'
+import { useEffect, useState } from 'react';
+import { FileUploader, FormInput, PageBreadcrumb } from '../../../components';
 import { LinkType } from '../../../dto/link_type';
 import Swal from 'sweetalert2';
 import LoadingScreen from '../../../components/Loading/loading';
 import { ModalLayout } from '../../../components/HeadlessUI';
 import TablePaginate from '../../../components/Table/tablePaginate';
-import { getCategories, getGalleri, getGenerals, postGalleri } from '../../../helpers';
+import { getCategories } from '../../../helpers';
 import ModalPreview from '../../../components/ModalPreviewImage/ModalPreview';
-import Select from 'react-select'
+import Select from 'react-select';
 import { HelperFunction } from '../../../helpers/HelpersFunction';
+import { getRegulasi, PostRegulasi } from '../../../helpers/api/regulasi';
 
 const Index = () => {
 
     const [modal, setModal] = useState(false);
     const [loading, setLoading] = useState(false);
-    const [formData, setFormData] = useState<any>({ description: '', image: '', is_active: 1, category: "" });
+    const [formData, setFormData] = useState<any>({ is_active: 1 });
     const [isCreate, setIsCreate] = useState<boolean>(false);
     const [dataPaginate, setDataPaginate] = useState<any>(null);
     const [previewImage, setPreviewImage] = useState(false)
@@ -26,14 +27,14 @@ const Index = () => {
 
     const fetchData = async (page = 1) => {
         setLoading(true);
-        const res: any[] = await getGenerals(`?page=${page}`);
+        const res: any[] = await getRegulasi(`?page=${page}`);
         setDataPaginate(res);
         setLoading(false);
     }
 
     useEffect(() => {
         fetchData();
-        getCategories(`?menu_tujuan=Galleri`).then((res) => {
+        getCategories(`?menu_tujuan=Regulasi`).then((res) => {
             setKategoriOptions(HelperFunction.FormatOptions(res.data, 'nama_kategori', 'id'))
         })
     }, [])
@@ -44,10 +45,10 @@ const Index = () => {
             delete formData.image
             delete formData.image_thumb
         }
-        const data = { ...formData, category: selectedKategori?.value, _method: formData.id ? 'PUT' : 'POST' };
-        await postGalleri(data, formData?.id).then(() => {
+        const data = { ...formData, kategori: selectedKategori?.value, _method: formData.id ? 'PUT' : 'POST' };
+        await PostRegulasi(data, formData?.id).then(() => {
             setModal(false);
-            Swal.fire('Success', formData.id ? 'Update Galleri Berhasil' : 'Input Galleri Berhasil', 'success');
+            Swal.fire('Success', formData.id ? 'Update Regulasi Berhasil' : 'Input Regulasi Berhasil', 'success');
         }).catch((err) => {
             setModal(false);
             console.log(err)
@@ -58,13 +59,15 @@ const Index = () => {
     };
 
     const columns = [
-        { name: 'title', row: (cell: any) => <div>{cell.description}</div> },
-        { name: 'Kategori', row: (cell: any) => <div>{kategoriOptions?.filter((x) => x.value == cell.category)[0]?.label}</div> },
+        { name: 'Judul', row: (cell: any) => <div>{cell.judul}</div> },
+        { name: 'kategori', row: (cell: any) => <div>{kategoriOptions?.filter((x) => x.value == cell.kategori)[0]?.label}</div> },
+        { name: 'Tahun Terbit', row: (cell: any) => <div>{cell.tahun_terbit}</div> },
         {
-            name: 'Image', row: (cell: LinkType) => <button className='btn bg-success text-white' onClick={() => { setPreviewImage(true); setFormData(cell) }}>
+            name: 'File', row: (cell: any) => <button className='btn bg-success text-white' onClick={() => { window.open(import.meta.env.VITE_PUBLIC_URL_STORAGE + cell.pdf_path, '_blank') }}>
                 Link
             </button>
         },
+                { name: 'Status', row: (cell: any) => <div>{cell?.is_active ? "aktif" : "Tidak Aktif"}</div> },
         {
             name: 'Action', row: (cell: any) => (
                 <button className='btn bg-primary text-white' onClick={() => handleEdit(cell)}>
@@ -76,7 +79,7 @@ const Index = () => {
 
     const onFileUpload = (val: any) => {
         console.log(val)
-        setFormData({ ...formData, image: val[0] })
+        setFormData({ ...formData, file: val[0] })
     }
 
     const handleEdit = (evt) => {
@@ -100,9 +103,9 @@ const Index = () => {
                             </button>
                         </div>
                         <div className='p-4 max-h-screen overflow-y-auto w-[70vw]'>
-                            <FormInput name='Judul' label='judul' value={formData.title} onChange={(e) => setFormData({ ...formData, title: e.target.value })} className='form-input mb-3' />
-                            <FormInput name='Judul' label='Nama Pernebit' value={formData.title} onChange={(e) => setFormData({ ...formData, title: e.target.value })} className='form-input mb-3' />
-                            <FormInput name='Judul' label='Tanggal Terbit' type='date' value={formData.title} onChange={(e) => setFormData({ ...formData, title: e.target.value })} className='form-input mb-3' />
+                            <FormInput name='Judul' label='judul' value={formData.judul} onChange={(e) => setFormData({ ...formData, judul: e.target.value })} className='form-input mb-3' />
+                            <FormInput name='Judul' label='No Regulasi' value={formData.no_regulasi} onChange={(e) => setFormData({ ...formData, no_regulasi: e.target.value })} className='form-input mb-3' />
+                            <FormInput name='Judul' label='Tanggal Terbit' type='date' value={formData.tahun_terbit} onChange={(e) => setFormData({ ...formData, tahun_terbit: e.target.value })} className='form-input mb-3' />
                             <div className='mb-2'>
                                 <label className="mb-2" htmlFor="choices-text-remove-button">
                                     Kategori
@@ -113,13 +116,23 @@ const Index = () => {
                             <div className="flex justify-between items-center">
                                 <h4 className="card-title mb-1">File</h4>
                             </div>
+
                             <FileUploader singleFile multipleUploads={false} onFileUpload={onFileUpload} icon="ri-upload-cloud-line text-4xl text-gray-300 dark:text-gray-200" text=" klik untuk upload." onFileDelete={function (index: any): void {
                                 throw new Error('Function not implemented.');
-                            } } handleDeletePrevImage={function (parms: any, idx: any): void {
+                            }} handleDeletePrevImage={function (parms: any, idx: any): void {
                                 throw new Error('Function not implemented.');
-                            } } detailData={undefined} />
+                            }} detailData={undefined} />
 
-                            {/* <FormInput name='image' label='Format' value={formData.image} onChange={(e) => setFormData({ ...formData, image: e.target.value })} className='form-input mb-3' /> */}
+                            <div className="px-4">
+
+                            {!isCreate && (
+                                <div className='mb-2'>
+                                    <h6 className='text-sm mb-2'>Status</h6>
+                                    <input type='checkbox' checked={formData.is_active === 1 ? true : false} onChange={(e) => setFormData({ ...formData, is_active: e.target.checked ? 1 : 0 })} />
+                                    <label className='ml-2'>Aktif</label>
+                                </div>
+                            )}
+                            </div>
 
                         </div>
                         <div className='flex justify-end p-4 border-t gap-x-4'>

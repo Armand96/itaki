@@ -56,6 +56,8 @@ const Index = () => {
                 Preview image
             </button>
         },
+                        { name: 'Status', row: (cell: any) => <div>{cell?.is_active ? "aktif" : "Tidak Aktif"}</div> },
+
         {
             name: 'Action', row: (cell: LinkType) => (
                 <button className='btn bg-primary text-white' onClick={() => { setModal(true); setFormData(cell); setIsCreate(false); }}>
@@ -91,6 +93,14 @@ const Index = () => {
                             <FileUploader onFileDelete={() => null} detailData={null} handleDeletePrevImage={() => null} prevData={null} singleFile multipleUploads={false} onFileUpload={onFileUpload} icon="ri-upload-cloud-line text-4xl text-gray-300 dark:text-gray-200" text=" klik untuk upload." />
 
                         </div>
+
+                            {!isCreate && (
+                                <div className='mb-2'>
+                                    <h6 className='text-sm mb-2'>Status</h6>
+                                    <input type='checkbox' checked={formData.is_active === 1 ? true : false} onChange={(e) => setFormData({ ...formData, is_active: e.target.checked ? 1 : 0 })} />
+                                    <label className='ml-2'>Aktif</label>
+                                </div>
+                            )}
                         <div className='flex justify-end p-4 border-t gap-x-4'>
                             <button className='btn bg-light text-gray-800' onClick={() => setModal(false)}>Close</button>
                             <button className='btn bg-primary text-white' onClick={postData}>Submit</button>

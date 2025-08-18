@@ -12,4 +12,9 @@ function getGalleri(params:any = "") {
     return api.get(baseUrl).then((res) => res.data)
 }
 
-export { postGalleri, getGalleri }
+function deleteGalleri(body: any, update: any = "") {
+    return api.createWithFile(`api/admin/gallery${update && `/${update}`}`, body)
+}
+
+
+export { postGalleri, getGalleri, deleteGalleri}

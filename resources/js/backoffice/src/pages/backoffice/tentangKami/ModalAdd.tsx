@@ -5,7 +5,7 @@ import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import cloneDeep from 'clone-deep';
 import Swal from 'sweetalert2';
-import { PostGenerals } from '../../../helpers';
+import { deleteGalleri, getDocumentGenerals, getGalleri, getGenerals, PostDocumentGenerals, postGalleri, PostGenerals } from '../../../helpers';
 
 
 interface ModalAddTypes {
@@ -14,42 +14,111 @@ interface ModalAddTypes {
     isCreate: boolean,
     setLoading: (loading: any) => void,
     detailData: any,
-    reloadData: () => void
 }
 
-export const ModalAdd = ({ isOpen, toggleModal, isCreate, setLoading, detailData, reloadData }: ModalAddTypes) => {
+export const ModalAdd = ({ isOpen, toggleModal, isCreate, setLoading, detailData }: ModalAddTypes) => {
     const [formData, setFormData] = useState<any>({
-        name: '',
-        brand: '',
-        description: '',
-        release_date: '',
-        price: 0,
-        link: []
+
     })
     const [imageDelete, setImageDelete] = useState<any>([])
     const [oldImages, setOldImages] = useState<any>([])
 
+    const titleToSlug = (title: string) => {
+        return title
+            .toLowerCase()
+            .replace(/ /g, '-')
+            .replace(/[^\w-]+/g, '');
+    };
+
+    const slug = titleToSlug(detailData?.title);
+
+
     useEffect(() => {
-        console.log(detailData)
+        if (["Sejarah ITAKI", "Visi", "Misi"].includes(detailData?.title)) {
+
+
+            getGenerals(`?category=${slug}`).then((res) => {
+                setFormData({
+                    description: res?.data[0]?.content,
+                    oldDesc: true,
+                    id: res?.data[0]?.id,
+                })
+            })
+        }
+        if (detailData?.title === "Struktur Anggota") {
+            getGalleri(`?category=${slug}`).then((res) => {
+                setOldImages(res?.data)
+            })
+        }
+        if (detailData?.title === "Kode Etik Perushaan") {
+            getDocumentGenerals(`?category=${slug}`).then((res) => {
+                setOldImages(res?.data)
+            })
+        }
+
     }, [])
 
 
-    const postData = () => {
+    const postData = async () => {
         setLoading(true);
 
-     PostGenerals({
-        _method: "PUT",
-        ...detailData,
-        value: formData?.description || detailData?.content,
-        image: formData?.image || ""
-     }, detailData.id).then(() => {
+        try {
+            if (["Sejarah ITAKI", "Visi", "Misi"].includes(detailData?.title)) {
+                if (formData?.oldDesc) {
+                    await PostGenerals({
+                        category: slug,
+                        title: slug,
+                        value: formData.description,
+                        _method: "PUT"
+                    }, formData?.id);
+                } else {
+                    await PostGenerals({
+                        title: slug,
+                        category: slug,
+                        value: formData.description,
+                    });
+                }
+            }
+            if (detailData?.title === "Kode Etik Perushaan") {
+                console.log("FILLLLLE", formData?.image)
+                if (formData?.image) {
+                    await PostDocumentGenerals({
+                        title: formData?.image?.name,
+                        value: slug,
+                        category: slug,
+                        file: formData?.image,
+                    });
+                }
+
+                await imageDelete.map((id) => {
+                    PostDocumentGenerals({
+                        '_method': 'DELETE'
+                    }, id)
+                })
+            }
+            if (detailData?.title === "Struktur Anggota") {
+                if (formData?.image) {
+                    await postGalleri({
+                        category: slug,
+                        image: formData?.image,
+                        description: slug
+                    });
+                }
+
+                await imageDelete.map((id) => {
+                    deleteGalleri({
+                        '_method': 'DELETE'
+                    }, id)
+                })
+            }
+
             toggleModal();
-            Swal.fire('Success', detailData ? 'Edit Tentang Kami berhasil' : 'Input Tentang Kami berhasil', 'success');
-            reloadData();
-        }).catch((error) => {
+            Swal.fire('Success', `Edit ${detailData?.title} Berhasil`, 'success');
+        } catch (error: any) {
             Swal.fire('Error', error.message || 'Terjadi kesalahan', 'error');
+        } finally {
             setLoading(false);
-        })
+        }
     };
 
 
@@ -71,6 +140,7 @@ export const ModalAdd = ({ isOpen, toggleModal, isCreate, setLoading, detailData
         let prevData = cloneDeep(oldImages)
         prevData.splice(idx, 1)
         setOldImages(prevData)
+        setOldImages(null)
         setImageDelete([...imageDelete, parms])
 
     }
@@ -82,11 +152,11 @@ export const ModalAdd = ({ isOpen, toggleModal, isCreate, setLoading, detailData
     const handleDesc = (value: string, delta: any) => {
 
         if (!delta || !delta.ops || formData.description == value) return;
-
-
         setFormData({ ...formData, description: value })
 
     }
+
+    console.log("old", oldImages)
 
 
 
@@ -101,7 +171,7 @@ export const ModalAdd = ({ isOpen, toggleModal, isCreate, setLoading, detailData
                 </div>
                 <div className='p-4 overflow-y-auto w-[70vw]'>
 
-                    <div className={`${["visi", "misi", "sejarah-itaki"].includes(detailData?.slug) ? "block" : "hidden"} mb-20`} >
+                    <div className={`${["Visi", "Misi", "Sejarah ITAKI"].includes(detailData?.title) ? "block" : "hidden"} mb-20`} >
                         <div className="flex justify-between items-center">
                             <h4 className="card-title">Deskripsi</h4>
                         </div>
@@ -112,11 +182,11 @@ export const ModalAdd = ({ isOpen, toggleModal, isCreate, setLoading, detailData
                     </div>
 
 
-                    <div className={`${["kode-etik-perushaan", "struktur-anggota",].includes(detailData?.slug) ? "block" : "hidden"} mb-2`} >
+                    <div className={`${["Kode Etik Perushaan", "Struktur Anggota",].includes(detailData?.title) ? "block" : "hidden"} mb-2`} >
                         <label className="mb-2" htmlFor="choices-text-remove-button">
                             Upload Image (max ukuran image {import.meta.env.VITE_REACT_APP_MAX_UPLOAD_SIZE}MB)
                         </label>
-                        <FileUploader singleFile multipleUploads={false} onFileDelete={newFileDelete} detailData={detailData} handleDeletePrevImage={handlePrevImage} prevData={oldImages} maxSizeParms={2} onFileUpload={onFileUpload} icon="ri-upload-cloud-line text-4xl text-gray-300 dark:text-gray-200" text=" klik untuk upload. " />
+                        <FileUploader singleFile multipleUploads={false} onFileDelete={newFileDelete} detailData={oldImages} handleDeletePrevImage={handlePrevImage} prevData={oldImages} maxSizeParms={2} onFileUpload={onFileUpload} icon="ri-upload-cloud-line text-4xl text-gray-300 dark:text-gray-200" text=" klik untuk upload. " />
 
                     </div>
 

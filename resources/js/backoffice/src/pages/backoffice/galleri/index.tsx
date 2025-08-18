@@ -112,6 +112,15 @@ const Index = () => {
                             </div>
                             <FileUploader singleFile multipleUploads={false}  onFileUpload={onFileUpload} icon="ri-upload-cloud-line text-4xl text-gray-300 dark:text-gray-200" text=" klik untuk upload." />
 
+                              <div className="mt-4">
+                                 {!isCreate && (
+                                <div className='mb-2'>
+                                    <h6 className='text-sm mb-2'>Status</h6>
+                                    <input type='checkbox' checked={formData.is_active === 1 ? true : false} onChange={(e) => setFormData({ ...formData, is_active: e.target.checked ? 1 : 0 })} />
+                                    <label className='ml-2'>Aktif</label>
+                                </div>
+                            )}
+                              </div>
                             {/* <FormInput name='image' label='Format' value={formData.image} onChange={(e) => setFormData({ ...formData, image: e.target.value })} className='form-input mb-3' /> */}
 
                         </div>

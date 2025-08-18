@@ -70,7 +70,7 @@ const FileUploader = ({
     return (
         <>
             <Dropzone
-                disabled={singleFile ? selectedFiles.length > 0 : false}
+                disabled={singleFile ? selectedFiles?.length > 0  || prevData?.length > 0 : false}
                 multiple={multipleUploads}
                 onDropAccepted={(acceptedFiles) => validateFiles(acceptedFiles)}
             >
@@ -161,6 +161,9 @@ const FileUploader = ({
                                 </div>
 
                                 <div className="flex items-center gap-3">
+                                    {
+                                        console.log("fff",file)
+                                    }
                                     {file.image && (
                                         <img
                                             data-dz-thumbnail=""
@@ -173,7 +176,9 @@ const FileUploader = ({
 
                                 <div>
                                         <Link to="" className="font-semibold">
-                                            Foto {detailData?.name}  { idx + 1 }
+                                            {
+                                                file?.title || `Foto   ${ idx + 1 }`
+                                            }
                                         </Link>
                                     </div>
                                 </div>

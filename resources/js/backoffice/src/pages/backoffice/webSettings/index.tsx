@@ -96,13 +96,7 @@ const Index = () => {
                                 </label>
                                 <FileUploader multipleUploads={false} onFileDelete={newFileDelete} prevData={null} detailData={null} handleDeletePrevImage={() => null} onFileUpload={onFileUpload} icon="ri-upload-cloud-line text-4xl text-gray-300 dark:text-gray-200" text=" klik untuk upload." />
                             </div>
-                              <div className="flex justify-between items-center">
-                            <h4 className="card-title">Deskripsi *</h4>
-                        </div>
 
-                        <div className="pt-3">
-                            <ReactQuill defaultValue={`input deskripsi disini`} theme="snow" modules={modules} style={{ height: 300 }} value={formData.description} onChange={handleDesc} />
-                        </div>
                         </div>
                         <div className='flex justify-end p-4 border-t gap-x-4'>
                             <button className='btn bg-light text-gray-800' onClick={() => setModal(false)}>Close</button>
