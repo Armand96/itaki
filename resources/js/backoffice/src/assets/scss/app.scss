@@ -23,7 +23,7 @@ File: Main Css File
     --surface1: rgba(255, 255, 255, 0.1);
     --surface2: rgba(255, 255, 255, 0.2);
   }
-  
+
 
 // Custom Variables
 @import "config/variables";
@@ -46,7 +46,7 @@ File: Main Css File
 @import "components/pagination";
 
 
-// Plugins (Extended UI Components) 
+// Plugins (Extended UI Components)
 @import "plugins/simplebar";
 @import "plugins/swiper";
 @import "plugins/sortablejs"; // Drang & Drop
@@ -80,3 +80,8 @@ File: Main Css File
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+.ql-tooltip.ql-editing {
+    left: 0 !important;
+}
