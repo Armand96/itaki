@@ -15,4 +15,40 @@
 
 @import "../../public/assets/css/main.css";
 
+* {
+      font-family: "Plus Jakarta Sans", sans-serif;
+}
 
+.container-header {
+    width: 90% ;
+    margin: 0 auto;
+}
+
+
+
+
+@media (max-width: 1200px) {
+.luminix-header-btn {
+    display: none;
+}
+}
+
+.luminix-main-menu-item {
+    margin-right: 120px ;
+}
+
+@media (max-width: 1226px) {
+.luminix-main-menu-item {
+    display: none ;
+}
+}
+
+.table-primary th {
+    background-color: #2920D2 !important;
+    color: white;
+}
+
+.btn-outline-primary:hover {
+        background-color: #2920D2 !important;
+
+}
