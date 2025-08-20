@@ -7,7 +7,6 @@ import React from 'react'
 
 
 // images import
-import logo_white1_img from "@/assets/images/logo/logo.png";
 import location_img from "@/assets/images/iconbox/location.svg";
 import mail_img from "@/assets/images/iconbox/mail.svg";
 import call_img from "@/assets/images/iconbox/call.svg";
@@ -16,7 +15,7 @@ export default function FooterOne() {
     return (
         <>
             <footer className="luminix-footer-section1">
-                <div className="container">
+                <div className="container-header">
                     <div className="luminix-footer-one">
                         <div className="row">
 

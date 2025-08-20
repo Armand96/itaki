@@ -53,15 +53,10 @@ const Index = () => {
     };
 
     const columns = [
-        { name: 'Judul', row: (cell: any) => <div>{cell.judul}</div> },
-        { name: 'Penerbit', row: (cell: any) => <div>{cell.penerbit}</div> },
-        { name: 'Tahun Terbit', row: (cell: any) => <div>{cell.tahun_terbit}</div> },
-        {
-            name: 'File', row: (cell: any) => <button className='btn bg-success text-white' onClick={() => { window.open(import.meta.env.VITE_PUBLIC_URL_STORAGE + cell.file_path, '_blank') }}>
-                Link
-            </button>
-        },
-        { name: 'Status', row: (cell: any) => <div>{cell?.is_active ? "aktif" : "Tidak Aktif"}</div> },
+        { name: 'Nama kegiatan', row: (cell: any) => <div>{cell.judul}</div> },
+        { name: 'Deksripsi singkat', row: (cell: any) => <div>{cell.short_desc}</div> },
+        { name: 'Tanggal Event', row: (cell: any) => <div>{cell.tgl_event}</div> },
+        { name: 'Status Event', row: (cell: any) => <div>{cell?.status_event ? "sedang berjalan" : "tidak aktif"}</div> },
 
         {
             name: 'Action', row: (cell: any) => (
@@ -80,7 +75,8 @@ const Index = () => {
 
 
     const modules = {
-        toolbar: [[{ font: [] }, { size: [] }], ['bold', 'italic', 'underline', 'strike'], [{ color: [] }, { background: [] }], [{ script: 'super' }, { script: 'sub' }], [{ header: [false, 1, 2, 3, 4, 5, 6] }, 'blockquote', 'code-block'], [{ list: 'ordered' }, { list: 'bullet' }, { indent: '-1' }, { indent: '+1' }], ['direction', { align: [] }], ['link', 'clean']],
+        toolbar: [[{ font: [] }, { size: [] }], ['bold', 'italic', 'underline', 'strike'], [{ color: [] }, { background: [] }], [{ script: 'super' }, { script: 'sub' }], [{ header: [false, 1, 2, 3, 4, 5, 6] }, 'blockquote', 'code-block'], [{ list: 'ordered' }, { list: 'bullet' }, { indent: '-1' }, { indent: '+1' }], ['direction', { align: [] }],   ['link', 'image', 'video', 'clean'],
+],
     }
 
     const handleDesc = (value: string, delta: any) => {
@@ -107,7 +103,7 @@ const Index = () => {
                              <div className="mt-4">
 
                                     <div className='mb-2'>
-                                        <h6 className='text-sm mb-2'>Kegiatan</h6>
+                                        <h6 className='text-sm mb-2'>Status</h6>
                                         <input type='checkbox' checked={formData.status_event} onChange={(e) => setFormData({ ...formData, status_event: e.target.checked})} />
                                         <label className='ml-2'>Sedang berjalan</label>
                                     </div>
@@ -136,15 +132,7 @@ const Index = () => {
 
 
 
-                            <div className="mt-4">
-                                {!isCreate && (
-                                    <div className='mb-2'>
-                                        <h6 className='text-sm mb-2'>Status</h6>
-                                        <input type='checkbox' checked={formData.is_active === 1 ? true : false} onChange={(e) => setFormData({ ...formData, is_active: e.target.checked ? 1 : 0 })} />
-                                        <label className='ml-2'>Aktif</label>
-                                    </div>
-                                )}
-                            </div>
+
                         </div>
 
 
