@@ -9,6 +9,7 @@ use App\Http\Requests\ResponseSuccess;
 use App\Models\Kegiatan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Storage;
 use Symfony\Component\Routing\Exception\ResourceNotFoundException;
 use Symfony\Component\Translation\Exception\NotFoundResourceException;
 
@@ -48,6 +49,15 @@ class KegiatanController extends Controller
     {
         try {
             $validated = $request->validated();
+
+            if ($request->hasFile('image')) {
+                $file = $request->file('image');
+                $imageName = time() . '.' . $file->extension();
+                $path = $file->storeAs('kegiatan', $imageName, 'public');
+                $validated['cover_image'] = $path;
+                $validated['cover_image_thumb'] = $path;
+            }
+
             $kegiatan = kegiatan::create($validated);
             return response()->json(new ResponseSuccess($kegiatan, "Success", "Success Create kegiatan"));
         } catch (\Throwable $th) {
@@ -80,6 +90,16 @@ class KegiatanController extends Controller
     {
         try {
             $validated = $request->validated();
+
+            if ($request->hasFile('image')) {
+                $file = $request->file('image');
+                $imageName = time() . '.' . $file->extension();
+                $path = $file->storeAs('post', $imageName, 'public');
+                $validated['cover_image'] = $path;
+                Storage::disk('public')->delete($kegiatan->cover_image);
+                Storage::disk('public')->delete($kegiatan->cover_image_thumb);
+            }
+
             $kegiatan->update($validated);
             return response()->json(new ResponseSuccess($kegiatan, "Success", "Success Update kegiatan"));
         } catch (\Throwable $th) {
@@ -96,6 +116,10 @@ class KegiatanController extends Controller
     {
         try {
             $kegiatan->delete();
+            if($kegiatan->cover_image) {
+                Storage::disk('public')->delete($kegiatan->cover_image);
+                Storage::disk('public')->delete($kegiatan->cover_image_thumb);
+            }
             return response()->json(new ResponseSuccess($kegiatan, "Success", "Success Delete Kegiatan"));
         } catch (\Throwable $th) {
             Log::error($th);

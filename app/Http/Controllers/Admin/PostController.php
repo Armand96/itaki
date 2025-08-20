@@ -118,6 +118,9 @@ class PostController extends Controller
     {
         try {
             $post->update(['is_active' => false]);
+            if($post->cover_image) {
+                Storage::disk('public')->delete($post->cover_image);
+            }
             return response()->json(new ResponseSuccess($post, "Success", "Success Set Product To Inactive"));
         } catch (\Throwable $th) {
             Log::error($th->getMessage());

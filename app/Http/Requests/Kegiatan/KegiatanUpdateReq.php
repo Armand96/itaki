@@ -12,6 +12,7 @@ class KegiatanUpdateReq extends ApiRequest
     public string $detail;
     public string $tgl_event;
     public string $status_event;
+    public mixed $image;
 
     /**
      * Get the validation rules that apply to the request.
@@ -27,6 +28,7 @@ class KegiatanUpdateReq extends ApiRequest
             'detail' => 'required|string',
             'tgl_event' => 'required|date',
             'status_event' => 'required|boolean',
+            'image' => 'image',
         ];
     }
 }

@@ -17,6 +17,8 @@ return new class extends Migration
             $table->string("slug", 200);
             $table->enum('kategori', ['seminar', 'webinar']);
             $table->string('short_desc', 200);
+            $table->string('cover_image', 150)->nullable();
+            $table->string('cover_image_thumb', 150)->nullable();
             $table->text('detail');
             $table->date('tgl_event');
             $table->boolean('status_event')->nullable();
