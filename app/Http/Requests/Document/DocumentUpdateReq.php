@@ -7,6 +7,7 @@ use App\Http\Requests\ApiRequest;
 class DocumentUpdateReq extends ApiRequest
 {
     public string $title;
+    public string $category;
     public mixed $file;
     public string $description;
     /**
@@ -18,6 +19,7 @@ class DocumentUpdateReq extends ApiRequest
     {
         return [
             'title' => 'string|required',
+            'category' => 'string|required',
             'file' => 'file',
             'description' => 'string'
         ];

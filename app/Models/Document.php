@@ -9,6 +9,7 @@ class Document extends Model
     protected $fillable = [
         'title',
         'file_path',
+        'category',
         'description'
     ];
 

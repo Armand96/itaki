@@ -8,6 +8,8 @@ use App\Http\Controllers\Admin\PostController;
 use App\Http\Controllers\Admin\SosmedController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\WebSettingController;
+use App\Http\Controllers\Client\AboutUsController;
+use App\Http\Controllers\Client\HomeController;
 use App\Http\Controllers\Client\WebSettingCController;
 use App\Http\Controllers\KaryaIlmiahController;
 use App\Http\Controllers\KategoriController;
@@ -15,6 +17,7 @@ use App\Http\Controllers\KegiatanController;
 use App\Http\Controllers\RegulasiController;
 use App\Http\Requests\ResponseFail;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Route;
 
 Route::post('/login', [UserController::class, 'login'])->middleware('throttle:global');
@@ -35,6 +38,9 @@ Route::middleware(['auth:sanctum'])->group(function () {
 });
 
 Route::get("/kegiatan_enum", [KegiatanController::class, 'getEnum']);
+Route::get('kategori', function() {
+    return Config::get('category');
+});
 
 // ->middleware('auth:sanctum') // add this to admin before deploying
 Route::prefix('admin')->group(
@@ -59,7 +65,25 @@ Route::prefix('admin')->group(
     }
 );
 
-Route::middleware(['throttle:global'])->group(function () {
+Route::middleware(['throttle:global'])->prefix('client')->group(function () {
+
+    // HOME
+    Route::get('sambutan', [HomeController::class, 'sambutan']);
+    Route::get('foto_pimpinan', [HomeController::class, 'fotoPimpinan']);
+    Route::get('daftar_anggota', [HomeController::class, 'daftarAnggota']);
+    Route::get('list_client', [HomeController::class, 'listClient']);
+    Route::get('list_sosmed', [HomeController::class, 'listSosmed']);
+
+    // ABOUT US
+    Route::get('sejarah', [AboutUsController::class, 'sejarah']);
+    Route::get('visi_misi', [AboutUsController::class, 'visiMisi']);
+    Route::get('kode_etik', [AboutUsController::class, 'kodeEtik']);
+
+    // MANUAL FILTER
+    Route::get('post_with_category', [HomeController::class, 'postParamCategory']);
+    Route::get('gallery_with_category', [HomeController::class, 'galleryParamCategory']);
+    Route::get('document_with_category', [HomeController::class, 'documentParamCategory']);
+
     //WEB SETTING
     Route::get('web_setting', [WebSettingCController::class, 'index']);
     Route::get('web_setting/{web_setting}', [WebSettingCController::class, 'show']);
