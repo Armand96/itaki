@@ -76,7 +76,10 @@ Route::middleware(['throttle:global'])->prefix('client')->group(function () {
 
     // ABOUT US
     Route::get('sejarah', [AboutUsController::class, 'sejarah']);
-    Route::get('visi_misi', [AboutUsController::class, 'visiMisi']);
+    Route::get('visi', [AboutUsController::class, 'visi']);
+    Route::get('misi', [AboutUsController::class, 'misi']);
+    Route::get('visi_image', [AboutUsController::class, 'visiImage']);
+    Route::get('misi_image', [AboutUsController::class, 'misiImage']);
     Route::get('kode_etik', [AboutUsController::class, 'kodeEtik']);
 
     // MANUAL FILTER
