@@ -14,10 +14,12 @@ const Index = () => {
   const [dataPaginate, setDataPaginate] = useState<any>({
     data: [
         {
-            title: "Sambutan pimpinan"
+            title: "Sambutan pimpinan",
+            key: "sambutan"
         },
           {
-            title: "List Klien"
+            title: "List Klien",
+            key: "list_client"
         }
     ]
   });

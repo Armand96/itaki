@@ -52,3 +52,11 @@
         background-color: #2920D2 !important;
 
 }
+
+
+@media (max-width: 768px) {
+  .ql-size-large {
+    font-size: 18px !important;
+}
+
+}

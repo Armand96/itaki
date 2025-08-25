@@ -3,15 +3,47 @@ import Breadcrumb from "@/common/Breadcrumb";
 import HeaderOne from "@/layouts/headers/HeaderOne";
 import Wrapper from "@/layouts/Wrapper";
 import FooterTwo from "@/layouts/footers/FooterOne";
-import { Worker, Viewer } from "@react-pdf-viewer/core";
-import { defaultLayoutPlugin } from "@react-pdf-viewer/default-layout";
 
-// Import styles
-import '@react-pdf-viewer/core/lib/styles/index.css';
-import '@react-pdf-viewer/default-layout/lib/styles/index.css';
+import { Document, Page, pdfjs } from "react-pdf";
+import { useEffect, useState } from "react";
+import useLoading from "@/store/useLoading";
+import FetchData from "../../../services/FetchData";
+
+// worker pdf.js
+pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@3.11.174/build/pdf.worker.min.js`;
 
 const KodeEtik = () => {
-	const defaultLayoutPluginInstance = defaultLayoutPlugin();
+	const [numPages, setNumPages] = useState<number>(0);
+    const setLoading = useLoading((state) => state.setLoading)
+    const [pdf, setPdf] = useState<any>(null)
+
+	const onDocumentLoadSuccess = ({ numPages }: { numPages: number }) => {
+		setNumPages(numPages);
+	};
+
+useEffect(() => {
+  FetchData.GetKodeEtik().then(async (res) => {
+    try {
+      setLoading(false);
+
+      const fileUrl = `${process.env.NEXT_PUBLIC_URL}storage${res?.file_path}`;
+
+      const response = await fetch(fileUrl);
+
+      if (!response.ok) throw new Error("Gagal fetch PDF");
+
+      const blob = await response.blob();
+
+      const url = URL.createObjectURL(blob);
+
+      setPdf(url);
+    } catch (err) {
+      console.error("Error ambil PDF:", err);
+    }
+  });
+}, []);
+
+
 
 	return (
 		<Wrapper>
@@ -21,22 +53,25 @@ const KodeEtik = () => {
 			<div
 				className="container"
 				style={{
-					height: "120vh",
+					height: "100vh",
 					display: "flex",
+					flexDirection: "column",
 					alignItems: "center",
 					justifyContent: "center",
-					margin: "30px auto"
+					margin: "30px auto",
 				}}
 			>
-				<Worker workerUrl={`https://unpkg.com/pdfjs-dist@3.11.174/build/pdf.worker.min.js`}>
-					<div style={{ width: '100%', height: '100%' }}>
-						<Viewer
-
-							fileUrl="/susunan-pengurus.pdf"
-							plugins={[defaultLayoutPluginInstance]}
-						/>
-					</div>
-				</Worker>
+				<div style={{ width: "100%", height: "100%", overflow: "auto" }}>
+					<Document
+						file={pdf}// file dari folder public
+						onLoadSuccess={onDocumentLoadSuccess}
+						loading={<p>Loading PDF...</p>}
+					>
+						{Array.from(new Array(numPages), (_, index) => (
+							<Page key={`page_${index + 1}`} pageNumber={index + 1} width={800} />
+						))}
+					</Document>
+				</div>
 			</div>
 
 			<FooterTwo />

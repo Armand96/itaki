@@ -37,21 +37,21 @@ export const ModalAdd = ({ isOpen, toggleModal, isCreate, setLoading, detailData
         if (["Sejarah ITAKI", "Visi", "Misi"].includes(detailData?.title)) {
 
 
-            getGenerals(`?category=${slug}`).then((res) => {
+            getGenerals(`?category=${detailData?.key}`).then((res) => {
                 setFormData({
                     description: res?.data[0]?.content,
-                    oldDesc: true,
+                    oldDesc: res?.data[0]?.content || false,
                     id: res?.data[0]?.id,
                 })
             })
         }
         if (detailData?.title === "Struktur Anggota") {
-            getGalleri(`?category=${slug}`).then((res) => {
+            getGalleri(`?category=${detailData?.key}`).then((res) => {
                 setOldImages(res?.data)
             })
         }
         if (detailData?.title === "Kode Etik Perushaan") {
-            getDocumentGenerals(`?category=${slug}`).then((res) => {
+            getDocumentGenerals(`?category=${detailData?.key}`).then((res) => {
                 setOldImages(res?.data)
             })
         }
@@ -66,14 +66,14 @@ export const ModalAdd = ({ isOpen, toggleModal, isCreate, setLoading, detailData
             if (["Sejarah ITAKI", "Visi", "Misi"].includes(detailData?.title)) {
                 if (formData?.oldDesc) {
                     await PostGenerals({
-                        category: slug,
+                        category: detailData?.key,
                         title: slug,
                         value: formData.description,
                         _method: "PUT"
                     }, formData?.id);
                 } else {
                     await PostGenerals({
-                        title: slug,
+                        title: detailData?.key,
                         category: slug,
                         value: formData.description,
                     });
@@ -85,7 +85,7 @@ export const ModalAdd = ({ isOpen, toggleModal, isCreate, setLoading, detailData
                     await PostDocumentGenerals({
                         title: formData?.image?.name,
                         value: slug,
-                        category: slug,
+                        category: detailData?.key,
                         file: formData?.image,
                     });
                 }
@@ -99,7 +99,7 @@ export const ModalAdd = ({ isOpen, toggleModal, isCreate, setLoading, detailData
             if (detailData?.title === "Struktur Anggota") {
                 if (formData?.image) {
                     await postGalleri({
-                        category: slug,
+                        category: detailData?.key,
                         image: formData?.image,
                         description: slug
                     });

@@ -5991,6 +5991,7 @@ blockquote img {
 }
 .luminix-about-card h2, .luminix-about-card h5 {
   color: var(--white-color);
+  font-size: 16px;
 }
 @media (max-width: 1399px) {
   .luminix-about-card {

@@ -4,6 +4,7 @@ import { Metadata } from "next";
 import "./globals.css";
 import { Plus_Jakarta_Sans } from "next/font/google";
 import { ErrorBoundary } from "@/components/ErrorBoundary";
+import 'react-quill/dist/quill.snow.css';
 
 const plusJakarta = Plus_Jakarta_Sans({
   subsets: ["latin"],

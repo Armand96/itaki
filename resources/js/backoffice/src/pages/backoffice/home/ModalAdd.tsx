@@ -25,13 +25,13 @@ export const ModalAdd = ({ isOpen, toggleModal, isCreate, setLoading, detailData
 
 
     useEffect(() => {
-        if (detailData?.title === "List Klien") {
-            getGalleri("?category=listKlien").then((res) => {
+        if (detailData?.key === "list_client") {
+            getGalleri("?category=list_client").then((res) => {
                 setOldImages(res?.data)
             })
         }
-        if (detailData?.title === "Sambutan pimpinan") {
-            getGenerals("?category=SambutanPimpinan").then((res) => {
+        if (detailData?.key === "sambutan") {
+            getGenerals("?category=sambutan").then((res) => {
                 setFormData({
                     description: res?.data[0]?.content,
                     oldDesc: true,
@@ -47,14 +47,14 @@ export const ModalAdd = ({ isOpen, toggleModal, isCreate, setLoading, detailData
             setLoading(true);
 
 
-            if (detailData?.title === "List Klien") {
+            if (detailData?.key === "list_client") {
                 if (formData?.image?.length > 0) {
                     const uploadImagesSequentially = async () => {
                         for (const file of Array.from(formData.image)) {
                             await new Promise((resolve) => {
                                 setTimeout(async () => {
                                     await postGalleri({
-                                        category: "listKlien",
+                                        category: "list_client",
                                         image: file,
                                         description: "listKlien"
                                     });
@@ -71,19 +71,19 @@ export const ModalAdd = ({ isOpen, toggleModal, isCreate, setLoading, detailData
                     }, id)
                 })
             }
-            if (detailData?.title === "Sambutan pimpinan") {
+            if (detailData?.key === "sambutan") {
                 if (formData?.oldDesc) {
                     PostGenerals({
-                        category: "SambutanPimpinan",
-                        title: "Sambutan Pimpinan",
+                        category: "sambutan",
+                        title: "sambutan",
                         value: formData.description,
                         _method: "PUT"
 
                     }, formData?.id)
                 } else {
                     PostGenerals({
-                        title: "Sambutan Pimpinan",
-                        category: "SambutanPimpinan",
+                        title: "sambutan",
+                        category: "sambutan",
                         value: formData.description,
                     })
                 }

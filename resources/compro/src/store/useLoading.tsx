@@ -1,16 +1,13 @@
-import { useState } from "react";
+import { create } from "zustand";
 
-const useLoading = () => {
-    const [loading, setLoading] = useState<boolean>(true);
+interface LoadingState {
+    loading: boolean;
+    setLoading: (loading: boolean) => void;
+}
 
-    const SetLoading = (loading: boolean) => {
-        setLoading(() => loading);
-    };
-
-    return {
-        SetLoading,
-        loading
-    };
-};
+const useLoading = create<LoadingState>((set) => ({
+    loading: true,
+    setLoading: (loading) => set({ loading }),
+}));
 
 export default useLoading;
