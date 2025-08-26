@@ -26,7 +26,7 @@ useEffect(() => {
     try {
       setLoading(false);
 
-      const fileUrl = `${process.env.NEXT_PUBLIC_URL}storage${res?.file_path}`;
+      const fileUrl = `${process.env.NEXT_PUBLIC_URL}storage/${res?.file_path}`;
 
       const response = await fetch(fileUrl);
 
