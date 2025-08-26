@@ -43,7 +43,7 @@ class AboutUsController extends Controller
 
     public function visiImage()
     {
-        $visiImage = Gallery::where('category', 'visi')->first();
+        $visiImage = Gallery::where('category', 'like', '%visi%')->first();
         if ($visiImage) {
             return response()->json($visiImage);
         } else {
@@ -52,7 +52,7 @@ class AboutUsController extends Controller
     }
     public function misiImage()
     {
-        $misiImage = Gallery::where('category', 'visi')->first();
+        $misiImage = Gallery::where('category', 'like', '%misi%')->first();
         if ($misiImage) {
             return response()->json($misiImage);
         } else {
@@ -65,6 +65,26 @@ class AboutUsController extends Controller
         $document = Document::where('category', 'kode_etik')->first();
         if ($document) {
             return response()->json($document);
+        } else {
+            throw new ResourceNotFoundException("Data not found");
+        }
+    }
+
+    public function strukturOrganisasi()
+    {
+        $image = Gallery::where('category', 'struktur_organisasi')->first();
+        if ($image) {
+            return response()->json($image);
+        } else {
+            throw new ResourceNotFoundException("Data not found");
+        }
+    }
+
+    public function sertifikasi()
+    {
+        $sertifikasi = Gallery::where('category', 'sertifikasi')->first();
+        if ($sertifikasi) {
+            return response()->json($sertifikasi);
         } else {
             throw new ResourceNotFoundException("Data not found");
         }

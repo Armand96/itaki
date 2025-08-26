@@ -8,6 +8,20 @@ use Illuminate\Support\Facades\Response;
 //     return view('welcome');
 // });
 
+Route::get('/storagez/{path}', function ($path) {
+    $file = storage_path('app/public/' . $path);
+
+    if (!file_exists($file)) {
+        abort(404);
+    }
+
+    return Response::file($file, [
+        'Access-Control-Allow-Origin' => '*',
+        'Access-Control-Allow-Methods' => 'GET, OPTIONS',
+        'Access-Control-Allow-Headers' => 'Origin, Content-Type, Accept'
+    ]);
+})->where('path', '.*');
+
 
 Route::prefix('/admin')->group(function () {
     Route::get('/{any?}', function () {

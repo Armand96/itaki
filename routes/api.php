@@ -81,6 +81,8 @@ Route::middleware(['throttle:global'])->prefix('client')->group(function () {
     Route::get('visi_image', [AboutUsController::class, 'visiImage']);
     Route::get('misi_image', [AboutUsController::class, 'misiImage']);
     Route::get('kode_etik', [AboutUsController::class, 'kodeEtik']);
+    Route::get('struktur_organisasi', [AboutUsController::class, 'strukturOrganisasi']);
+    Route::get('sertifikasi', [AboutUsController::class, 'sertifikasi']);
 
     // MANUAL FILTER
     Route::get('post_with_category', [HomeController::class, 'postParamCategory']);
