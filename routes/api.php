@@ -43,20 +43,20 @@ Route::get('kategori', function() {
 });
 
 // ->middleware('auth:sanctum') // add this to admin before deploying
-Route::prefix('admin')->group(
+Route::prefix('admin')->middleware('api')->group(
     function () {
-        Route::resource('kegiatan', KegiatanController::class);
-        Route::resource('regulasi', RegulasiController::class);
-        Route::resource('karya_ilmiah', KaryaIlmiahController::class);
-        Route::resource('kategori', KategoriController::class);
-        Route::resource('sosmed', SosmedController::class);
-        Route::resource('user', UserController::class);
-        Route::resource('client', ClientController::class);
-        Route::resource('daftar_anggota', DaftarAnggotaController::class);
-        Route::resource('document', DocumentController::class);
-        Route::resource('gallery', GalleryController::class);
-        Route::resource('post', PostController::class);
-        Route::resource('web_setting', WebSettingController::class);
+        Route::apiResource('kegiatan', KegiatanController::class);
+        Route::apiResource('regulasi', RegulasiController::class);
+        Route::apiResource('karya_ilmiah', KaryaIlmiahController::class);
+        Route::apiResource('kategori', KategoriController::class);
+        Route::apiResource('sosmed', SosmedController::class);
+        Route::apiResource('user', UserController::class);
+        Route::apiResource('client', ClientController::class);
+        Route::apiResource('daftar_anggota', DaftarAnggotaController::class);
+        Route::apiResource('document', DocumentController::class);
+        Route::apiResource('gallery', GalleryController::class);
+        Route::apiResource('post', PostController::class);
+        Route::apiResource('web_setting', WebSettingController::class);
         Route::post('gallery_multiple_upload', [GalleryController::class, 'multiple']);
         Route::post('client_multiple_upload', [ClientController::class, 'multiple']);
         Route::post('web_setting_with_upload', [WebSettingController::class, 'createWithUpload']);
@@ -65,7 +65,7 @@ Route::prefix('admin')->group(
     }
 );
 
-Route::middleware(['throttle:global'])->prefix('client')->group(function () {
+Route::middleware(['throttle:global', 'api'])->prefix('client')->group(function () {
 
     // HOME
     Route::get('sambutan', [HomeController::class, 'sambutan']);
