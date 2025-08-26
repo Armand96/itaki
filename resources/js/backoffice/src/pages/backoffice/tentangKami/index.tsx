@@ -27,7 +27,7 @@ const Index = () => {
             },
             {
                 title: "Struktur Anggota",
-                key: "daftar_anggota"
+                key: "struktur_organisasi"
             },
             {
                 title: "Kode Etik Perushaan",

@@ -25,6 +25,14 @@ const FetchData = {
         const res = await apiService.getData(`api/client/kode_etik${params}`);
         return res.data;
     },
+     GetStrukturOrganisasi: async (params: string = '' ) => {
+        const res = await apiService.getData(`api/client/struktur_organisasi${params}`);
+        return res.data;
+    },
+    GetSertifikasi: async (params: string = '' ) => {
+        const res = await apiService.getData(`api/client/sertifikasi${params}`);
+        return res.data;
+    },
 };
 
 export default FetchData
