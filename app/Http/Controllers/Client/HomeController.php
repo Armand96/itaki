@@ -8,6 +8,7 @@ use App\Models\DaftarAnggota;
 use App\Models\Document;
 use App\Models\Gallery;
 use App\Models\KaryaIlmiah;
+use App\Models\Kategori;
 use App\Models\Kegiatan;
 use App\Models\Post;
 use App\Models\Regulasi;
@@ -134,5 +135,18 @@ class HomeController extends Controller
             ->paginate($dataPerPage);
 
         return $kegiatans;
+    }
+
+    public function listKategori(Request $req)
+    {
+        $dataPerPage = $req->input('data_per_page', 10);
+
+        $kategoris = Kategori::query()
+            ->when($req->filled('nama_kategori'), fn($q) => $q->where('nama_kategori', 'like', "%{$req->nama_kategori}%"))
+            ->when($req->filled('menu_tujuan'), fn($q) => $q->where('menu_tujuan', 'like', "%{$req->menu_tujuan}%"))
+            ->orderBy('id', 'desc')
+            ->paginate($dataPerPage);
+
+        return $kategoris;
     }
 }
