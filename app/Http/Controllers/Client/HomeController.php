@@ -7,7 +7,9 @@ use App\Models\Client;
 use App\Models\DaftarAnggota;
 use App\Models\Document;
 use App\Models\Gallery;
+use App\Models\KaryaIlmiah;
 use App\Models\Post;
+use App\Models\Regulasi;
 use App\Models\Sosmed;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Exception\BadRequestException;
@@ -86,5 +88,34 @@ class HomeController extends Controller
     {
         $listSosmed = Sosmed::where('is_active', true)->get();
         return response()->json($listSosmed);
+    }
+
+    public function listRegulasi(Request $request)
+    {
+        $dataPerPage = $request->input('data_per_page', 10);
+
+        $regulasi = Regulasi::query()
+            ->when($request->filled('judul'), fn($q) => $q->where('judul', 'like', "%{$request->judul}%"))
+            ->when($request->filled('kategori'), fn($q) => $q->where('kategori', 'like', "%{$request->kategori}%"))
+            ->when($request->filled('no_regulasi'), fn($q) => $q->where('no_regulasi', 'like', "%{$request->no_regulasi}%"))
+            ->where('is_active', true)
+            ->orderBy('id', 'desc')
+            ->paginate($dataPerPage);
+
+        return $regulasi;
+    }
+
+    public function listKaryaIlmiah(Request $request)
+    {
+        $dataPerPage = $request->input('data_per_page', 10);
+
+        $karyaIlmiahs = KaryaIlmiah::query()
+            ->when($request->filled('judul'), fn($q) => $q->where('judul', 'like', "%{$request->title}%"))
+            ->when($request->filled('penerbit'), fn($q) => $q->where('penerbit', 'like', "%{$request->title}%"))
+            ->where('is_active', true)
+            ->orderBy('id', 'desc')
+            ->paginate($dataPerPage);
+
+        return $karyaIlmiahs;
     }
 }

@@ -73,6 +73,8 @@ Route::middleware(['throttle:global', 'api'])->prefix('client')->group(function 
     Route::get('daftar_anggota', [HomeController::class, 'daftarAnggota']);
     Route::get('list_client', [HomeController::class, 'listClient']);
     Route::get('list_sosmed', [HomeController::class, 'listSosmed']);
+    Route::get('list_regulasi', [HomeController::class, 'listRegulasi']);
+    Route::get('list_karya_ilmiah', [HomeController::class, 'listKaryaIlmiah']);
 
     // ABOUT US
     Route::get('sejarah', [AboutUsController::class, 'sejarah']);

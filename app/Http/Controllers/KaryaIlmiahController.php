@@ -22,7 +22,8 @@ class KaryaIlmiahController extends Controller
         $dataPerPage = $req->input('data_per_page', 10);
 
         $karyaIlmiahs = KaryaIlmiah::query()
-            ->when($req->filled('title'), fn($q) => $q->where('title', 'like', "%{$req->title}%"))
+            ->when($req->filled('judul'), fn($q) => $q->where('judul', 'like', "%{$req->title}%"))
+            ->when($req->filled('penerbit'), fn($q) => $q->where('penerbit', 'like', "%{$req->title}%"))
             ->orderBy('id', 'desc')
             ->paginate($dataPerPage);
 
