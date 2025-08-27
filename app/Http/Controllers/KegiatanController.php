@@ -22,7 +22,7 @@ class KegiatanController extends Controller
     {
         $dataPerPage = $req->input('data_per_page', 10);
 
-        $kategoris = Kegiatan::query()
+        $kegiatans = Kegiatan::query()
             ->when($req->filled('kategori'), fn($q) => $q->where('kategori', 'like', "%{$req->kategori}%"))
             ->when($req->filled('short_desc'), fn($q) => $q->where('short_desc', 'like', "%{$req->short_desc}%"))
             ->when($req->filled('detail'), fn($q) => $q->where('detail', 'like', "%{$req->detail}%"))
@@ -31,7 +31,7 @@ class KegiatanController extends Controller
             ->orderBy('id', 'desc')
             ->paginate($dataPerPage);
 
-        return $kategoris;
+        return $kegiatans;
     }
 
     /**

@@ -8,6 +8,7 @@ use App\Models\DaftarAnggota;
 use App\Models\Document;
 use App\Models\Gallery;
 use App\Models\KaryaIlmiah;
+use App\Models\Kegiatan;
 use App\Models\Post;
 use App\Models\Regulasi;
 use App\Models\Sosmed;
@@ -117,5 +118,21 @@ class HomeController extends Controller
             ->paginate($dataPerPage);
 
         return $karyaIlmiahs;
+    }
+
+    public function listKegiatan(Request $req)
+    {
+        $dataPerPage = $req->input('data_per_page', 10);
+
+        $kegiatans = Kegiatan::query()
+            ->when($req->filled('kategori'), fn($q) => $q->where('kategori', 'like', "%{$req->kategori}%"))
+            ->when($req->filled('short_desc'), fn($q) => $q->where('short_desc', 'like', "%{$req->short_desc}%"))
+            ->when($req->filled('detail'), fn($q) => $q->where('detail', 'like', "%{$req->detail}%"))
+            ->when($req->filled('tgl_event'), fn($q) => $q->where('tgl_event', '=', "%{$req->tgl_event}%"))
+            ->when($req->filled('status_event'), fn($q) => $q->where('status_event', '=', "%{$req->status_event}%"))
+            ->orderBy('id', 'desc')
+            ->paginate($dataPerPage);
+
+        return $kegiatans;
     }
 }

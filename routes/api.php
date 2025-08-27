@@ -75,6 +75,7 @@ Route::middleware(['throttle:global', 'api'])->prefix('client')->group(function 
     Route::get('list_sosmed', [HomeController::class, 'listSosmed']);
     Route::get('list_regulasi', [HomeController::class, 'listRegulasi']);
     Route::get('list_karya_ilmiah', [HomeController::class, 'listKaryaIlmiah']);
+    Route::get('list_kegiatan', [HomeController::class, 'listKegiatan']);
 
     // ABOUT US
     Route::get('sejarah', [AboutUsController::class, 'sejarah']);
