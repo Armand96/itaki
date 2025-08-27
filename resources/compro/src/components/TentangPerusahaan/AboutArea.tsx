@@ -29,7 +29,9 @@ export default function AboutArea({ dataList }: { dataList: any }) {
             {/* Image di kanan */}
             <div className="col-lg-6 order-lg-2 d-flex">
               <Image
-                src={about1}
+                src="/assets/images/about-us/visi.jpg"
+                width={600}
+                height={400}
                 style={{ width: "100%", objectFit: "cover", borderRadius: "8px" }}
                 alt="Visi"
                 className="img-fluid w-full"
@@ -57,7 +59,9 @@ export default function AboutArea({ dataList }: { dataList: any }) {
             {/* Image di kanan */}
             <div className="col-lg-6 order-lg-0 d-flex">
               <Image
-                src={about1}
+                width={600}
+                height={400}
+                src="/assets/images/about-us/misi.jpg"
                 style={{ width: "100%", objectFit: "cover", borderRadius: "8px" }}
                 alt="Visi"
                 className="img-fluid w-full"
