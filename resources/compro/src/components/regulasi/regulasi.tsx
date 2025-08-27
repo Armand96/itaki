@@ -1,8 +1,10 @@
 "use client";
 
 import TableWithPagination from "@/common/TableWithPagination";
-import { useState } from "react";
+import useLoading from "@/store/useLoading";
+import { useEffect, useState } from "react";
 import ReactPaginate from "react-paginate";
+import FetchData from "../../../services/FetchData";
 
 // Data dummy
 const kategoriFilters = [
@@ -17,33 +19,56 @@ interface RegulasiData {
     tahun: number;
 }
 
-const allData: RegulasiData[] = Array.from({ length: 30 }).map((_, i) => ({
-    no: i + 1,
-    nama: `Regulasi ${i + 1}`,
-    tahun: 2020 + (i % 5),
-}));
 
 export default function Regulasi() {
-    const [activeKategori, setActiveKategori] = useState("uu");
-    const itemsPerPage = 5;
-    const [itemOffset, setItemOffset] = useState(0);
+    const [activeKategori, setActiveKategori] = useState(1);
+    const [categoriesList, setCategoriesList] = useState<any>([])
+    const setLoading = useLoading((state) => state.setLoading)
+    const [paginateData, setPaginateData] = useState<any>({
+        data: [],
+        last_page: 1,
+        current_page: 1,
+        per_page: 10,
+    })
 
-    const pageCount = Math.ceil(allData.length / itemsPerPage);
-    const endOffset = itemOffset + itemsPerPage;
-    const currentData = allData.slice(itemOffset, endOffset);
-    const [currentPage, setCurrentPage] = useState(0);
+    const fetchData = (page: number = 1, kategori: any = '') => {
+        setLoading(true)
+        FetchData.GetRegulasi(`?page=${page}&data_per_page=10&kategori=${kategori}`).then((res) => {
+            setLoading(false)
+            setPaginateData(res)
+        })
+    }
+
+    const setCurrentPage = (page: number) => {
+        fetchData(page, activeKategori)
+    }
+
+
+    useEffect(() => {
+        Promise.all([fetchData(), FetchData.GetKategori(`?menu_tujuan=Regulasi`)]).then((res) => {
+            setLoading(false)
+            setCategoriesList(res[1]?.data || [])
+        })
+    }, [])
+
+    const handleKategoriChange = (kategoriId: number) => {
+        setActiveKategori(kategoriId);
+        fetchData(1, kategoriId);
+    }
+
+
 
 
     const columns = [
-        { key: "no", label: "No Regulasi" },
-        { key: "nama", label: "Nama Regulasi" },
-        { key: "tahun", label: "Tahun Terbit" },
+        { key: "no_regulasi", label: "No Regulasi" ,  sortable: true,},
+        { key: "judul", label: "Nama Regulasi" ,  sortable: true,},
+        { key: "tahun_terbit", label: "Tahun Terbit",  sortable: true, render: (value: any) => value?.split("-")[0] },
         {
-            key: "link",
+            key: "pdf_path",
             label: "Aksi",
             render: (value: string) =>
                 value ? (
-                    <a href={value} target="_blank" rel="noopener noreferrer">
+                    <a href={`${process.env.NEXT_PUBLIC_URL}storage/${value}`} target="_blank" rel="noopener noreferrer">
                         Link
                     </a>
                 ) : (
@@ -56,26 +81,26 @@ export default function Regulasi() {
     return (
         <div className="container py-4">
             {/* Filter Kategori */}
-        <div className="d-flex flex-column flex-md-row justify-content-center gap-2 mb-4 align-items-md-center">
-    {kategoriFilters.map((filter) => (
-        <button
-            key={filter.value}
-            onClick={() => setActiveKategori(filter.value)}
-            className={`btn px-3 py-2 ${
-                activeKategori === filter.value ? "btn-primary" : "btn-outline-primary"
-            }`}
-        >
-            {filter.label}
-        </button>
-    ))}
-</div>
+            <div className="d-flex flex-column flex-md-row justify-content-center gap-2 mb-4 align-items-md-center">
+                {categoriesList.map((filter) => (
+                    <button
+                        key={filter.id}
+                        onClick={() => handleKategoriChange(filter.id)}
+                        className={`btn px-3 py-2 ${activeKategori === filter.id ? "btn-primary" : "btn-outline-primary"
+                            }`}
+                    >
+                        {filter.nama_kategori}
+                    </button>
+                ))}
+            </div>
 
 
             <TableWithPagination
                 columns={columns}
-                data={currentData}
-                currentPage={currentPage}
-                pageCount={pageCount}
+                data={paginateData?.data}
+                currentPage={paginateData?.current_page}
+                pageCount={paginateData?.per_page}
+                lastPage={paginateData?.last_page}
                 onPageChange={setCurrentPage}
             />
 

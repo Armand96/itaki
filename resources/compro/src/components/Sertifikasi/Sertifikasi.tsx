@@ -28,13 +28,11 @@ export default function SkemaSertifikasi() {
         <div className="luminix-padding-section">
             <div className="container">
 
-
                 <h3 className="mx-auto text-center">Skema Sertifikasi</h3>
 
-                {/* Gambar Skema */}
                 <div className="flex justify-center mb-12" style={{ display: "flex", justifyContent: "center" }}>
                     <Image
-                        src={image} // taruh file gambar di public/images/sertifikasi/
+                        src={image}
                         alt="Skema Sertifikasi"
                         width={400}
                         height={400}
