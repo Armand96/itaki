@@ -132,7 +132,7 @@ class KegiatanController extends Controller
     {
         return response()->json([
             ['key' => 'seminar', 'value' => 'Seminar'],
-            ['key' => 'webinar', 'value' => 'Weminar'],
+            ['key' => 'webinar', 'value' => 'Webinar'],
         ]);
     }
 }
