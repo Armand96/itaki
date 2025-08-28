@@ -33,6 +33,22 @@ const FetchData = {
         const res = await apiService.getData(`api/client/sertifikasi${params}`);
         return res.data;
     },
+    GetRegulasi: async (params: string = '' ) => {
+        const res = await apiService.getData(`api/client/list_regulasi${params}`);
+        return res.data;
+    },
+      GetPublikasi: async (params: string = '' ) => {
+        const res = await apiService.getData(`api/client/list_karya_ilmiah${params}`);
+        return res.data;
+    },
+      GetKategori: async (params: string = '' ) => {
+        const res = await apiService.getData(`api/client/list_kategori${params}`);
+        return res.data;
+    },
+       GetGalleri: async (params: string = '' ) => {
+        const res = await apiService.getData(`api/client/gallery_with_category${params}`);
+        return res.data;
+    },
 };
 
 export default FetchData

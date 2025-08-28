@@ -1,8 +1,6 @@
 "use client";
 import portfolio_data from "@/data/portfolio-data";
-import RightArrawWhitIcon from "@/svg/RightArrawWhitIcon";
 import Image from "next/image";
-import Link from "next/link";
 import { useState } from "react";
 
 
