@@ -9,4 +9,5 @@ return [
     ['key' => 'kode_etik', 'value' => 'Kode Etik'],
     ['key' => 'struktur_organisasi', 'value' => 'Struktur Organisasi'],
     ['key' => 'sertifikasi', 'value' => 'Sertifikasi'],
+    ['key' => 'gallery', 'value' => 'Gallery'],
 ];

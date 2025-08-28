@@ -92,6 +92,7 @@ Route::middleware(['throttle:global', 'api'])->prefix('client')->group(function 
     Route::get('gallery_with_category', [HomeController::class, 'galleryParamCategory']);
     Route::get('document_with_category', [HomeController::class, 'documentParamCategory']);
     Route::get('list_kategori', [HomeController::class, 'listKategori']);
+    Route::get('galleries', [HomeController::class, 'galleriesMultipleCategories']);
 
     //WEB SETTING
     Route::get('web_setting', [WebSettingCController::class, 'index']);

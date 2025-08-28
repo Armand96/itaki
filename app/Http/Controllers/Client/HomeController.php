@@ -22,7 +22,6 @@ class HomeController extends Controller
 {
     public function postParamCategory(Request $request)
     {
-        if (!$request->has('category')) throw new BadRequestException("category must be filled");
         $postSambutan = Post::where('category', $request->category)->where('is_active', true)->first();
         if ($postSambutan) {
             return response()->json($postSambutan);
@@ -33,7 +32,6 @@ class HomeController extends Controller
 
     public function galleryParamCategory(Request $request)
     {
-        if (!$request->has('category')) throw new BadRequestException("category must be filled");
         $dataPerPage = $request->data_per_page ? $request->data_per_page : 10;
         $galleries = Gallery::query()
             ->where('category', $request->category)
@@ -44,7 +42,6 @@ class HomeController extends Controller
 
     public function documentParamCategory(Request $request)
     {
-        if (!$request->has('category')) throw new BadRequestException("category must be filled");
         $dataPerPage = $request->data_per_page ? $request->data_per_page : 10;
         $galleries = Document::query()
             ->where('category', $request->category)
@@ -148,5 +145,17 @@ class HomeController extends Controller
             ->paginate($dataPerPage);
 
         return $kategoris;
+    }
+
+    public function galleriesMultipleCategories(Request $request)
+    {
+        $dataPerPage = $request->data_per_page ? $request->data_per_page : 10;
+        $galleries = Gallery::query()
+            ->where('category', 'gallery')
+            ->when($request->filled('category'), fn($q) => $q->orWhereIn('category', explode(",", $request->category)))
+            ->orderBy('id', 'desc')
+            ->paginate($dataPerPage);
+
+        return $galleries;
     }
 }
