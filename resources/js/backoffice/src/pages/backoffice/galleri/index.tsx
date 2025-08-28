@@ -21,18 +21,17 @@ const Index = () => {
     const [dataPaginate, setDataPaginate] = useState<any>(null);
     const [previewImage, setPreviewImage] = useState(false)
     const [kategoriOptions, setKategoriOptions] = useState<any>([])
-    const [selectedKategori, setSelectedKategori] = useState<any>()
 
 
     const fetchData = async (page = 1) => {
         setLoading(true);
-        const res: any[] = await getGalleri(`?page=${page}`);
+        const res: any[] = await getGalleri(`?page=${page}&category=gallery`);
         setDataPaginate(res);
         setLoading(false);
     }
 
     useEffect(() => {
-                            fetchData();
+     fetchData();
     getCategories(`?menu_tujuan=Galleri`).then((res) => {
            setKategoriOptions(HelperFunction.FormatOptions(res.data, 'nama_kategori', 'id'))
         })
@@ -41,10 +40,10 @@ const Index = () => {
     const postData = async () => {
         setLoading(true);
         if (!isCreate) {
-            delete formData.image
+            // delete formData.image
             delete formData.image_thumb
         }
-        const data = { ...formData, category: selectedKategori?.value, _method: formData.id ? 'PUT' : 'POST' };
+        const data = { ...formData, category: "gallery",  _method: formData.id ? 'PUT' : 'POST' };
         await postGalleri(data, formData?.id).then(() => {
             setModal(false);
             Swal.fire('Success', formData.id ? 'Update Galleri Berhasil' : 'Input Galleri Berhasil', 'success');
@@ -59,7 +58,6 @@ const Index = () => {
 
     const columns = [
         { name: 'Deskripsi', row: (cell: any) => <div>{cell.description}</div> },
-        { name: 'Kategori', row: (cell: any) => <div>{kategoriOptions?.filter((x) => x.value == cell.category)[0]?.label}</div> },
         {
             name: 'Image', row: (cell: LinkType) => <button className='btn bg-success text-white' onClick={() => { setPreviewImage(true); setFormData(cell) }}>
                 Preview image
@@ -101,18 +99,18 @@ const Index = () => {
                         </div>
                         <div className='p-4 max-h-screen overflow-y-auto w-[70vw]'>
                             <FormInput name='name' label='description' value={formData.description} onChange={(e) => setFormData({ ...formData, description: e.target.value })} className='form-input mb-3' />
-                               <div className='mb-2'>
+                               {/* <div className='mb-2'>
                                 <label className="mb-2" htmlFor="choices-text-remove-button">
                                     Kategori
                                 </label>
                                 <Select  className="select2 z-5" options={kategoriOptions} value={selectedKategori} onChange={(e) => setSelectedKategori(e)} />
-                            </div>
+                            </div> */}
                             <div className="flex justify-between items-center">
                                 <h4 className="card-title mb-1">Image</h4>
                             </div>
                             <FileUploader singleFile multipleUploads={false}  onFileUpload={onFileUpload} icon="ri-upload-cloud-line text-4xl text-gray-300 dark:text-gray-200" text=" klik untuk upload." />
 
-                              <div className="mt-4">
+                              {/* <div className="mt-4">
                                  {!isCreate && (
                                 <div className='mb-2'>
                                     <h6 className='text-sm mb-2'>Status</h6>
@@ -120,7 +118,7 @@ const Index = () => {
                                     <label className='ml-2'>Aktif</label>
                                 </div>
                             )}
-                              </div>
+                              </div> */}
                             {/* <FormInput name='image' label='Format' value={formData.image} onChange={(e) => setFormData({ ...formData, image: e.target.value })} className='form-input mb-3' /> */}
 
                         </div>
