@@ -21,7 +21,7 @@ const HomeOne = () => {
             setLoading(false)
             setDataList({
                 sambutan: res[0]?.content,
-                                klien: res[1]?.content
+                klien: res[1]?.content
 
             })
         })

@@ -4108,7 +4108,13 @@ margin-bottom: 10px ;
  .luminix-p-content {
   opacity: 1;
   bottom: 30px;
+  margin-right: 20px ;
 }
+
+ .luminix-p-content h5 {
+  font-size: 14px !important;
+}
+
 .luminix-p-wrap:hover .luminix-p-thumb img {
   scale: 1.1;
 }

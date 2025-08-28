@@ -1,76 +1,87 @@
 "use client";
-import portfolio_data from "@/data/portfolio-data";
+import useLoading from "@/store/useLoading";
 import Image from "next/image";
-import { useState } from "react";
-
+import { useEffect, useState, useCallback } from "react";
+import FetchData from "../../../services/FetchData";
 
 export const portfolio_filters = [
-  { label: "All", value: "*" },
-  { label: "Business", value: "business" },
-  { label: "Consulting", value: "consultancy" },
-  { label: "Creative", value: "security" },
+    { label: "All", value: "*" },
+    { label: "Business", value: "business" },
+    { label: "Consulting", value: "consultancy" },
+    { label: "Creative", value: "security" },
 ];
 
-
-
-
 export default function GaleriArea() {
+    const setLoading = useLoading((state) => state.setLoading);
+    const [dataList, setDataList] = useState<any[]>([]);
+    const [page, setPage] = useState(1);
+    const [hasMore, setHasMore] = useState(true);
+    const [loading, setLocalLoading] = useState(false);
 
-  const [activeFilter, setActiveFilter] = useState("*");
+    const fetchGallery = useCallback(async () => {
+        if (loading || !hasMore) return;
+        setLocalLoading(true);
+        try {
+            const res = await FetchData.GetGalleri(`?data_per_page=10&page=${page}`);
+            if (res?.data?.length) {
+                setDataList((prev) => [...prev, ...res.data]);
+                if (res.data.length < 10) setHasMore(false);
+            } else {
+                setHasMore(false);
+            }
+        } finally {
+            setLocalLoading(false);
+            setLoading(false);
+        }
+    }, [page, loading, hasMore, setLoading]);
 
-  const filteredData = activeFilter === "*"
-    ? portfolio_data
-    : portfolio_data.filter(item => item.categories.includes(activeFilter));
+    useEffect(() => {
+        fetchGallery();
+    }, [page]);
 
+    useEffect(() => {
+        const handleScroll = () => {
+            if (
+                window.innerHeight + window.scrollY >=
+                    document.body.offsetHeight - 300 &&
+                hasMore &&
+                !loading
+            ) {
+                setPage((prev) => prev + 1);
+            }
+        };
+        window.addEventListener("scroll", handleScroll);
+        return () => window.removeEventListener("scroll", handleScroll);
+    }, [hasMore, loading]);
 
-
-  return (
-    <>
-      <div className="luminix-padding-section">
-        <div className="container">
-          <div className="luminix-section-title center">
-            <h2>Galleri dari kegiatan Kami</h2>
-            <div className="luminix-portfolio-menu mt-50">
-              <ul id="watch-filter-gallery" className="option-set clear-both" data-option-key="filter">
-                {portfolio_filters.map((filter, i) => (
-                  <li
-                    key={filter.value}
-                    className={`wow fadeInUpX ${activeFilter === filter.value ? "active" : ""}`}
-                    data-wow-delay={`0.${i + 1}s`}
-                    onClick={() => setActiveFilter(filter.value)}
-                    style={{ cursor: "pointer" }}
-                  >
-                    {filter.label}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </div>
-          <div className="row luminix-portfolio-column" id="luminix-portfolio-grid">
-
-            {filteredData.map((item) => (
-              <div key={item.id} className={`col-xl-6 col-lg-6 col-md-6 col-sm-6 collection-grid-item ${item.categories.join(" ")}`}>
-                <div className="luminix-p-wrap wrap2">
-                  <div className="luminix-p-thumb">
-                    <Image width={item.width} height={item.height} src={item.image} alt={item.title} />
-                    <div className="luminix-p-content">
-                      <h5>{item.title}</h5>
-                      {/* <div className="luminix-p-btn">
-                        <Link href={item.href}>
-                          <RightArrawWhitIcon />
-                        </Link>
-                      </div> */}
+    return (
+        <>
+            <div className="luminix-padding-section">
+                <div className="container">
+                    <div className="luminix-section-title center">
+                        <h2 style={{ fontSize: "36px" }}>Galleri dari kegiatan Kami</h2>
                     </div>
-                  </div>
+                    <div className="row luminix-portfolio-column" id="luminix-portfolio-grid">
+                        {dataList.map((item: any) => (
+                            <div key={item.id} className={`col-xl-6 col-lg-6 col-md-6 col-sm-6 collection-grid-item`}>
+                                <div className="luminix-p-wrap wrap2">
+                                    <div className="luminix-p-thumb">
+                                        <Image width={550} height={550} src={`${process.env.NEXT_PUBLIC_URL}storage/${item?.image}`} alt={item.title} />
+                                        <div className="luminix-p-content">
+                                            <h5>{item.description}</h5>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        ))}
+                        {loading && (
+                            <div style={{ textAlign: "center", width: "100%" }}>
+                                <p>Loading...</p>
+                            </div>
+                        )}
+                    </div>
                 </div>
-              </div>
-            ))}
-
-
-
-          </div>
-        </div>
-      </div>
-    </>
-  )
+            </div>
+        </>
+    );
 }
