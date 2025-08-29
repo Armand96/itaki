@@ -5,7 +5,7 @@ import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import cloneDeep from 'clone-deep';
 import Swal from 'sweetalert2';
-import { deleteGalleri, getGalleri, getGenerals, postGalleri, PostGenerals, } from '../../../helpers';
+import { DeleteListKlien, getGenerals, getKlien, PostGenerals, PostListKlien } from '../../../helpers';
 
 
 interface ModalAddTypes {
@@ -17,16 +17,14 @@ interface ModalAddTypes {
 }
 
 export const ModalAdd = ({ isOpen, toggleModal, isCreate, setLoading, detailData }: ModalAddTypes) => {
-    const [formData, setFormData] = useState<any>({
 
-    })
+    const [formData, setFormData] = useState<any>()
     const [imageDelete, setImageDelete] = useState<any>([])
     const [oldImages, setOldImages] = useState<any>([])
 
-
     useEffect(() => {
         if (detailData?.key === "list_client") {
-            getGalleri("?category=list_client").then((res) => {
+            getKlien("").then((res) => {
                 setOldImages(res?.data)
             })
         }
@@ -53,8 +51,9 @@ export const ModalAdd = ({ isOpen, toggleModal, isCreate, setLoading, detailData
                         for (const file of Array.from(formData.image)) {
                             await new Promise((resolve) => {
                                 setTimeout(async () => {
-                                    await postGalleri({
+                                    await PostListKlien({
                                         category: "list_client",
+                                        name: "list_client",
                                         image: file,
                                         description: "listKlien"
                                     });
@@ -66,7 +65,7 @@ export const ModalAdd = ({ isOpen, toggleModal, isCreate, setLoading, detailData
                     await uploadImagesSequentially();
                 }
                 await imageDelete.map((id) => {
-                    deleteGalleri({
+                    DeleteListKlien({
                         '_method': 'DELETE'
                     }, id)
                 })
@@ -129,7 +128,7 @@ export const ModalAdd = ({ isOpen, toggleModal, isCreate, setLoading, detailData
 
     const handleDesc = (value: string, delta: any) => {
 
-        if (!delta || !delta.ops || formData.description == value) return;
+        if (!delta || !delta.ops || formData?.description == value) return;
 
 
         setFormData({ ...formData, description: value })
@@ -155,7 +154,7 @@ export const ModalAdd = ({ isOpen, toggleModal, isCreate, setLoading, detailData
                         </div>
 
                         <div className="pt-3">
-                            <ReactQuill defaultValue={`input deskripsi disini`} theme="snow" modules={modules} style={{ height: 300 }} value={formData.description} onChange={handleDesc} />
+                            <ReactQuill defaultValue={`input deskripsi disini`} theme="snow" modules={modules} style={{ height: 300 }} value={formData?.description} onChange={handleDesc} />
                         </div>
                     </div>
 

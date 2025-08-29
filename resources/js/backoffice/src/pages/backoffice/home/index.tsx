@@ -23,6 +23,7 @@ const Index = () => {
         }
     ]
   });
+
   const [previewImage, setPreviewImage] = useState(false)
 
 

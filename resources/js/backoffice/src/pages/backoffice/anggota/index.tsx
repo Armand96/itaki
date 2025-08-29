@@ -1,4 +1,3 @@
-// components
 
 import { useEffect, useState } from 'react';
 import { FileUploader, FormInput, PageBreadcrumb } from '../../../components';

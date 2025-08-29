@@ -1,7 +1,7 @@
 // components
 
 import { useEffect, useState } from 'react';
-import { FormInput, PageBreadcrumb } from '../../../components';
+import { FileUploader, FormInput, PageBreadcrumb } from '../../../components';
 import Swal from 'sweetalert2';
 import LoadingScreen from '../../../components/Loading/loading';
 import { ModalLayout } from '../../../components/HeadlessUI';
@@ -39,7 +39,7 @@ const Index = () => {
 
     const postData = async () => {
         setLoading(true);
-        const data = { ...formData, tgl_event: dayjs(formData?.tgl_event).format("YYYY-MM-DD"), kategori: selectedKategori?.value, _method: formData.id ? 'PUT' : 'POST' };
+        const data = { ...formData, status_event: formData?.status_event ? 1 : 0 , name: formData?.judul, tgl_event: dayjs(formData?.tgl_event).format("YYYY-MM-DD"), kategori: selectedKategori?.value, _method: formData.id ? 'PUT' : 'POST' };
         await PostKegiatan(data, formData?.id).then(() => {
             setModal(false);
             Swal.fire('Success', formData.id ? 'Update Kegiatan Berhasil' : 'Input Kegiatan Berhasil', 'success');
@@ -57,7 +57,6 @@ const Index = () => {
         { name: 'Deksripsi singkat', row: (cell: any) => <div>{cell.short_desc}</div> },
         { name: 'Tanggal Event', row: (cell: any) => <div>{cell.tgl_event}</div> },
         { name: 'Status Event', row: (cell: any) => <div>{cell?.status_event ? "sedang berjalan" : "tidak aktif"}</div> },
-
         {
             name: 'Action', row: (cell: any) => (
                 <button className='btn bg-primary text-white' onClick={() => handleEdit(cell)}>
@@ -80,11 +79,15 @@ const Index = () => {
     }
 
     const handleDesc = (value: string, delta: any) => {
-
         if (!delta || !delta.ops || formData.detail == value) return;
         setFormData({ ...formData, detail: value })
-
     }
+
+    const onFileUpload = (val: any) => {
+        console.log(val)
+        setFormData({ ...formData, image: val[0] })
+    }
+
 
     return (
         <>
@@ -119,8 +122,13 @@ const Index = () => {
                                 <Select className="select2 z-5" options={kategoriOptions} value={selectedKategori} onChange={(e) => setSelectedKategori(e)} />
                             </div>
 
+                              <div className="flex justify-between items-center">
+                                <h4 className="card-title mb-1">Image</h4>
+                            </div>
 
-                            <div className={` mb-20`} >
+                            <FileUploader singleFile multipleUploads={false}  onFileUpload={onFileUpload} icon="ri-upload-cloud-line text-4xl text-gray-300 dark:text-gray-200" text=" klik untuk upload." />
+
+                            <div className={`mt-6 mb-20`} >
                                 <div className="flex justify-between items-center">
                                     <h4 className="card-title">Deskripsi</h4>
                                 </div>
@@ -129,8 +137,6 @@ const Index = () => {
                                     <ReactQuill defaultValue={`input deskripsi disini`} theme="snow" modules={modules} style={{ height: 300 }} value={formData.detail} onChange={handleDesc} />
                                 </div>
                             </div>
-
-
 
 
                         </div>

@@ -46,7 +46,11 @@ const FetchData = {
         return res.data;
     },
        GetGalleri: async (params: string = '' ) => {
-        const res = await apiService.getData(`api/client/gallery_with_category${params}`);
+        const res = await apiService.getData(`api/client/galleries${params}`);
+        return res.data;
+    },
+     GetKegiatan: async (params: string = '' ) => {
+        const res = await apiService.getData(`api/client/list_kegiatan${params}`);
         return res.data;
     },
 };
