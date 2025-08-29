@@ -73,7 +73,9 @@ class HomeController extends Controller
     public function daftarAnggota(Request $request)
     {
         $dataPerPage = $request->data_per_page ? $request->data_per_page : 10;
-        $daftarAnggota = DaftarAnggota::orderBy('urutan', 'asc')->paginate($dataPerPage);
+        $daftarAnggota = DaftarAnggota::orderBy('urutan', 'asc')
+            ->when($request->filled('name'), fn($q) => $q->where('name', 'like', "%{$request->name}%"))
+            ->paginate($dataPerPage);
         return $daftarAnggota;
     }
 
