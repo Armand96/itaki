@@ -96,8 +96,8 @@ class KegiatanController extends Controller
                 $imageName = time() . '.' . $file->extension();
                 $path = $file->storeAs('post', $imageName, 'public');
                 $validated['cover_image'] = $path;
-                Storage::disk('public')->delete($kegiatan->cover_image);
-                Storage::disk('public')->delete($kegiatan->cover_image_thumb);
+                $kegiatan->cover_image && Storage::disk('public')->delete($kegiatan->cover_image ?? "");
+                $kegiatan->cover_image_thumb && Storage::disk('public')->delete($kegiatan->cover_image_thumb);
             }
 
             $kegiatan->update($validated);
@@ -117,8 +117,8 @@ class KegiatanController extends Controller
         try {
             $kegiatan->delete();
             if($kegiatan->cover_image) {
-                Storage::disk('public')->delete($kegiatan->cover_image);
-                Storage::disk('public')->delete($kegiatan->cover_image_thumb);
+                $kegiatan->cover_image && Storage::disk('public')->delete($kegiatan->cover_image);
+                $kegiatan->cover_image_thumb && Storage::disk('public')->delete($kegiatan->cover_image_thumb);
             }
             return response()->json(new ResponseSuccess($kegiatan, "Success", "Success Delete Kegiatan"));
         } catch (\Throwable $th) {

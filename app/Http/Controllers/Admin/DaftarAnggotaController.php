@@ -93,8 +93,8 @@ class DaftarAnggotaController extends Controller
                 $path = $file->storeAs('anggota', $imageName, 'public');
                 $validated['image'] = $path;
                 $validated['image_thumb'] = $path;
-                Storage::disk('public')->delete($daftarAnggotum->image);
-                Storage::disk('public')->delete($daftarAnggotum->image_thumb);
+                $daftarAnggotum->image && Storage::disk('public')->delete($daftarAnggotum->image);
+                $daftarAnggotum->image_thumb && Storage::disk('public')->delete($daftarAnggotum->image_thumb);
             }
             $daftarAnggotum->update($validated);
             return response()->json(new ResponseSuccess($daftarAnggotum, "Success", "Success Update Anggota"));
@@ -112,8 +112,8 @@ class DaftarAnggotaController extends Controller
     {
         try {
             $daftarAnggotum->delete();
-            Storage::disk('public')->delete($daftarAnggotum->image);
-            Storage::disk('public')->delete($daftarAnggotum->image_thumb);
+            $daftarAnggotum->image && Storage::disk('public')->delete($daftarAnggotum->image);
+            $daftarAnggotum->image_thumb && Storage::disk('public')->delete($daftarAnggotum->image_thumb);
             return response()->json(new ResponseSuccess($daftarAnggotum, "Success", "Success Delete Anggota"));
         } catch (\Throwable $th) {
             Log::error($th);

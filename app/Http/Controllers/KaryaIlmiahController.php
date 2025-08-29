@@ -91,6 +91,7 @@ class KaryaIlmiahController extends Controller
                 $fileName = time() . '.' . $file->extension();
                 $path = $file->storeAs('karya_ilmiah', $fileName, 'public');
                 $validated['file_path'] = $path;
+                $karyaIlmiah->pdf_path && Storage::disk('public')->delete($karyaIlmiah->pdf_path ?? "");
             }
 
             $karyaIlmiah->update($validated);
@@ -109,7 +110,7 @@ class KaryaIlmiahController extends Controller
     {
         try {
             $karyaIlmiah->delete();
-            Storage::disk('public')->delete($karyaIlmiah->file_path);
+            $karyaIlmiah->pdf_path && Storage::disk('public')->delete($karyaIlmiah->file_path);
             return response()->json(new ResponseSuccess($karyaIlmiah, "Success", "Success Update Karya Ilmiah"));
         } catch (\Throwable $th) {
             Log::error($th->getMessage());

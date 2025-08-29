@@ -130,8 +130,8 @@ class ClientController extends Controller
                 $path = $file->storeAs('client', $imageName, 'public');
                 $validated['image'] = $path;
                 $validated['image_thumb'] = $path;
-                Storage::disk('public')->delete($client->image ?? "");
-                Storage::disk('public')->delete($client->image_thumb ?? "");
+                $client->image && Storage::disk('public')->delete($client->image ?? "");
+                $client->image_thumb && Storage::disk('public')->delete($client->image_thumb ?? "");
             }
             $client->update($validated);
             return response()->json(new ResponseSuccess($client, "Success", "Success Update Client"));
@@ -149,8 +149,8 @@ class ClientController extends Controller
     {
         try {
             $client->delete();
-            Storage::disk('public')->delete($client->image);
-            Storage::disk('public')->delete($client->image_thumb);
+            $client->image && Storage::disk('public')->delete($client->image);
+            $client->image_thumb && Storage::disk('public')->delete($client->image_thumb);
             return response()->json(new ResponseSuccess($client, "Success", "Success Update Client"));
         } catch (\Throwable $th) {
             Log::error($th);

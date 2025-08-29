@@ -94,6 +94,7 @@ class RegulasiController extends Controller
                 $fileName = time() . '.' . $file->extension();
                 $path = $file->storeAs('regulasi', $fileName, 'public');
                 $validated['pdf_path'] = $path;
+                $regulasi->pdf_path && Storage::disk('public')->delete($regulasi->pdf_path ?? "");
             }
 
             $regulasi->update($validated);
@@ -112,7 +113,7 @@ class RegulasiController extends Controller
     {
         try {
             $regulasi->delete();
-            Storage::disk('public')->delete($regulasi->pdf_path);
+            $regulasi->pdf_path && Storage::disk('public')->delete($regulasi->pdf_path);
             return response()->json(new ResponseSuccess($regulasi, "Success", "Success Delete Regulasi"));
         } catch (\Throwable $th) {
             Log::error($th->getMessage());

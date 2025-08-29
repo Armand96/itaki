@@ -128,8 +128,8 @@ class GalleryController extends Controller
                 $path = $file->storeAs('gallery', $imageName, 'public');
                 $validated['image'] = $path;
                 $validated['image_thumb'] = $path;
-                Storage::disk('public')->delete($gallery->image);
-                Storage::disk('public')->delete($gallery->image_thumb);
+                $gallery->image && Storage::disk('public')->delete($gallery->image);
+                $gallery->image_thumb && Storage::disk('public')->delete($gallery->image_thumb);
             }
             $gallery->update($validated);
             return response()->json(new ResponseSuccess($gallery, "Success", "Success Upload Image"));
@@ -147,8 +147,8 @@ class GalleryController extends Controller
     {
         try {
             $gallery->delete();
-            Storage::disk('public')->delete($gallery->image);
-            Storage::disk('public')->delete($gallery->image_thumb);
+            $gallery->image && Storage::disk('public')->delete($gallery->image);
+            $gallery->image_thumb && Storage::disk('public')->delete($gallery->image_thumb);
             return response()->json(new ResponseSuccess($gallery, "Success", "Success Delete Image"));
         } catch (\Throwable $th) {
             Log::error($th->getMessage());
