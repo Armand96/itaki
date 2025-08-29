@@ -139,6 +139,11 @@ class HomeController extends Controller
         return $kegiatans;
     }
 
+    public function kegiatanSingle(Kegiatan $kegiatan)
+    {
+        return response()->json($kegiatan);
+    }
+
     public function listKategori(Request $req)
     {
         $dataPerPage = $req->input('data_per_page', 10);
