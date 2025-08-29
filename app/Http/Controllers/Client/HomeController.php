@@ -75,6 +75,7 @@ class HomeController extends Controller
         $dataPerPage = $request->data_per_page ? $request->data_per_page : 10;
         $daftarAnggota = DaftarAnggota::orderBy('urutan', 'asc')
             ->when($request->filled('name'), fn($q) => $q->where('name', 'like', "%{$request->name}%"))
+            ->whereNotNull('urutan')
             ->paginate($dataPerPage);
         return $daftarAnggota;
     }
