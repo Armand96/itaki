@@ -2,7 +2,7 @@ import dynamic from "next/dynamic";
 import Loading from "../../loading";
 
 
-const Seminar = dynamic(() => import('@/components/detailSeminar'), {
+const Seminar = dynamic(() => import('@/components/detailKegiatan'), {
   loading: () => <Loading />
 });
 

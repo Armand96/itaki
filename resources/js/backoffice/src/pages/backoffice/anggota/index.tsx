@@ -29,6 +29,9 @@ const Index = () => {
     }, []);
 
     const postData = async () => {
+
+         delete formData?.image_thumb
+
         if(!formData?.is_show){
             delete formData?.urutan
         }

@@ -17,12 +17,12 @@ const HomeOne = () => {
     const [dataList, setDataList] = useState<any>(null)
 
    useEffect(() => {
-        Promise.all([FetchData.GetSambutan(), FetchData.GetKlienList()]).then((res) => {
+        Promise.all([FetchData.GetSambutan(), FetchData.GetKlienList(), FetchData.GetAnggota(`?urutan_non_null=1`)]).then((res) => {
             setLoading(false)
             setDataList({
                 sambutan: res[0]?.content,
-                klien: res[1]?.content
-
+                klien: res[1],
+                team: res[2]?.data
             })
         })
    }, [])
@@ -33,8 +33,8 @@ const HomeOne = () => {
             <HeaderOne />
             <HeroHomeOne />
             <AboutHomeOne sambutan={dataList?.sambutan} />
-            <TeamHomeOne />
-            <TestimonialHomeOne />
+            <TeamHomeOne team={dataList?.team} />
+            <TestimonialHomeOne klien={dataList?.klien}/>
             <FooterOne />
         </Wrapper>
     );

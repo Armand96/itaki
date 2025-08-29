@@ -1,8 +1,6 @@
 import Breadcrumb from "@/common/Breadcrumb";
 import HeaderOne from "@/layouts/headers/HeaderOne";
 import Wrapper from "@/layouts/Wrapper";
-import TeamHomeOne from "../homes/TeamHomeOne";
-import FooterTwo from "@/layouts/footers/FooterOne";
 import TeamArea from "./TeamArea";
 import FooterOne from "@/layouts/footers/FooterOne";
 

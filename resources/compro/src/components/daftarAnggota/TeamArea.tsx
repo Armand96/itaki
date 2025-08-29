@@ -1,34 +1,78 @@
 "use client"
 import socialLinks from "@/data/socialLinks";
 import team_data from "@/data/team-data";
+import useLoading from "@/store/useLoading";
 import Image from "next/image";
 import Link from "next/link";
-import Select from "react-select";
-import { useState } from "react";
-
-const wilayahOptions = [
-    { value: "semua", label: "Semua Wilayah" },
-    { value: "jakarta", label: "Jakarta" },
-    { value: "bandung", label: "Bandung" },
-    { value: "surabaya", label: "Surabaya" },
-];
-
+import { use, useCallback, useEffect, useState } from "react";
+import FetchData from "../../../services/FetchData";
+import { useDebounce } from 'use-debounce';
 
 
 const TeamArea = () => {
-    const [wilayah, setWilayah] = useState<any>(null);
     const [searchName, setSearchName] = useState("");
+    const setLoading = useLoading((state) => state.setLoading);
+    const [loading, setLocalLoading] = useState(false);
+    const [dataList, setDataList] = useState<any[]>([]);
+    const [page, setPage] = useState(1);
+    const [hasMore, setHasMore] = useState(true);
+    const [searchDebounceName] = useDebounce(searchName, 500)
+    const [firstLoad, setFirstLoad] = useState(false)
 
-    // Filter data berdasarkan wilayah dan nama
-    const filteredTeam = team_data.filter((member) => {
-        const matchWilayah =
-            !wilayah || wilayah.value === "semua" || member?.wilayah === wilayah.value;
-        const matchName = member.name
-            .toLowerCase()
-            .includes(searchName.toLowerCase());
-        return matchWilayah && matchName;
-    });
 
+    useEffect(() => {
+        if (firstLoad) {
+            FetchData.GetAnggota(`?data_per_page=10&page=1&nama=${searchName}`).then((res) => {
+                if (res?.data?.length) {
+                    setDataList(res.data);
+                    if (res.data.length < 10) setHasMore(false);
+                } else {
+                    setHasMore(false);
+                }
+            })
+        }
+
+
+    }, [searchDebounceName]);
+
+
+    const fetchGallery = useCallback(async () => {
+        if (loading || !hasMore) return;
+        setLocalLoading(true);
+        try {
+            const res = await FetchData.GetAnggota(`?data_per_page=10&page=${page}&nama=${searchDebounceName}`);
+            if (res?.data?.length) {
+                setDataList((prev) => [...prev, ...res.data]);
+                if (res.data.length < 10) setHasMore(false);
+            } else {
+                setHasMore(false);
+            }
+        } finally {
+            setLocalLoading(false);
+            setLoading(false);
+        }
+    }, [page, loading, hasMore, setLoading, searchDebounceName]);
+
+    useEffect(() => {
+
+        fetchGallery();
+        setFirstLoad(true)
+    }, [page]);
+
+    useEffect(() => {
+        const handleScroll = () => {
+            if (
+                window.innerHeight + window.scrollY >=
+                document.body.offsetHeight - 300 &&
+                hasMore &&
+                !loading
+            ) {
+                setPage((prev) => prev + 1);
+            }
+        };
+        window.addEventListener("scroll", handleScroll);
+        return () => window.removeEventListener("scroll", handleScroll);
+    }, [hasMore, loading]);
 
 
     return (
@@ -84,7 +128,7 @@ const TeamArea = () => {
                         value={searchName}
                         onChange={(e) => setSearchName(e.target.value)}
                     />
-                    <input
+                    {/* <input
                         type="text"
                         className="form-control"
                         placeholder="Nama Jabatan"
@@ -92,45 +136,30 @@ const TeamArea = () => {
                             // flex: "1 1 50%",
                             border: "none",
                             height: "38px",
-                                                        borderLeft: "1px solid #001A3D",
+                            borderLeft: "1px solid #001A3D",
                             padding: "0 10px",
                             boxShadow: "none",
                         }}
                         value={searchName}
                         onChange={(e) => setSearchName(e.target.value)}
-                    />
+                    /> */}
                 </div>
 
 
                 <div className="row mt-5">
-                    {filteredTeam.length ? (
-                        filteredTeam.map((member, index) => (
+                    {dataList.length ? (
+                        dataList.map((member) => (
                             <div className="col-lg-3 col-md-6 mb-4" key={member.id}>
                                 <div className="luminix-team-thumb">
                                     <Image
-                                        src={member.image}
-                                        alt={member.name}
+                                        src={member?.image ? `${process.env.NEXT_PUBLIC_URL}storage/${member?.image}` : "/assets/images/team/team1.png"}
+                                        alt={member.nama}
                                         width={306}
                                         height={400}
                                     />
                                     <div className="luminix-team-content">
-                                        <Link href="/single-team">
-                                            <h5>{member.name}</h5>
-                                        </Link>
-                                        <p>{member.position}</p>
-                                        <div className="luminix-team-social">
-                                            <ul>
-                                                {socialLinks.map((link, idx) => (
-                                                    <li key={idx}>
-                                                        <Link
-                                                            href={link.href}
-                                                            target="_blank"
-                                                            dangerouslySetInnerHTML={{ __html: link.svg }}
-                                                        ></Link>
-                                                    </li>
-                                                ))}
-                                            </ul>
-                                        </div>
+                                        <h5>{member.nama}</h5>
+                                        <p>{member.jabatan}</p>
                                     </div>
                                 </div>
                             </div>

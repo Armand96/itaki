@@ -53,6 +53,18 @@ const FetchData = {
         const res = await apiService.getData(`api/client/list_kegiatan${params}`);
         return res.data;
     },
+        GetAnggota: async (params: string = '' ) => {
+        const res = await apiService.getData(`api/client/daftar_anggota${params}`);
+        return res.data;
+    },
+      GetSosmed: async (params: string = '' ) => {
+        const res = await apiService.getData(`api/client/list_sosmed${params}`);
+        return res.data;
+    },
+    GetWebSettings: async (params: string = '' ) => {
+        const res = await apiService.getData(`api/client/web_setting${params}`);
+        return res.data;
+    },
 };
 
 export default FetchData

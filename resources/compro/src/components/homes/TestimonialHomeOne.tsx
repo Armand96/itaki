@@ -49,14 +49,6 @@ interface StyleProps {
 }
 
 
-// images import
-import brand1_img from "@/assets/images/brand/brand1.svg";
-import brand2_img from "@/assets/images/brand/brand2.svg";
-import brand3_img from "@/assets/images/brand/brand3.svg";
-import brand4_img from "@/assets/images/brand/brand4.svg";
-import brand5_img from "@/assets/images/brand/brand5.svg";
-
-
 
 export default function TestimonialHomeOne({ style_2, klien }: StyleProps) {
     return (
@@ -70,10 +62,15 @@ export default function TestimonialHomeOne({ style_2, klien }: StyleProps) {
                 </div>
                 <div className={`${style_2 ? 'luminix-brand-section2' : 'luminix-brand-section'}`}>
                     <Slider {...settings} className="luminix-brand-slider-wrap">
-                        <div className="luminix-brand-item">
-                            <Image width={190} height={41} src={brand1_img} alt="here is theme image" />
-                        </div>
-                        <div className="luminix-brand-item">
+                        {
+                            klien?.map((item: any) => (
+                                <div key={item.id} className="luminix-brand-item">
+                                    <Image width={190} height={190} src={`${process.env.NEXT_PUBLIC_URL}storage/${item?.image}`} alt={item.gambar?.alternativeText || "here is theme image"} />
+                                </div>
+                            ))
+                        }
+
+                        {/* <div className="luminix-brand-item">
                             <Image width={190} height={41} src={brand2_img} alt="here is theme image" />
                         </div>
                         <div className="luminix-brand-item">
@@ -147,7 +144,7 @@ export default function TestimonialHomeOne({ style_2, klien }: StyleProps) {
                         </div>
                         <div className="luminix-brand-item">
                             <Image width={190} height={41} src={brand2_img} alt="here is theme image" />
-                        </div>
+                        </div> */}
                     </Slider>
                 </div>
             </div>

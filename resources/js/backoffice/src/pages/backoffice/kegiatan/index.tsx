@@ -39,7 +39,7 @@ const Index = () => {
 
     const postData = async () => {
         setLoading(true);
-        const data = { ...formData, status_event: formData?.status_event ? 1 : 0 , name: formData?.judul, tgl_event: dayjs(formData?.tgl_event).format("YYYY-MM-DD"), kategori: selectedKategori?.value, _method: formData.id ? 'PUT' : 'POST' };
+        const data = { ...formData, status_event: formData?.status_event ? 1 : 0 , name: formData?.judul, tgl_event: dayjs(formData?.tgl_event).format("YYYY-MM-DD"), kategori: selectedKategori?.value || formData?.kategori , _method: formData.id ? 'PUT' : 'POST' };
         await PostKegiatan(data, formData?.id).then(() => {
             setModal(false);
             Swal.fire('Success', formData.id ? 'Update Kegiatan Berhasil' : 'Input Kegiatan Berhasil', 'success');
@@ -54,6 +54,7 @@ const Index = () => {
 
     const columns = [
         { name: 'Nama kegiatan', row: (cell: any) => <div>{cell.judul}</div> },
+               { name: 'Jenis Event', row: (cell: any) => <div>{cell.kategori}</div> },
         { name: 'Deksripsi singkat', row: (cell: any) => <div>{cell.short_desc}</div> },
         { name: 'Tanggal Event', row: (cell: any) => <div>{cell.tgl_event}</div> },
         { name: 'Status Event', row: (cell: any) => <div>{cell?.status_event ? "sedang berjalan" : "tidak aktif"}</div> },
@@ -137,8 +138,6 @@ const Index = () => {
                                     <ReactQuill defaultValue={`input deskripsi disini`} theme="snow" modules={modules} style={{ height: 300 }} value={formData.detail} onChange={handleDesc} />
                                 </div>
                             </div>
-
-
                         </div>
 
 

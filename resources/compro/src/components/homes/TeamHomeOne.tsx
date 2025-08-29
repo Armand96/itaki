@@ -6,6 +6,7 @@ import React from 'react';
 // interface
 interface StyleProps {
   style_2?: boolean;
+    team?: any;
 }
 
 interface TeamMember {
@@ -29,10 +30,9 @@ const teamMembers: TeamMember[] = [
   { name: " DERMAWATI SIMANJUNTAK, SE", role: "KEUANGAN", image: team3_img, delay: 900, hasSocial: true },
   { name: "", role: " ADMINISTRASI DAN MANAGEMENT", image: team4_img, delay: 1100, hasSocial: true },
     { name: "", role: " ADMINISTRASI DAN SERTIFIKASI", image: team5_img, delay: 1100, hasSocial: true },
-
 ];
 
-export default function TeamHomeOne({ style_2 }: StyleProps) {
+export default function TeamHomeOne({ style_2, team }: StyleProps) {
   return (
     <div className="luminix-padding-section4">
       <div className="container">
@@ -45,16 +45,14 @@ export default function TeamHomeOne({ style_2 }: StyleProps) {
         </div>
 
         <div className="row">
-          {teamMembers.map((member, idx) => (
+          {team?.map((member, idx) => (
             <div key={idx} className="col-xl-3 col-lg-6 col-md-6">
               <div className="luminix-team-wrap" data-aos="fade-up" data-aos-duration={member.delay}>
                 <div className="luminix-team-thumb">
-                  <Image width={306} height={400} style={{ objectFit: "cover", }} src={member.image} alt={member.name} />
+                  <Image width={306} height={400} style={{ objectFit: "cover", }}  src={member?.image ? `${process.env.NEXT_PUBLIC_URL}storage/${member?.image}` : "/assets/images/team/team1.png"} alt={member.nama} />
                   <div className="luminix-team-content">
-                    <Link href="/single-team">
-                      <h5 style={{ fontSize: "16px"}}>{member.name}</h5>
-                    </Link>
-                    <p>{member.role}</p>
+                      <h5 style={{ fontSize: "16px"}}>{member.nama}</h5>
+                    <p>{member.jabatan}</p>
                   </div>
                 </div>
               </div>
