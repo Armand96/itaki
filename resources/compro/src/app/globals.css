@@ -37,7 +37,15 @@
     margin-right: 120px ;
 }
 
-@media (max-width: 1226px) {
+
+@media (max-width: 1400px) {
+.luminix-main-menu-item {
+       margin-right: 10px ;
+
+}
+}
+
+@media (max-width: 1200px) {
 .luminix-main-menu-item {
     display: none ;
 }

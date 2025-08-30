@@ -9,7 +9,7 @@ import Link from "next/link";
 import "dayjs/locale/id";
 dayjs.locale("id");
 
-const SeminarTable = () => {
+const WebinarContent = () => {
     const setLoading = useLoading((state) => state.setLoading);
     const [paginateData, setPaginateData] = useState<any>({
         data: [],
@@ -22,7 +22,7 @@ const SeminarTable = () => {
     const fetchData = async (page: number = 1, append = false) => {
         setLoading(true);
         try {
-            const res = await FetchData.GetKegiatan(`?page=${page}&kategori=seminar`);
+            const res = await FetchData.GetKegiatan(`?page=${page}&kategori=webinar`);
             setPaginateData((prev: any) => ({
                 ...res,
                 data: append ? [...prev.data, ...res.data] : res.data,
@@ -67,6 +67,7 @@ const SeminarTable = () => {
                     <div
                         key={item.id}
                         className="col-xl-6 col-lg-6 col-md-6 col-sm-6 collection-grid-item"
+
                     >
                         <div className="luminix-p-wrap wrap2">
                             <Link
@@ -76,7 +77,7 @@ const SeminarTable = () => {
                                 <Image
                                     width={550}
                                     height={550}
-                                    src={`${process.env.NEXT_PUBLIC_URL}storage/${item?.cover_image}`}
+                                    src={item?.cover_image ? `${process.env.NEXT_PUBLIC_URL}storage/${item?.cover_image}` : "" }
                                     alt={item.judul}
                                 />
                                 <div
@@ -126,4 +127,4 @@ const SeminarTable = () => {
     );
 };
 
-export default SeminarTable;
+export default WebinarContent;
