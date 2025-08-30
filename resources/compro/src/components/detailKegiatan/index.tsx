@@ -30,8 +30,7 @@ const DetailSeminar = () => {
             <Breadcrumb
                 title={data?.judul}
                 subtitle={data?.kategori}
-                bg_img="singleportfolio-breadcrumb-bg"
-            />
+bg_img="about-breadcrumb-bg"            />
 
             <div className="container my-4">
                 {data ? (
