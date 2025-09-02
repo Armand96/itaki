@@ -40,8 +40,8 @@ export default function ContactForm() {
       const publicKey = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY as string;
 
       const templateParams = {
-        from_name: data.Fname,
-        from_email: data.email,
+        name: data.Fname,
+        email: data.email,
         phone: data.phone,
         message: data.message,
       };
