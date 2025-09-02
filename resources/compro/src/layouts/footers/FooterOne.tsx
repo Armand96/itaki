@@ -88,9 +88,12 @@ export default function FooterOne() {
                                         </li>
                                         <li>
 
-                                            <a href="mailto:name@email.com" style={{ display: 'inline-flex', alignItems: 'center', gap: 8 }}>
+                                            <a
+                                                href={`mailto:${listData?.webSettings?.find((x: any) => x.name === "email")?.value || ""}`}
+                                                style={{ display: 'inline-flex', alignItems: 'center', gap: 8 }}
+                                            >
                                                 <Image width={25} height={21} src={mail_img} alt="here is theme image" />
-                                                {listData?.webSettings?.filter((x: any) => x.name === "email")[0]?.value}
+                                                {listData?.webSettings?.find((x: any) => x.name === "email")?.value}
                                             </a>
 
                                         </li>

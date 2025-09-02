@@ -1,5 +1,6 @@
 
-import React from 'react';
+"use client"
+import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 import ContactForm from '@/form/ContactForm';
 
@@ -8,8 +9,24 @@ import contact2_img from "@/assets/images/contact-us/contact2.png";
 import call_img from "@/assets/images/contact-us/call.svg";
 import email_img from "@/assets/images/contact-us/email.svg";
 import location_img from "@/assets/images/contact-us/location.svg";
+import FetchData from '../../../services/FetchData';
+import useLoading from '@/store/useLoading';
 
 export default function ContactArea() {
+    const setLoading = useLoading((state) => state.setLoading);
+    const [listData, setListData] = useState<any>()
+
+        useEffect(() => {
+        Promise.all([
+            FetchData.GetWebSettings(),
+        ]).then((res) => {
+            setListData({
+                webSettings: res[0]?.data,
+            })
+            setLoading(false);
+        })
+    }, [])
+
 
 
     return (
@@ -24,17 +41,21 @@ export default function ContactArea() {
                                 </div>
                                 <div className="luminix-contact-us-info-data">
                                     <h5>Kontak Kami</h5>
-                                    <a href="+088">+088-748-7888-999</a>
-                                    <a href="+123">+088-103-3914-999</a>
-                                </div>
+                                    <a
+                                        href={`tel:${listData?.webSettings?.find((x: any) => x.name === "telp")?.value || ""}`}
+                                    >
+                                        {listData?.webSettings?.find((x: any) => x.name === "telp")?.value || ""}
+                                    </a> </div>
                             </div>
                             <div className="colk">
                                 <div className="luminix-contact-us-info-wrap">
                                         <Image width={39} height={30} src={email_img} alt="here is theme image" />
                                     <div className="luminix-contact-us-info-data">
                                         <h5>Email</h5>
-                                        <a href="mailto:name@gamil.com">support@gmail.com</a>
-                                        <a href="mailto:name@gamil.com">example@gmail.com</a>
+                                        <a
+                                                href={`mailto:${listData?.webSettings?.find((x: any) => x.name === "email")?.value || ""}`}
+                                                style={{ display: 'inline-flex', alignItems: 'center', gap: 8 }}
+                                            >{listData?.webSettings?.find((x: any) => x.name === "email")?.value || ""}</a>
                                     </div>
                                 </div>
                             </div>
@@ -43,9 +64,7 @@ export default function ContactArea() {
                                         <Image width={28} height={35} src={location_img} alt="here is theme image" />
                                     <div className="luminix-contact-us-info-data" >
                                         <h5>Alamat</h5>
-                                        <span> Ruko Duren Sawit Center, Jl. Duren Sawit Raya (dermaga) No. 8 R,<br />
-                                            RT.7/RW.10, Klender, Kec. Duren Sawit, Kota Jakarta Timur,<br />
-                                            Daerah Khusus Ibukota Jakarta 13470</span>
+                                        <span> {listData?.webSettings?.filter((x: any) => x.name === "alamat")[0]?.value}</span>
                                     </div>
                                 </div>
                             </div>

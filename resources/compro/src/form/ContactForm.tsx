@@ -1,12 +1,11 @@
-
-
 "use client";
-import React from 'react';
+import React from "react";
 import * as yup from "yup";
-import { toast } from 'react-toastify';
+import { toast } from "react-toastify";
 import { useForm } from "react-hook-form";
-import { yupResolver } from '@hookform/resolvers/yup';
-import RightArrawWhitIcon from '@/svg/RightArrawWhitIcon';
+import { yupResolver } from "@hookform/resolvers/yup";
+import RightArrawWhitIcon from "@/svg/RightArrawWhitIcon";
+import emailjs from "@emailjs/browser";
 
 interface FormData {
   Fname: string;
@@ -29,34 +28,44 @@ export default function ContactForm() {
     register,
     handleSubmit,
     reset,
-    formState: { errors, isSubmitting }
+    formState: { errors, isSubmitting },
   } = useForm<FormData>({
     resolver: yupResolver(schema),
   });
 
   const onSubmit = async (data: FormData) => {
     try {
-      // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 1000));
-      console.log('Form submitted:', data);
-      toast.success("Message sent successfully");
+      const serviceId = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID as string;
+      const templateId = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID as string;
+      const publicKey = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY as string;
+
+      const templateParams = {
+        from_name: data.Fname,
+        from_email: data.email,
+        phone: data.phone,
+        message: data.message,
+      };
+
+      await emailjs.send(serviceId, templateId, templateParams, publicKey);
+
+      toast.success("Pesan berhasil dikirim");
       reset();
     } catch (error) {
-      toast.error("Failed to send message");
-      console.error('Submission error:', error);
+      toast.error("Gagal mengirim pesan");
+      console.error("Submission error:", error);
     }
   };
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <div className="luminix-main-field">
-        <input type="text" placeholder='Nama' {...register("Fname")} />
+        <input type="text" placeholder="Nama" {...register("Fname")} />
         <p className="form_error">{errors.Fname?.message}</p>
       </div>
       <div className="row">
         <div className="col-lg-6">
           <div className="luminix-main-field">
-            <input type="email" placeholder='Email' {...register("email")} />
+            <input type="email" placeholder="Email" {...register("email")} />
             <p className="form_error">{errors.email?.message}</p>
           </div>
         </div>
@@ -81,7 +90,7 @@ export default function ContactForm() {
         type="submit"
         disabled={isSubmitting}
       >
-        {isSubmitting ? 'Sending...' : 'Send Message'}
+        {isSubmitting ? "Sending..." : "Send Message"}
         <RightArrawWhitIcon />
       </button>
     </form>

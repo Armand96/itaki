@@ -10,6 +10,7 @@
     "build:laravel": "npm run build && npm run postexport"
   },
   "dependencies": {
+    "@emailjs/browser": "^4.4.1",
     "@hookform/resolvers": "^5.1.1",
     "@next/bundle-analyzer": "^15.4.1",
     "@react-pdf-viewer/core": "^3.12.0",
