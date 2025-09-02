@@ -156,7 +156,6 @@ const Index = () => {
                     <h3 className='text-2xl font-bold'>Kegiatan</h3>
                     <button className='btn bg-primary mb-4 text-white' onClick={() => { setModal(true); setIsCreate(true); setFormData({ name: '', is_active: 1 }); }}>Tambah Data</button>
                 </div>
-                <p className='mb-2'>Total Data : {dataPaginate?.total}</p>
                 <TablePaginate totalPage={dataPaginate?.last_page || 0} data={dataPaginate?.data} columns={columns} onPageChange={(val) => fetchData(val?.current_page as any + 1)} />
             </div>
         </>

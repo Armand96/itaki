@@ -27,11 +27,11 @@ axios.interceptors.response.use(
 			switch (error.response.status) {
 				case 401:
 					message = 'Invalid credentials'
-					localStorage.removeItem(AUTH_SESSION_KEY)
-					window.location.href = '/admin/auth/login'
-					break
-				case 403:
-					localStorage.removeItem(AUTH_SESSION_KEY)
+                    document.cookie = `${AUTH_SESSION_KEY}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`
+                    window.location.href = '/admin/auth/login'
+                    break
+                case 403:
+                    document.cookie = `${AUTH_SESSION_KEY}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`
 					break
 				case 404:
 					message = 'Sorry! the data you are looking for could not be found'

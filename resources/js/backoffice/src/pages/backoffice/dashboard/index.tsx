@@ -41,23 +41,6 @@ const Dashboard = () => {
             {loading && <LoadingScreen />}
             <PageBreadcrumb title="Dashboard" subName="Backoffice" />
             <p className='text-2xl text-gray-800 font-semibold text-center'>{getGreeting()}, Admin</p>
-            <div className="mt-5">
-                <Statistics data={dashboardData} />
-            </div>
-            <div className="mt-5">
-                <p className="text-gray-800 text-xl font-semibold mb-4">10 Produk Terbanyak Dilihat</p>
-                <div className="mb-5">
-                <TopVisitedProduct data={dashboardData} />
-                </div>
-                <TopVisitedProductMonthly data={dashboardData} />
-            </div>
-            <div className="mt-5">
-                <p className="text-gray-800 text-xl font-semibold mb-4">10 Variant Terbanyak Dilihat</p>
-                <div className="mb-5">
-                <TopVisitedVariant data={dashboardData} />
-                </div>
-                <TopVisitedVariantMonthly data={dashboardData} />
-            </div>
         </>
     )
 }

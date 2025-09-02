@@ -55,7 +55,6 @@ const Index = () => {
           <h3 className='text-2xl font-bold'>Home</h3>
         </div>
 
-        <p className='mb-2'>Total Data : {dataPaginate?.total}</p>
         <TablePaginate totalPage={dataPaginate?.last_page || 0} data={dataPaginate?.data} columns={columns} />
       </div>
     </>
