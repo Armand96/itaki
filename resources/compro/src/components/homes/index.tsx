@@ -32,7 +32,7 @@ const HomeOne = () => {
         <Wrapper>
             <HeaderOne />
             <HeroHomeOne />
-            <AboutHomeOne sambutan={dataList?.sambutan} />
+            <AboutHomeOne sambutan={dataList?.sambutan} team={dataList?.team} />
             <TeamHomeOne team={dataList?.team} />
             <TestimonialHomeOne klien={dataList?.klien}/>
             <FooterOne />

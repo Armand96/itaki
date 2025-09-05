@@ -8,7 +8,8 @@ import Link from 'next/link'
 import about_img from "@/assets/images/direksi/1. Ketua Umum.jpg"
 import icon1_img from "@/assets/images/about-us/icon1.svg"
 
-export default function AboutHomeOne({ sambutan }: { sambutan: any }) {
+export default function AboutHomeOne({ sambutan, team }: { sambutan: any, team: any }) {
+    console.log(team)
     return (
         <>
             <div className="luminix-padding-section">
@@ -16,10 +17,10 @@ export default function AboutHomeOne({ sambutan }: { sambutan: any }) {
                     <div className="row">
                         <div className="col-lg-4">
                             <div className="luminix-about-thumb" data-aos="fade-up" data-aos-duration="700">
-                                <Image width={500} height={600} style={{ objectFit: "cover", objectPosition: "top"}} src={about_img} alt="here is theme image" />
+                                <Image width={500} height={600} style={{ objectFit: "cover", objectPosition: "top"}} src={`${process.env.NEXT_PUBLIC_URL}storage/${team?.filter((x: any) => x.urutan == 1)[0]?.image}`} alt="here is theme image" />
                                 <div className="luminix-about-card">
-                                    <h4 className="text-white">KETUA UMUM</h4>
-                                    <h5>HEBER LOLO SIMBOLON, ST, SE, M.Sc</h5>
+                                    <h4 className="text-white">{team?.filter((x: any) => x.urutan == 1)[0]?.jabatan}</h4>
+                                    <h5>{team?.filter((x: any) => x.urutan == 1)[0]?.nama}</h5>
                                 </div>
                             </div>
                         </div>
