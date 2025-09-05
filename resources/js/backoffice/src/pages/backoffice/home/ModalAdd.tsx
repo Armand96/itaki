@@ -171,7 +171,11 @@ export const ModalAdd = ({ isOpen, toggleModal, isCreate, setLoading, detailData
                 </div>
                 <div className='flex justify-end p-4 border-t gap-x-4'>
                     <button className='btn bg-light text-gray-800' onClick={() => toggleModal()}>Close</button>
-                    <button className='btn bg-primary text-white' onClick={postData}>Submit</button>
+                    <button className='btn bg-primary text-white' disabled={
+                        (!formData?.description && detailData?.key === "sambutan") ||
+                        (!formData?.image?.length && detailData?.key === "list_client")
+                    }
+                        onClick={postData}>Submit</button>
                 </div>
             </div>
         </ModalLayout>
