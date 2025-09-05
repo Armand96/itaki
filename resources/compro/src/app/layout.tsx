@@ -23,6 +23,11 @@ export const metadata: Metadata = {
 
 };
 
+    console.log = () => {};
+    console.warn = () => {};
+    console.error = () => {};
+
+
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className={plusJakarta.variable}>
