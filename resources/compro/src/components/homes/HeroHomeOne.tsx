@@ -23,7 +23,7 @@ export default function HeroHomeOne() {
           <div className="luminix-hero-content">
             <h5 data-aos="fade-up" data-aos-duration="700">ITAKI</h5>
             <h1 data-aos="fade-up" data-aos-duration="900" className="hero-title">Bersama kita berkembang</h1>
-            <p data-aos="fade-up" data-aos-duration="1100" className="text">Selamat datang di ikati, organisasi kontruksi developer terbesar di indonesia</p>
+            <p data-aos="fade-up" data-aos-duration="1100" className="text">Selamat datang di ITAKI, organisasi kontruksi developer terbesar di indonesia</p>
           </div>
         </div>
       </div>
