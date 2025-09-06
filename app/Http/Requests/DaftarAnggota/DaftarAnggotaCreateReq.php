@@ -9,6 +9,9 @@ class DaftarAnggotaCreateReq extends ApiRequest
     public string $nama;
     public mixed $image;
     public string $jabatan;
+    public string $jenjang;
+    public string $nomor_kta;
+    public string $nomor_registrasi;
     public string $deskripsi_jabatan;
     public string $urutan;
 
@@ -23,6 +26,9 @@ class DaftarAnggotaCreateReq extends ApiRequest
             'nama' => 'required|string',
             'image' => 'image',
             'jabatan' => 'string',
+            'jenjang' => 'string',
+            'nomor_kta' => 'string',
+            'nomor_registrasi' => 'string',
             'deskripsi_jabatan' => 'string',
             'urutan' => 'string',
         ];

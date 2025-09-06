@@ -15,6 +15,9 @@ return new class extends Migration
             $table->id();
             $table->string("nama", 150);
             $table->string("jabatan", 50);
+            $table->integer("jenjang");
+            $table->integer("nomor_kta");
+            $table->string("nomor_registrasi", 150);
             $table->string("image", 200)->nullable();
             $table->string("image_thumb", 200)->nullable();
             $table->text("deskripsi_jabatan")->nullable();

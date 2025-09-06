@@ -45,8 +45,8 @@ class PrestarterSeeder extends Seeder
         (3, 'LinkedIn', NULL, 'https://www.linkedin.com/company/itaki/?originalSubdomain=id', 1, '2025-08-29 14:15:57', '2025-08-29 14:32:16'),
         (4, 'Instagram', NULL, 'instragram', 1, '2025-08-29 14:16:06', '2025-08-29 14:29:39')");
 
-        DB::insert("INSERT INTO `daftar_anggotas` VALUES (1, 'Ucok', 'test', NULL, NULL, 'ww', 10, '2025-08-17 11:06:37', '2025-08-18 16:00:09'),
-        (2, 'nama', 'CEO', 'anggota/1756464212.jpg', 'anggota/1756464212.jpg', 'test deskripsi', 1, '2025-08-18 15:53:03', '2025-08-29 10:43:32'),
-        (3, 'polisi anjing', 'test', NULL, NULL, NULL, NULL, '2025-08-29 09:19:27', '2025-08-29 09:19:27')");
+        DB::insert("INSERT INTO `daftar_anggotas` VALUES (1, 'Ucok', 'test', 9, 538, '200/2JNWJ9/2IDI2', NULL, NULL, 'ww', 10, '2025-08-17 11:06:37', '2025-08-18 16:00:09'),
+        (2, 'nama', 'CEO', 9, 538, '200/2JNWJ9/2IDI2', 'anggota/1756464212.jpg', 'anggota/1756464212.jpg', 'test deskripsi', 1, '2025-08-18 15:53:03', '2025-08-29 10:43:32'),
+        (3, 'TEST', 'test', 9, 538, '200/2JNWJ9/2IDI2', NULL, NULL, NULL, NULL, '2025-08-29 09:19:27', '2025-08-29 09:19:27')");
     }
 }

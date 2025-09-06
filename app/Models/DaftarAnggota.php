@@ -9,6 +9,9 @@ class DaftarAnggota extends Model
     protected $fillable = [
         "nama",
         "jabatan",
+        "jenjang",
+        "nomor_kta",
+        "nomor_registrasi",
         "image",
         "image_thumb",
         "deskripsi_jabatan",
