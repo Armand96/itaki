@@ -7,79 +7,64 @@ import Link from "next/link";
 import { use, useCallback, useEffect, useState } from "react";
 import FetchData from "../../../services/FetchData";
 import { useDebounce } from 'use-debounce';
+import TableWithPagination from "@/common/TableWithPagination";
 
 
 const TeamArea = () => {
     const [searchName, setSearchName] = useState("");
     const setLoading = useLoading((state) => state.setLoading);
-    const [loading, setLocalLoading] = useState(false);
-    const [dataList, setDataList] = useState<any[]>([]);
-    const [page, setPage] = useState(1);
-    const [hasMore, setHasMore] = useState(true);
     const [searchDebounceName] = useDebounce(searchName, 500)
-    const [firstLoad, setFirstLoad] = useState(false)
+    const [firstLoading, setFirstLoading] = useState(false)
+    const [paginateData, setPaginateData] = useState<any>({
+        data: [],
+        last_page: 1,
+        current_page: 1,
+        per_page: 10,
+    })
 
+    const fetchData = (page: number = 1, nama: any = '') => {
+        setLoading(true)
+        FetchData.GetAnggota(`?page=${page}&data_per_page=10&nama=${nama}`).then((res) => {
+            setLoading(false)
+            setPaginateData(res)
+        })
+    }
+
+    const setCurrentPage = (page: number) => {
+        fetchData(page)
+    }
 
     useEffect(() => {
-        if (firstLoad) {
-            FetchData.GetAnggota(`?data_per_page=10&page=1&nama=${searchName}`).then((res) => {
-                if (res?.data?.length) {
-                    setDataList(res.data);
-                    if (res.data.length < 10) setHasMore(false);
-                } else {
-                    setHasMore(false);
-                }
-            })
+        if (firstLoading) {
+            fetchData(1, searchDebounceName)
         }
+    }, [searchDebounceName])
 
-
-    }, [searchDebounceName]);
-
-
-    const fetchGallery = useCallback(async () => {
-        if (loading || !hasMore) return;
-        setLocalLoading(true);
-        try {
-            const res = await FetchData.GetAnggota(`?data_per_page=10&page=${page}&nama=${searchDebounceName}`);
-            if (res?.data?.length) {
-                setDataList((prev) => [...prev, ...res.data]);
-                if (res.data.length < 10) setHasMore(false);
-            } else {
-                setHasMore(false);
-            }
-        } finally {
-            setLocalLoading(false);
-            setLoading(false);
-        }
-    }, [page, loading, hasMore, setLoading, searchDebounceName]);
 
     useEffect(() => {
+        Promise.all([fetchData()]).then((res) => {
+            setLoading(false)
+            setFirstLoading(true)
+        })
+    }, [])
 
-        fetchGallery();
-        setFirstLoad(true)
-    }, [page]);
+    const columns = [
+        { key: "nama", label: "Nama", sortable: true, },
+        { key: "jabatan", label: "Jabatan Kerja SKK", sortable: true, },
+        { key: "jenjang", label: "Jenjang", sortable: true, },
+        { key: "nomor_kta", label: "Nomor KTA", sortable: true, },
+        { key: "nomor_registrasi", label: "Nomor Registrasi", sortable: true, },
 
-    useEffect(() => {
-        const handleScroll = () => {
-            if (
-                window.innerHeight + window.scrollY >=
-                document.body.offsetHeight - 300 &&
-                hasMore &&
-                !loading
-            ) {
-                setPage((prev) => prev + 1);
-            }
-        };
-        window.addEventListener("scroll", handleScroll);
-        return () => window.removeEventListener("scroll", handleScroll);
-    }, [hasMore, loading]);
+    ];
+
+
 
 
     return (
         <div className="luminix-padding-section4">
             <div className="container">
                 <div className="luminix-section-title center">
-                    <h2>Daftar Anggota</h2>
+                    {/* <h2>Daftar Anggota</h2> */}
                 </div>
 
                 {/* Filter Section */}
@@ -147,26 +132,15 @@ const TeamArea = () => {
 
 
                 <div className="row mt-5">
-                    {dataList.length ? (
-                        dataList.map((member) => (
-                            <div className="col-lg-3 col-md-6 mb-4" key={member.id}>
-                                <div className="luminix-team-thumb">
-                                    <Image
-                                        src={member?.image ? `${process.env.NEXT_PUBLIC_URL}storage/${member?.image}` : "/assets/images/team/team1.png"}
-                                        alt={member.nama}
-                                        width={306}
-                                        height={400}
-                                    />
-                                    <div className="luminix-team-content">
-                                        <h5>{member.nama}</h5>
-                                        <p>{member.jabatan}</p>
-                                    </div>
-                                </div>
-                            </div>
-                        ))
-                    ) : (
-                        <p className="text-center">Tidak ada anggota ditemukan</p>
-                    )}
+                    <TableWithPagination
+                        columns={columns}
+                        data={paginateData?.data}
+                        currentPage={paginateData?.current_page}
+                        pageCount={paginateData?.per_page}
+                        lastPage={paginateData?.last_page}
+                        onPageChange={setCurrentPage}
+                    />
+
                 </div>
             </div>
         </div>

@@ -52,7 +52,7 @@ const Index = () => {
 
     const columns = [
         { name: 'Nama', row: (cell: WebSettings) => <div>{cell.name}</div> },
-        { name: 'content', row: (cell: WebSettings) => <div className=" whitespace-normal">{cell.value}</div> },
+        { name: 'content', row: (cell: WebSettings) => <div className="w-[600px] whitespace-normal" style={{ wordWrap: 'break-word', whiteSpace: 'pre-wrap' }}>{cell.value}</div> },
         {
             name: 'Action', row: (cell: WebSettings) => (
                 <button className='btn bg-primary text-white' onClick={() => { setModal(true); setFormData(cell); setIsCreate(false); }}>
@@ -113,7 +113,7 @@ const Index = () => {
                     <button className='btn bg-primary mb-4 text-white' onClick={() => { setModal(true), setIsCreate(true) }}>Tambah Data</button>
                 </div>
                 <p className='mb-2'>Total Data : {dataPaginate?.total}</p>
-                <TablePaginate totalPage={dataPaginate?.last_page || 0} data={dataPaginate?.data} columns={columns} onPageChange={(val) => fetchData(val.selected)} />
+                                    <TablePaginate totalPage={dataPaginate?.last_page || 0} data={dataPaginate?.data} columns={columns} onPageChange={(val) => fetchData(val.selected)} />
             </div>
         </>
     );

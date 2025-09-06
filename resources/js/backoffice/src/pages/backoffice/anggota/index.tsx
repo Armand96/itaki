@@ -39,7 +39,7 @@ const Index = () => {
             delete formData?.image
         }
         setLoading(true);
-        const data = { ...formData, _method: formData.id ? 'PUT' : 'POST' };
+        const data = { ...formData, _method: formData.id ? 'PUT' : 'POST', urutan: formData?.urutan || null };
         await PostAnggota(data, formData?.id).then(() => {
             setModal(false);
             Swal.fire('Success', formData.id ? 'Update Anggota Berhasil' : 'Input Anggota Berhasil', 'success')
@@ -61,6 +61,9 @@ const Index = () => {
     const columns = [
         { name: 'Nama', row: (cell: any) => <div>{cell.nama}</div> },
         { name: 'Jabatan', row: (cell: any) => <div>{cell.jabatan}</div> },
+        { name: 'Nomor KTA', row: (cell: any) => <div>{cell.nomor_kta}</div> },
+        { name: 'Nomor Registrasi', row: (cell: any) => <div>{cell.nomor_registrasi}</div> },
+        { name: 'Jenjang', row: (cell: any) => <div>{cell.jenjang}</div> },
         {
             name: 'Action', row: (cell: any) => (
                 <button className='btn bg-primary text-white' onClick={() => { setModal(true); setFormData({...cell, is_show: cell?.urutan }); setIsCreate(false); }}>
@@ -87,10 +90,13 @@ const Index = () => {
                             <FormInput name='nama' label='Nama' value={formData.nama} onChange={(e) => setFormData({ ...formData, nama: e.target.value })} className='form-input mb-3' />
                             <FormInput name='jabatan' label='Jabatan' value={formData.jabatan} onChange={(e) => setFormData({ ...formData, jabatan: e.target.value })} className='form-input mb-3' />
                             <FormInput name='deskripsi_jabatan' label='Deksripsi Jabatan' value={formData.deskripsi_jabatan}  type="textarea" onChange={(e) => setFormData({ ...formData, deskripsi_jabatan: e.target.value })} className='form-input mb-3' />
+                            <FormInput name='jenjang' label='Jenjang' value={formData.jenjang}  type="number" onChange={(e) => setFormData({ ...formData, jenjang: e.target.value })} className='form-input mb-3' />
+                            <FormInput name='nomor_kta' label='Nomor KTA' value={formData.nomor_kta}  type="number" onChange={(e) => setFormData({ ...formData, nomor_kta: e.target.value })} className='form-input mb-3' />
+                            <FormInput name='nomor_registrasi' label='Nomor Registrasi' value={formData.nomor_registrasi}  type="text" onChange={(e) => setFormData({ ...formData, nomor_registrasi: e.target.value })} className='form-input mb-3' />
 
                             <div className='mt-5'>
                                 <h6 className='text-sm mb-2'>Munculkan di team</h6>
-                                <input type='checkbox' checked={formData.is_show ? true : false} onChange={(e) => setFormData({ ...formData, is_show: e.target.checked ? 1 : 0 })} />
+                                <input type='checkbox' checked={formData.is_show ? true : false} onChange={(e) => setFormData({ ...formData, is_show: e.target.checked})} />
                                 <label className='ml-2'>Aktif</label>
                             </div>
 
@@ -103,6 +109,7 @@ const Index = () => {
                               <div className="flex justify-between items-center">
                                 <h4 className="card-title mb-1">Image</h4>
                             </div>
+
                             <FileUploader singleFile multipleUploads={false} onFileUpload={onFileUpload} icon="ri-upload-cloud-line text-4xl text-gray-300 dark:text-gray-200" text=" klik untuk upload." />
 
                         </div>

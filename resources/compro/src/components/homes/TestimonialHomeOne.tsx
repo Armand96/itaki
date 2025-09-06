@@ -56,16 +56,21 @@ export default function TestimonialHomeOne({ style_2, klien }: StyleProps) {
             <div className="luminix-padding-section3 light-bg1">
                 <div className="container">
                     <div className="luminix-section-title center">
-                        <h2 className="title">klien kami</h2>
+                        <h2 className="title">Klien Kami</h2>
                         <p className="text2"></p>
                     </div>
                 </div>
                 <div className={`${style_2 ? 'luminix-brand-section2' : 'luminix-brand-section'}`}>
                     <Slider {...settings} className="luminix-brand-slider-wrap">
                         {
-                            klien?.map((item: any) => (
-                                <div key={item.id} className="luminix-brand-item">
-                                    <Image width={190} height={190} src={`${process.env.NEXT_PUBLIC_URL}storage/${item?.image}`} alt={item.gambar?.alternativeText || "here is theme image"} />
+                            [...(klien || []), ...(klien || [])].map((item: any, idx: number) => (
+                                <div key={`${item.id}-${idx}`} className="luminix-brand-item">
+                                    <Image
+                                        width={230}
+                                        height={190}
+                                        src={`${process.env.NEXT_PUBLIC_URL}storage/${item?.image}`}
+                                        alt={item.gambar?.alternativeText || "here is theme image"}
+                                    />
                                 </div>
                             ))
                         }

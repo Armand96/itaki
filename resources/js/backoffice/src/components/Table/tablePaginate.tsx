@@ -24,7 +24,7 @@ const TablePaginate: React.FC<TablePaginateProps> = ({ data, columns, totalPage,
           <div className="overflow-auto w-full">
             <div className="w-full inline-block align-middle">
               <div className="overflow-x-auto">
-                <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700 border">
+                <table className="w-full divide-y divide-gray-200 dark:divide-gray-700 border">
                   <thead>
                     <tr>
                       {columns.map((column, index) => (
@@ -72,7 +72,7 @@ const TablePaginate: React.FC<TablePaginateProps> = ({ data, columns, totalPage,
         </div>
       </div>
     );
-  
+
 
 };
 
