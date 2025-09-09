@@ -14,6 +14,7 @@ class DaftarAnggotaUpdateReq extends ApiRequest
     public string $nomor_registrasi;
     public string $deskripsi_jabatan;
     public string $urutan;
+    public string $is_active;
 
     /**
      * Get the validation rules that apply to the request.
@@ -31,6 +32,7 @@ class DaftarAnggotaUpdateReq extends ApiRequest
             'nomor_registrasi' => 'string',
             'deskripsi_jabatan' => 'string',
             'urutan' => 'string',
+            'is_active' => 'boolean',
         ];
     }
 }

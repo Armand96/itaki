@@ -22,6 +22,7 @@ return new class extends Migration
             $table->string("image_thumb", 200)->nullable();
             $table->text("deskripsi_jabatan")->nullable();
             $table->integer("urutan", false, true)->nullable();
+            $table->boolean('is_active')->default(true);
             $table->timestamps();
         });
     }

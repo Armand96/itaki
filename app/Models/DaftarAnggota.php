@@ -15,7 +15,8 @@ class DaftarAnggota extends Model
         "image",
         "image_thumb",
         "deskripsi_jabatan",
-        "urutan"
+        "urutan",
+        "is_active"
     ];
 
     protected $hidden = [
