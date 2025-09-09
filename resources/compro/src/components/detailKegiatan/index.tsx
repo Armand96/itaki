@@ -37,7 +37,7 @@ bg_img="about-breadcrumb-bg"            />
                     <div className="bg-white shadow-sm rounded p-4">
                         {/* Header dengan tanggal + status badge */}
                         <div className="d-flex align-items-center justify-content-between mb-3">
-                            <p className="mb-0 text-muted">
+                            <p className="mb-0 text-muted" >
                                 {dayjs(data?.tgl_event).format("DD MMMM YYYY")}
                             </p>
 

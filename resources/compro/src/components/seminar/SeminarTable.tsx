@@ -76,7 +76,7 @@ const SeminarTable = () => {
                                 <Image
                                     width={550}
                                     height={550}
-                                    src={`${process.env.NEXT_PUBLIC_URL}storage/${item?.cover_image}`}
+                                    src={item?.cover_image ? `${process.env.NEXT_PUBLIC_URL}storage/${item?.cover_image}` : "/assets/images/broken-image.png" }
                                     alt={item.judul}
                                 />
                                 <div
@@ -88,7 +88,7 @@ const SeminarTable = () => {
                                         flexDirection: "column",
                                     }}
                                 >
-                                    <h4>{item.judul}</h4>
+                                    <h4 style={{ fontSize: "24px"}}>{item.judul}</h4>
                                     <p style={{ marginTop: "10px" }}>
                                         {dayjs(item?.tgl_event).format("D MMMM YYYY")}
                                     </p>

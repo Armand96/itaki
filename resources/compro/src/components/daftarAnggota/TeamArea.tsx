@@ -22,21 +22,31 @@ const TeamArea = () => {
         per_page: 10,
     })
 
-    const fetchData = (page: number = 1, nama: any = '') => {
+    const fetchData = (page: number = 1, page_size= 10, nama: any = '') => {
         setLoading(true)
-        FetchData.GetAnggota(`?page=${page}&data_per_page=10&nama=${nama}`).then((res) => {
+        FetchData.GetAnggota(`?page=${page}&data_per_page=${page_size}&data_per_page=10&nama=${nama}`).then((res) => {
             setLoading(false)
             setPaginateData(res)
         })
     }
 
     const setCurrentPage = (page: number) => {
+        console.log("testtt")
+        console.log(page)
         fetchData(page)
+
     }
+
+       const setCurrentPageRows = (page: number) => {
+        console.log(page)
+        fetchData(1, page)
+
+    }
+
 
     useEffect(() => {
         if (firstLoading) {
-            fetchData(1, searchDebounceName)
+            fetchData(1, paginateData?.per_page, searchDebounceName)
         }
     }, [searchDebounceName])
 
@@ -135,6 +145,7 @@ const TeamArea = () => {
                     <TableWithPagination
                         columns={columns}
                         data={paginateData?.data}
+                        onChangeRows={setCurrentPageRows}
                         currentPage={paginateData?.current_page}
                         pageCount={paginateData?.per_page}
                         lastPage={paginateData?.last_page}

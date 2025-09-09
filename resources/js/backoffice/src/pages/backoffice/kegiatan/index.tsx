@@ -10,14 +10,19 @@ import { getCategories, getKegiatan, getKegiatanEnum, getPublikasiIlmiah, PostKe
 import dayjs from 'dayjs';
 import Select from 'react-select';
 import { HelperFunction } from '../../../helpers/HelpersFunction';
-import ReactQuill from 'react-quill';
+import ReactQuill, { Quill } from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
+import ResizeModule from '@botom/quill-resize-module';
+
+
+Quill.register("modules/resize", ResizeModule);
+
 
 const Index = () => {
 
     const [modal, setModal] = useState(false);
     const [loading, setLoading] = useState(false);
-    const [formData, setFormData] = useState<any>({ is_active: 1});
+    const [formData, setFormData] = useState<any>({ is_active: 1 });
     const [isCreate, setIsCreate] = useState<boolean>(false);
     const [dataPaginate, setDataPaginate] = useState<any>(null);
     const [kategoriOptions, setKategoriOptions] = useState<any>([])
@@ -39,7 +44,7 @@ const Index = () => {
 
     const postData = async () => {
         setLoading(true);
-        const data = { ...formData, status_event: formData?.status_event ? 1 : 0 , name: formData?.judul, tgl_event: dayjs(formData?.tgl_event).format("YYYY-MM-DD"), kategori: selectedKategori?.value || formData?.kategori , _method: formData.id ? 'PUT' : 'POST' };
+        const data = { ...formData, status_event: formData?.status_event ? 1 : 0, name: formData?.judul, tgl_event: dayjs(formData?.tgl_event).format("YYYY-MM-DD"), kategori: selectedKategori?.value || formData?.kategori, _method: formData.id ? 'PUT' : 'POST' };
         await PostKegiatan(data, formData?.id).then(() => {
             setModal(false);
             Swal.fire('Success', formData.id ? 'Update Kegiatan Berhasil' : 'Input Kegiatan Berhasil', 'success');
@@ -54,7 +59,7 @@ const Index = () => {
 
     const columns = [
         { name: 'Nama kegiatan', row: (cell: any) => <div>{cell.judul}</div> },
-               { name: 'Jenis Event', row: (cell: any) => <div>{cell.kategori}</div> },
+        { name: 'Jenis Event', row: (cell: any) => <div>{cell.kategori}</div> },
         { name: 'Deksripsi singkat', row: (cell: any) => <div>{cell.short_desc}</div> },
         { name: 'Tanggal Event', row: (cell: any) => <div>{cell.tgl_event}</div> },
         { name: 'Status Event', row: (cell: any) => <div>{cell?.status_event ? "sedang berjalan" : "tidak aktif"}</div> },
@@ -75,8 +80,23 @@ const Index = () => {
 
 
     const modules = {
-        toolbar: [[{ font: [] }, { size: [] }], ['bold', 'italic', 'underline', 'strike'], [{ color: [] }, { background: [] }], [{ script: 'super' }, { script: 'sub' }], [{ header: [false, 1, 2, 3, 4, 5, 6] }, 'blockquote', 'code-block'], [{ list: 'ordered' }, { list: 'bullet' }, { indent: '-1' }, { indent: '+1' }], ['direction', { align: [] }],   ['link', 'image', 'video', 'clean'],
-],
+        toolbar: [[{ font: [] }, { size: [] }], ['bold', 'italic', 'underline', 'strike'], [{ color: [] }, { background: [] }], [{ script: 'super' }, { script: 'sub' }], [{ header: [false, 1, 2, 3, 4, 5, 6] }, 'blockquote', 'code-block'], [{ list: 'ordered' }, { list: 'bullet' }, { indent: '-1' }, { indent: '+1' }], ['direction', { align: [] }], ['link', 'image', 'video', 'clean'],
+        ],
+        resize: {
+            showToolbar: true,     // menampilkan toolbar resize
+            showSize: true,        // menampilkan ukuran saat resize
+            toolbar: {
+                alingTools: true,    // menampilkan alignment tools (Left, Center, Right)
+                sizeTools: true,     // menampilkan size control buttons
+            },
+            locale: {
+                altTip: 'Tahan Alt untuk proporsional',
+                floatLeft: 'Kiri',
+                center: 'Tengah',
+                floatRight: 'Kanan',
+                restore: 'Reset Ukuran',
+            },
+        },
     }
 
     const handleDesc = (value: string, delta: any) => {
@@ -104,13 +124,13 @@ const Index = () => {
                         </div>
                         <div className='p-4 max-h-screen overflow-y-auto w-[70vw]'>
                             <FormInput name='Judul' label='judul' value={formData.judul} onChange={(e) => setFormData({ ...formData, judul: e.target.value })} className='form-input mb-3' />
-                             <div className="mt-4">
+                            <div className="mt-4">
 
-                                    <div className='mb-2'>
-                                        <h6 className='text-sm mb-2'>Status</h6>
-                                        <input type='checkbox' checked={formData.status_event} onChange={(e) => setFormData({ ...formData, status_event: e.target.checked})} />
-                                        <label className='ml-2'>Sedang berjalan</label>
-                                    </div>
+                                <div className='mb-2'>
+                                    <h6 className='text-sm mb-2'>Status</h6>
+                                    <input type='checkbox' checked={formData.status_event} onChange={(e) => setFormData({ ...formData, status_event: e.target.checked })} />
+                                    <label className='ml-2'>Sedang berjalan</label>
+                                </div>
 
                             </div>
 
@@ -123,11 +143,11 @@ const Index = () => {
                                 <Select className="select2 z-5" options={kategoriOptions} value={selectedKategori} onChange={(e) => setSelectedKategori(e)} />
                             </div>
 
-                              <div className="flex justify-between items-center">
+                            <div className="flex justify-between items-center">
                                 <h4 className="card-title mb-1">Image</h4>
                             </div>
 
-                            <FileUploader singleFile multipleUploads={false}  onFileUpload={onFileUpload} icon="ri-upload-cloud-line text-4xl text-gray-300 dark:text-gray-200" text=" klik untuk upload." />
+                            <FileUploader singleFile multipleUploads={false} onFileUpload={onFileUpload} icon="ri-upload-cloud-line text-4xl text-gray-300 dark:text-gray-200" text=" klik untuk upload." />
 
                             <div className={`mt-6 mb-20`} >
                                 <div className="flex justify-between items-center">

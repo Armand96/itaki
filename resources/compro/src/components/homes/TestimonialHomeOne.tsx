@@ -66,8 +66,9 @@ export default function TestimonialHomeOne({ style_2, klien }: StyleProps) {
                             [...(klien || []), ...(klien || [])].map((item: any, idx: number) => (
                                 <div key={`${item.id}-${idx}`} className="luminix-brand-item">
                                     <Image
-                                        width={230}
-                                        height={190}
+                                        width={400}
+                                        height={250}
+                                        className='img-responsive2'
                                         src={`${process.env.NEXT_PUBLIC_URL}storage/${item?.image}`}
                                         alt={item.gambar?.alternativeText || "here is theme image"}
                                     />

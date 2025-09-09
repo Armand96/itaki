@@ -62,17 +62,6 @@ const Index = () => {
         }
     ];
 
-      const handleDesc = (value: string, delta: any) => {
-        if (!delta || !delta.ops || formData.description == value) return;
-        setFormData({ ...formData, description: value })
-
-    }
-
-
-    const modules = {
-        toolbar: [[{ font: [] }, { size: [] }], ['bold', 'italic', 'underline', 'strike'], [{ color: [] }, { background: [] }], [{ script: 'super' }, { script: 'sub' }], [{ header: [false, 1, 2, 3, 4, 5, 6] }, 'blockquote', 'code-block'], [{ list: 'ordered' }, { list: 'bullet' }, { indent: '-1' }, { indent: '+1' }], ['direction', { align: [] }], ['link', 'clean']],
-    }
-
     return (
         <>
             {loading && <LoadingScreen />}
@@ -86,7 +75,7 @@ const Index = () => {
                             </button>
                         </div>
                         <div className='p-4 max-h-80 overflow-y-auto w-[70vw]'>
-                            <FormInput name='name' label='Name' value={formData.name} onChange={(e) => setFormData({ ...formData, name: e.target.value })} className='form-input mb-3' />
+                            <FormInput name='name' label='Name' disabled value={formData.name} onChange={(e) => setFormData({ ...formData, name: e.target.value })} className='form-input mb-3' />
                             {
                                 ((!isCreate && formData?.type === "text") || isCreate) && <FormInput name='content' label='Content' value={formData.value} onChange={(e) => setFormData({ ...formData, value: e.target.value })} className={`form-input mb-3`} />
                             }
@@ -110,7 +99,7 @@ const Index = () => {
             <div className='bg-white p-4 '>
                 <div className='flex justify-between'>
                     <h3 className='text-2xl font-bold'>web settings</h3>
-                    <button className='btn bg-primary mb-4 text-white' onClick={() => { setModal(true), setIsCreate(true) }}>Tambah Data</button>
+                    {/* <button className='btn bg-primary mb-4 text-white' onClick={() => { setModal(true), setIsCreate(true) }}>Tambah Data</button> */}
                 </div>
                 <p className='mb-2'>Total Data : {dataPaginate?.total}</p>
                                     <TablePaginate totalPage={dataPaginate?.last_page || 0} data={dataPaginate?.data} columns={columns} onPageChange={(val) => fetchData(val.selected)} />

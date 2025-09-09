@@ -17,7 +17,7 @@ export default function AboutHomeOne({ sambutan, team }: { sambutan: any, team: 
                     <div className="row">
                         <div className="col-lg-4">
                             <div className="luminix-about-thumb" data-aos="fade-up" data-aos-duration="700">
-                                <Image width={500} height={600} style={{ objectFit: "cover", objectPosition: "top"}} src={`${process.env.NEXT_PUBLIC_URL}storage/${team?.filter((x: any) => x.urutan == 1)[0]?.image}`} alt="here is theme image" />
+                                <Image width={450} height={600} className='img-responsive' style={{ objectFit: "cover", objectPosition: "top"}} src={`${process.env.NEXT_PUBLIC_URL}storage/${team?.filter((x: any) => x.urutan == 1)[0]?.image}`} alt="here is theme image" />
                                 <div className="luminix-about-card">
                                     <h4 className="text-white">{team?.filter((x: any) => x.urutan == 1)[0]?.jabatan}</h4>
                                     <h5>{team?.filter((x: any) => x.urutan == 1)[0]?.nama}</h5>

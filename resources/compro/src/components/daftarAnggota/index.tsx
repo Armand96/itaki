@@ -9,7 +9,7 @@ const Aboutus = () => {
 	return (
 		<Wrapper>
 			<HeaderOne />
-			<Breadcrumb title="Daftar Anggota" subtitle="daftar anggota resmi kita" bg_img="about-breadcrumb-bg" />
+			<Breadcrumb title="Daftar Anggota" subtitle="" bg_img="about-breadcrumb-bg" />
 			<TeamArea  />
 			<FooterOne />
 		</Wrapper>

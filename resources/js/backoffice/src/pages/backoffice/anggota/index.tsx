@@ -30,12 +30,14 @@ const Index = () => {
 
     const postData = async () => {
 
+        console.log(formData)
+
          delete formData?.image_thumb
 
         if(!formData?.is_show){
             delete formData?.urutan
         }
-         if(!formData?.image){
+         if(formData?.image === formData?.oldImage && formData?.id ){
             delete formData?.image
         }
         setLoading(true);
@@ -49,6 +51,7 @@ const Index = () => {
             console.log(err)
             Swal.fire('Error', err.name[0], 'error');
         })
+
         await fetchData();
     };
 
@@ -66,7 +69,7 @@ const Index = () => {
         { name: 'Jenjang', row: (cell: any) => <div>{cell.jenjang}</div> },
         {
             name: 'Action', row: (cell: any) => (
-                <button className='btn bg-primary text-white' onClick={() => { setModal(true); setFormData({...cell, is_show: cell?.urutan }); setIsCreate(false); }}>
+                <button className='btn bg-primary text-white' onClick={() => { setModal(true); setFormData({...cell, oldImage: cell?.image, is_show: cell?.urutan }); setIsCreate(false); }}>
                     Edit
                 </button>
             )
@@ -95,9 +98,8 @@ const Index = () => {
                             <FormInput name='nomor_registrasi' label='Nomor Registrasi' value={formData.nomor_registrasi}  type="text" onChange={(e) => setFormData({ ...formData, nomor_registrasi: e.target.value })} className='form-input mb-3' />
 
                             <div className='mt-5'>
-                                <h6 className='text-sm mb-2'>Munculkan di team</h6>
-                                <input type='checkbox' checked={formData.is_show ? true : false} onChange={(e) => setFormData({ ...formData, is_show: e.target.checked})} />
-                                <label className='ml-2'>Aktif</label>
+                               <input type='checkbox' checked={formData.is_show ? true : false} onChange={(e) => setFormData({ ...formData, is_show: e.target.checked})} />
+                                <label className='ml-2'>Tampilkan di list team ?</label>
                             </div>
 
                             <div className="mt-4">
@@ -111,6 +113,16 @@ const Index = () => {
                             </div>
 
                             <FileUploader singleFile multipleUploads={false} onFileUpload={onFileUpload} icon="ri-upload-cloud-line text-4xl text-gray-300 dark:text-gray-200" text=" klik untuk upload." />
+
+                              <div className="mt-4">
+                                 {!isCreate && (
+                                <div className='mb-2'>
+                                    <h6 className='text-sm mb-2'>Status</h6>
+                                    <input type='checkbox' checked={formData.is_active === 1 ? true : false} onChange={(e) => setFormData({ ...formData, is_active: e.target.checked ? 1 : 0 })} />
+                                    <label className='ml-2'>Aktif</label>
+                                </div>
+                            )}
+                              </div>
 
                         </div>
                         <div className='flex justify-end p-4 border-t gap-x-4'>

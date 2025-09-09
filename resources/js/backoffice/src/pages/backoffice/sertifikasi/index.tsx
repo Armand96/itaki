@@ -19,15 +19,17 @@ const Index = () => {
             setOldImages(res?.data || []);
             setFormData({
                 description: res?.data?.[0]?.description || '',
-                oldDesc: true,
+                oldDesc: res?.data?.[0]?.description || '',
                 id: res?.data?.[0]?.id,
             });
         });
     }, []);
 
+    console.log(formData)
+
     const postData = async () => {
 
-        if (formData.oldDesc !== formData.description) {
+        if (formData.oldDesc !== formData.description && formData?.id) {
             await postGalleri({
                 category: "sertifikasi",
                 // image: oldImages?.[0]?.image,

@@ -76,8 +76,8 @@ const WebinarContent = () => {
                             >
                                 <Image
                                     width={550}
-                                    height={550}
-                                    src={item?.cover_image ? `${process.env.NEXT_PUBLIC_URL}storage/${item?.cover_image}` : "" }
+                                    height={450}
+                                    src={item?.cover_image ? `${process.env.NEXT_PUBLIC_URL}storage/${item?.cover_image}` : "/assets/images/broken-image.png" }
                                     alt={item.judul}
                                 />
                                 <div
@@ -89,7 +89,7 @@ const WebinarContent = () => {
                                         flexDirection: "column",
                                     }}
                                 >
-                                    <h4>{item.judul}</h4>
+                                    <h4 style={{ fontSize: "18px"}}>{item.judul}</h4>
                                     <p style={{ marginTop: "10px" }}>
                                         {dayjs(item?.tgl_event).format("D MMMM YYYY")}
                                     </p>
