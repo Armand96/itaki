@@ -47,6 +47,7 @@ class DaftarAnggotaController extends Controller
     {
         try {
             $validated = $request->validated();
+            $validated['urutan'] = $validated['urutan'] == "null" ? null : $validated['urutan'];
             if ($request->hasFile('image')) {
                 $file = $request->file('image');
                 $imageName = time() . '.' . $file->extension();
