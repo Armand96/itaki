@@ -56,7 +56,7 @@ class SosmedController extends Controller
             return response()->json(new ResponseSuccess($sosmed, "Success", "Success Create Sosmed"));
         } catch (\Throwable $th) {
             Log::error($th);
-            return response()->json(new ResponseFail((object) null, "Server Error", $th->getMessage()));
+            return response()->json(new ResponseFail((object) null, "Server Error", $th->getMessage()), 500);
         }
     }
 
@@ -96,7 +96,7 @@ class SosmedController extends Controller
         } catch (\Throwable $th) {
             Log::error($th);
             //throw $th;
-            return response()->json(new ResponseFail((object) null, "Server Error", $th->getMessage()));
+            return response()->json(new ResponseFail((object) null, "Server Error", $th->getMessage()), 500);
         }
     }
 

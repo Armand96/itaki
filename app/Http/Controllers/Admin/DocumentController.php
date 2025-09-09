@@ -58,7 +58,7 @@ class DocumentController extends Controller
         } catch (\Throwable $th) {
             Log::error($th->getMessage());
             //throw $th;
-            return response()->json(new ResponseFail((object) null, "Server Error", $th->getMessage()));
+            return response()->json(new ResponseFail((object) null, "Server Error", $th->getMessage()), 500);
         }
     }
 
@@ -99,7 +99,7 @@ class DocumentController extends Controller
         } catch (\Throwable $th) {
             Log::error($th->getMessage());
             //throw $th;
-            return response()->json(new ResponseFail((object) null, "Server Error", $th->getMessage()));
+            return response()->json(new ResponseFail((object) null, "Server Error", $th->getMessage()), 500);
         }
     }
 

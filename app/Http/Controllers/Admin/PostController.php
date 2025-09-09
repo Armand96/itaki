@@ -64,7 +64,7 @@ class PostController extends Controller
             $isExist = Storage::disk('public')->exists($path) ?? false;
             if ($isExist) Storage::disk('public')->delete($path);
             //throw $th;
-            return response()->json(new ResponseFail((object) null, "Server Error", $th->getMessage()));
+            return response()->json(new ResponseFail((object) null, "Server Error", $th->getMessage()), 500);
         }
     }
 
@@ -107,7 +107,7 @@ class PostController extends Controller
         } catch (\Throwable $th) {
             Log::error($th->getMessage());
             //throw $th;
-            return response()->json(new ResponseFail((object) null, "Error", $th->getMessage()));
+            return response()->json(new ResponseFail((object) null, "Error", $th->getMessage()), 500);
         }
     }
 
@@ -125,7 +125,7 @@ class PostController extends Controller
         } catch (\Throwable $th) {
             Log::error($th->getMessage());
             //throw $th;
-            return response()->json(new ResponseFail((object) null, "Error", $th->getMessage()));
+            return response()->json(new ResponseFail((object) null, "Error", $th->getMessage()), 500);
         }
     }
 }

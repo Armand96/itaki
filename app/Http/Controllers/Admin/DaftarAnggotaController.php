@@ -59,7 +59,7 @@ class DaftarAnggotaController extends Controller
         } catch (\Throwable $th) {
             Log::error($th);
             //throw $th;
-            return response()->json(new ResponseFail((object) null, "Server Error", $th->getMessage()));
+            return response()->json(new ResponseFail((object) null, "Server Error", $th->getMessage()), 500);
         }
     }
 
@@ -101,7 +101,7 @@ class DaftarAnggotaController extends Controller
         } catch (\Throwable $th) {
             Log::error($th);
             //throw $th;
-            return response()->json(new ResponseFail((object) null, "Server Error", $th->getMessage()));
+            return response()->json(new ResponseFail((object) null, "Server Error", $th->getMessage()), 500);
         }
     }
 
@@ -118,7 +118,7 @@ class DaftarAnggotaController extends Controller
         } catch (\Throwable $th) {
             Log::error($th);
             //throw $th;
-            return response()->json(new ResponseFail((object) null, "Server Error", $th->getMessage()));
+            return response()->json(new ResponseFail((object) null, "Server Error", $th->getMessage()), 500);
         }
     }
 
