@@ -2,13 +2,13 @@ import dynamic from "next/dynamic";
 import Loading from "../loading";
 
 export const metadata = {
-  title: "Webinar",
+  title: "Event Kegiatan",
 };
 
-const WebBinar = dynamic(() => import('@/components/webinar'), {
+const Seminar = dynamic(() => import('@/components/EventKegiatan'), {
   loading: () => <Loading />
 });
 
 export default function Page() {
-  return <WebBinar />;
+  return <Seminar />;
 }

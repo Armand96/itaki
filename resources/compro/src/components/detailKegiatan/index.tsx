@@ -30,7 +30,7 @@ const DetailSeminar = () => {
             <Breadcrumb
                 title={data?.judul}
                 subtitle={data?.kategori}
-bg_img="about-breadcrumb-bg"            />
+                bg_img="about-breadcrumb-bg" />
 
             <div className="container my-4">
                 {data ? (
@@ -54,16 +54,34 @@ bg_img="about-breadcrumb-bg"            />
 
                         {/* Gambar */}
                         {data?.cover_image && (
-                            <div className="mb-4">
+                            <div className="mb-4 d-flex justify-content-center">
                                 <Image
                                     src={`${process.env.NEXT_PUBLIC_URL}storage/${data?.cover_image}`}
                                     alt={data.judul}
                                     width={800}
                                     height={400}
                                     className="img-fluid rounded"
+                                    style={{ margin: "0 auto" }}
                                 />
                             </div>
                         )}
+
+                        {
+                            data?.url_video && (
+                                <div className="mb-4 d-flex justify-content-center">
+                                    <iframe
+                                        width="560"
+                                        height="315"
+                                        src={data?.url_video}
+                                        title="YouTube video player"
+                                        className="iframe-yt"
+                                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                        referrerPolicy="strict-origin-when-cross-origin"
+                                        allowFullScreen
+                                    ></iframe>
+                                </div>
+                            )
+                        }
 
                         {/* Deskripsi */}
                         <div

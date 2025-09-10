@@ -43,7 +43,7 @@ const Index = () => {
         {
             name: 'Action', row: (cell: any) => (
                 <div className="flex gap-x-3">
-                    <button className='btn bg-primary text-white' onClick={() => { setModal(true); setFormData(cell); setIsCreate(false); }}>
+                    <button  className='btn bg-primary text-white' onClick={() => { setModal(true); setFormData(cell); setIsCreate(false); }}>
                         Edit
                     </button>
                 </div>

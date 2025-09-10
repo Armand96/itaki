@@ -107,10 +107,8 @@ const customStyles = {
       /** Pagination */
       pagination
       paginationServer={true}
-      paginationPerPage={10} // default jika server-side
+      paginationPerPage={pageCount}
       paginationTotalRows={totalPages}
-        paginationRowsPerPageOptions={[]} // hilangin pilihan rows per page
-
       paginationDefaultPage={currentPage}
     onChangeRowsPerPage={(pageCount) => onChangeRows(pageCount)}
       onChangePage={(page) => onPageChange(page)}

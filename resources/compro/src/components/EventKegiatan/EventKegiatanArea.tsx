@@ -9,7 +9,7 @@ import Link from "next/link";
 import "dayjs/locale/id";
 dayjs.locale("id");
 
-const WebinarContent = () => {
+const EventKegiatanArea = () => {
     const setLoading = useLoading((state) => state.setLoading);
     const [paginateData, setPaginateData] = useState<any>({
         data: [],
@@ -22,7 +22,7 @@ const WebinarContent = () => {
     const fetchData = async (page: number = 1, append = false) => {
         setLoading(true);
         try {
-            const res = await FetchData.GetKegiatan(`?page=${page}&kategori=webinar`);
+            const res = await FetchData.GetKegiatan(`?page=${page}`);
             setPaginateData((prev: any) => ({
                 ...res,
                 data: append ? [...prev.data, ...res.data] : res.data,
@@ -67,16 +67,15 @@ const WebinarContent = () => {
                     <div
                         key={item.id}
                         className="col-xl-6 col-lg-6 col-md-6 col-sm-6 collection-grid-item"
-
                     >
                         <div className="luminix-p-wrap wrap2">
                             <Link
-                                href={`/seminar/detail?id=${item?.id}`}
+                                href={`/event-kegiatan/detail?id=${item?.id}`}
                                 className="luminix-p-thumb"
                             >
                                 <Image
                                     width={550}
-                                    height={450}
+                                    height={550}
                                     src={item?.cover_image ? `${process.env.NEXT_PUBLIC_URL}storage/${item?.cover_image}` : "/assets/images/broken-image.png" }
                                     alt={item.judul}
                                 />
@@ -89,8 +88,9 @@ const WebinarContent = () => {
                                         flexDirection: "column",
                                     }}
                                 >
-                                    <h4 style={{ fontSize: "18px"}}>{item.judul}</h4>
-                                    <p style={{ marginTop: "10px" }}>
+                                    <h4 style={{ fontSize: "24px"}}>{item.judul}</h4>
+                                    <h5 style={{ fontSize: "14px"}}>{item.kategori}</h5>
+                                    <p style={{ marginTop: "6px" }}>
                                         {dayjs(item?.tgl_event).format("D MMMM YYYY")}
                                     </p>
 
@@ -127,4 +127,4 @@ const WebinarContent = () => {
     );
 };
 
-export default WebinarContent;
+export default EventKegiatanArea;

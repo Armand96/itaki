@@ -117,8 +117,7 @@ const menu_data = [
         has_dropdown: true,
         link: "#",
         sub_menus: [
-            { link: "/seminar", title: "Seminar" },
-            { link: "/webinar", title: "Webinar" },
+            { link: "/event-kegiatan", title: "Event Kegiatan" },
              {link: "/galleri",  title: "Galleri"},
         ],
     },

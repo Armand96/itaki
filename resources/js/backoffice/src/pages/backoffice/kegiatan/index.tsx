@@ -74,29 +74,20 @@ const Index = () => {
 
     const handleEdit = (evt) => {
         setModal(true);
+        setSelectedKategori(kategoriOptions?.filter((item) => item.label === evt?.kategori)[0])
+        delete evt.cover_image
+         delete evt.cover_image_thumb
+
         setFormData(evt);
         setIsCreate(false);
     }
 
 
+
+
     const modules = {
-        toolbar: [[{ font: [] }, { size: [] }], ['bold', 'italic', 'underline', 'strike'], [{ color: [] }, { background: [] }], [{ script: 'super' }, { script: 'sub' }], [{ header: [false, 1, 2, 3, 4, 5, 6] }, 'blockquote', 'code-block'], [{ list: 'ordered' }, { list: 'bullet' }, { indent: '-1' }, { indent: '+1' }], ['direction', { align: [] }], ['link', 'image', 'video', 'clean'],
+        toolbar: [[{ font: [] }, { size: [] }], ['bold', 'italic', 'underline', 'strike'], [{ color: [] }, { background: [] }], [{ script: 'super' }, { script: 'sub' }], [{ header: [false, 1, 2, 3, 4, 5, 6] }, 'blockquote', 'code-block'], [{ list: 'ordered' }, { list: 'bullet' }, { indent: '-1' }, { indent: '+1' }], ['direction', { align: [] }],
         ],
-        resize: {
-            showToolbar: true,     // menampilkan toolbar resize
-            showSize: true,        // menampilkan ukuran saat resize
-            toolbar: {
-                alingTools: true,    // menampilkan alignment tools (Left, Center, Right)
-                sizeTools: true,     // menampilkan size control buttons
-            },
-            locale: {
-                altTip: 'Tahan Alt untuk proporsional',
-                floatLeft: 'Kiri',
-                center: 'Tengah',
-                floatRight: 'Kanan',
-                restore: 'Reset Ukuran',
-            },
-        },
     }
 
     const handleDesc = (value: string, delta: any) => {
@@ -143,6 +134,8 @@ const Index = () => {
                                 <Select className="select2 z-5" options={kategoriOptions} value={selectedKategori} onChange={(e) => setSelectedKategori(e)} />
                             </div>
 
+                      <FormInput name='link_video' label='Link Video' value={formData.url_video} onChange={(e) => setFormData({ ...formData, url_video: e.target.value })} className='form-input mb-3' />
+
                             <div className="flex justify-between items-center">
                                 <h4 className="card-title mb-1">Image</h4>
                             </div>
@@ -165,7 +158,7 @@ const Index = () => {
 
                         <div className='flex justify-end p-4 border-t gap-x-4'>
                             <button className='btn bg-light text-gray-800' onClick={() => setModal(false)}>Close</button>
-                            <button className='btn bg-primary text-white' onClick={postData}>Submit</button>
+                            <button className='btn bg-primary text-white' disabled={!formData?.judul || !selectedKategori?.value || !formData?.short_desc || !formData?.tgl_event || !formData?.detail } onClick={postData}>Submit</button>
                         </div>
                     </div>
                 </ModalLayout>
