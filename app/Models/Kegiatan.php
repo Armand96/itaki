@@ -14,6 +14,7 @@ class Kegiatan extends Model
         'detail',
         'tgl_event',
         'status_event',
+        'url_video',
         'cover_image',
         'cover_image_thumb',
     ];

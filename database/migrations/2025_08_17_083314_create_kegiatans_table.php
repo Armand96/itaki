@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('cover_image_thumb', 150)->nullable();
             $table->text('detail');
             $table->date('tgl_event');
+            $table->text('url_video')->nullable();
             $table->boolean('status_event')->nullable();
             $table->timestamps();
         });
