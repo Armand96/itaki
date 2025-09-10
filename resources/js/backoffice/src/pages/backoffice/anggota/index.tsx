@@ -50,6 +50,10 @@ const Index = () => {
             delete formData?.image
         }
 
+        if(formData?.jenjang === null){
+            delete formData?.jenjang
+        }
+
         setLoading(true);
         const data = { ...formData, _method: formData.id ? 'PUT' : 'POST', urutan: formData?.urutan || null };
         await PostAnggota(data, formData?.id).then(() => {
