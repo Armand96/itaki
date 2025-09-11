@@ -27,9 +27,7 @@ class DaftarAnggotaController extends Controller
             ->when($req->has('description'), fn($q) => $q->where('description', 'like', "%{$req->description}%"))
             ->when($req->has('is_active'), fn($q) => $q->where('is_active', '=', "{$req->description}"))
             ->orderBy('id', 'desc')
-            ->toRawSql();
-            dd($anggotas);
-            // ->paginate($dataPerPage);
+            ->paginate($dataPerPage);
 
         return $anggotas;
     }
