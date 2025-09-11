@@ -23,11 +23,13 @@ class DaftarAnggotaController extends Controller
         $dataPerPage = $req->input('data_per_page', 10);
 
         $anggotas = DaftarAnggota::query()
-            ->when($req->filled('name'), fn($q) => $q->where('name', 'like', "%{$req->name}%"))
-            ->when($req->filled('description'), fn($q) => $q->where('description', 'like', "%{$req->description}%"))
-            ->when($req->filled('is_active'), fn($q) => $q->where('is_active', '=', "{$req->description}"))
+            ->when($req->has('nama'), fn($q) => $q->where('nama', 'like', "%{$req->nama}%"))
+            ->when($req->has('description'), fn($q) => $q->where('description', 'like', "%{$req->description}%"))
+            ->when($req->has('is_active'), fn($q) => $q->where('is_active', '=', "{$req->description}"))
             ->orderBy('id', 'desc')
-            ->paginate($dataPerPage);
+            ->toRawSql();
+            dd($anggotas);
+            // ->paginate($dataPerPage);
 
         return $anggotas;
     }
