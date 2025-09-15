@@ -1,10 +1,6 @@
 "use client"
-import socialLinks from "@/data/socialLinks";
-import team_data from "@/data/team-data";
 import useLoading from "@/store/useLoading";
-import Image from "next/image";
-import Link from "next/link";
-import { use, useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import FetchData from "../../../services/FetchData";
 import { useDebounce } from 'use-debounce';
 import TableWithPagination from "@/common/TableWithPagination";
@@ -56,7 +52,7 @@ const TeamArea = () => {
     }, [])
 
     const columns = [
-        { key: "nama", label: "Nama", sortable: true,  render: (value: any) => <div style={{width: "20%"}}>{value}</div> },
+        { key: "nama", label: "Nama", sortable: true, width: "20%" },
         { key: "jabatan", label: "Jabatan Kerja SKK", sortable: true, },
         { key: "jenjang", label: "Jenjang", sortable: true, },
         { key: "nomor_kta", label: "Nomor KTA", sortable: true, },

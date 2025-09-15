@@ -69,6 +69,7 @@ const EventKegiatanArea = () => {
                         className="col-xl-6 col-lg-6 col-md-6 col-sm-6 collection-grid-item"
                     >
                         <div className="luminix-p-wrap wrap2">
+                            <span className={`badge ${item.kategori === "seminar" ? "bg-success" : 'bg-primary'} `} style={{ position: 'absolute', right: "20px", zIndex: "100", top: '4px' }}>{item.kategori}</span>
                             <Link
                                 href={`/event-kegiatan/detail?id=${item?.id}`}
                                 className="luminix-p-thumb"
@@ -76,7 +77,7 @@ const EventKegiatanArea = () => {
                                 <Image
                                     width={550}
                                     height={550}
-                                    src={item?.cover_image ? `${process.env.NEXT_PUBLIC_URL}storage/${item?.cover_image}` : "/assets/images/broken-image.png" }
+                                    src={item?.cover_image ? `${process.env.NEXT_PUBLIC_URL}storage/${item?.cover_image}` : "/assets/images/broken-image.png"}
                                     alt={item.judul}
                                 />
                                 <div
@@ -88,8 +89,8 @@ const EventKegiatanArea = () => {
                                         flexDirection: "column",
                                     }}
                                 >
-                                    <h4 style={{ fontSize: "16px"}}>{item.judul}</h4>
-                                    <h5 style={{ fontSize: "14px"}}>{item.kategori}</h5>
+                                    <h4 style={{ fontSize: "16px" }}>{item.judul}</h4>
+                                    <h5 style={{ fontSize: "14px" }}>{ }</h5>
                                     <p style={{ marginTop: "6px" }}>
                                         {dayjs(item?.tgl_event).format("D MMMM YYYY")}
                                     </p>

@@ -9,6 +9,7 @@ export interface Column<T = any> {
   key: keyof T & string;
   label: string;
   render?: (value: T[keyof T], row: T) => React.ReactNode;
+    width?: string;       // contoh: "200px"
   sortable?: boolean;
   sortAccessor?: (row: T) => string | number | Date | null | undefined;
 }
@@ -55,6 +56,7 @@ export default function TableWithPagination<T extends Record<string, any>>({
       if (col.sortAccessor) return col.sortAccessor(row) as any;
       return row[col.key];
     },
+     width: col.width,
     sortable: !!col.sortable,
     cell: (row: T) =>
       col.render ? col.render(row[col.key], row) : (row[col.key] as any),

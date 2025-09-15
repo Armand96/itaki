@@ -21,8 +21,7 @@ const Aboutus = () => {
                 sejarah: res[0]?.content,
                 misi: res[1]?.content,
                 visi: res[2]?.content,
-                                team: res[3]?.data
-
+                team: res[3]?.data
             })
         })
     }, [])
@@ -32,7 +31,7 @@ const Aboutus = () => {
 			<HeaderOne />
 			<Breadcrumb title="Tentang Kami" subtitle="Tentang Kami" bg_img="about-breadcrumb-bg" />
             <AboutArea dataList={dataList} />
-			<TeamHomeOne style_2={true} team={dataList?.team}/>
+			{/* <TeamHomeOne style_2={true} team={dataList?.team}/> */}
 			<FooterTwo />
 		</Wrapper>
 	);
