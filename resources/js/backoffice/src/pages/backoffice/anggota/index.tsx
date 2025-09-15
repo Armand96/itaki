@@ -17,8 +17,8 @@ const Index = () => {
     const [isCreate, setIsCreate] = useState<boolean>(false);
     const [dataPaginate, setDataPaginate] = useState<any>(null);
     const [previewImage, setPreviewImage] = useState(false)
-      const [search, setSearch] = useState<any>('')
-    const [name] =  useDebounce(search, 1000);
+    const [search, setSearch] = useState<any>('')
+    const [name] = useDebounce(search, 1000);
 
 
     const fetchData = async (page = 1, search = "") => {
@@ -34,8 +34,8 @@ const Index = () => {
 
     useEffect(() => {
 
-         fetchData(1, name);
-    },[name])
+        fetchData(1, name);
+    }, [name])
 
     const postData = async () => {
 
@@ -50,7 +50,7 @@ const Index = () => {
             delete formData?.image
         }
 
-        if(formData?.jenjang === null){
+        if (formData?.jenjang === null) {
             delete formData?.jenjang
         }
 
@@ -81,7 +81,7 @@ const Index = () => {
         { name: 'Nomor KTA', row: (cell: any) => <div>{cell.nomor_kta}</div> },
         { name: 'Nomor Registrasi', row: (cell: any) => <div>{cell.nomor_registrasi}</div> },
         { name: 'Jenjang', row: (cell: any) => <div>{cell.jenjang}</div> },
-                { name: 'Status', row: (cell: any) => <div>{cell.is_active === 1 ? "Aktif" : "Tidak Aktif"}</div> },
+        { name: 'Status', row: (cell: any) => <div>{cell.is_active === 1 ? "Aktif" : "Tidak Aktif"}</div> },
 
         {
             name: 'Action', row: (cell: any) => (
@@ -115,7 +115,7 @@ const Index = () => {
 
                             <div className='mt-5'>
                                 <input type='checkbox' checked={formData.is_show ? true : false} onChange={(e) => setFormData({ ...formData, is_show: e.target.checked })} />
-                                <label className='ml-2'>Tampilkan di list team ?</label>
+                                <label className='ml-2'>Tampilkan di Tim Itaki ?</label>
                             </div>
 
                             <div className="mt-4">
@@ -124,11 +124,18 @@ const Index = () => {
                                 }
                             </div>
 
-                            <div className="flex justify-between items-center">
-                                <h4 className="card-title mb-1">Image</h4>
-                            </div>
 
-                            <FileUploader singleFile multipleUploads={false} onFileUpload={onFileUpload} icon="ri-upload-cloud-line text-4xl text-gray-300 dark:text-gray-200" text=" klik untuk upload." />
+
+                            {
+                                formData?.is_show && <>
+                                    <div className="flex justify-between items-center">
+                                        <h4 className="card-title mb-1">Image</h4>
+
+                                    </div>
+                                    <FileUploader singleFile multipleUploads={false} onFileUpload={onFileUpload} icon="ri-upload-cloud-line text-4xl text-gray-300 dark:text-gray-200" text=" klik untuk upload." />
+                                </>
+
+                            }
 
                             <div className="mt-4">
                                 {!isCreate && (

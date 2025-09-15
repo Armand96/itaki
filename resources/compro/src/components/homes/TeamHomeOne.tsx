@@ -38,10 +38,10 @@ export default function TeamHomeOne({ style_2, team }: StyleProps) {
       <div className="container">
         <div className="luminix-section-title center">
           {style_2 ? null : <h6>Tim Kami</h6>}
-          <h2 className="title">Kenali Tim Hebat Kami</h2>
+          {/* <h2 className="title">Kenali Tim Hebat Kami</h2>
           <p className="text2">
             Kami sangat antusias dengan apa yang kami lakukan! Kenali anggota tim luar biasa kami yang mewujudkan semuanya.
-          </p>
+          </p> */}
         </div>
 
         <div className="row">

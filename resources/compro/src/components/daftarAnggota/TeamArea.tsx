@@ -56,7 +56,7 @@ const TeamArea = () => {
     }, [])
 
     const columns = [
-        { key: "nama", label: "Nama", sortable: true, },
+        { key: "nama", label: "Nama", sortable: true,  render: (value: any) => <div style={{width: "20%"}}>{value}</div> },
         { key: "jabatan", label: "Jabatan Kerja SKK", sortable: true, },
         { key: "jenjang", label: "Jenjang", sortable: true, },
         { key: "nomor_kta", label: "Nomor KTA", sortable: true, },

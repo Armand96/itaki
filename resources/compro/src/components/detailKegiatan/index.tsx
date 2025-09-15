@@ -1,5 +1,5 @@
 "use client"
-import Breadcrumb from "@/common/Breadcrumb";
+import Breadcrumb from "./Breadcrumb";
 import HeaderOne from "@/layouts/headers/HeaderOne";
 import Wrapper from "@/layouts/Wrapper";
 import { useSearchParams } from "next/navigation";

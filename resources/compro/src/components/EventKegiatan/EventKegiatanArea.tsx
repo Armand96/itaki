@@ -88,7 +88,7 @@ const EventKegiatanArea = () => {
                                         flexDirection: "column",
                                     }}
                                 >
-                                    <h4 style={{ fontSize: "24px"}}>{item.judul}</h4>
+                                    <h4 style={{ fontSize: "16px"}}>{item.judul}</h4>
                                     <h5 style={{ fontSize: "14px"}}>{item.kategori}</h5>
                                     <p style={{ marginTop: "6px" }}>
                                         {dayjs(item?.tgl_event).format("D MMMM YYYY")}

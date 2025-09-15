@@ -21,7 +21,7 @@ interface RegulasiData {
 
 
 export default function Regulasi() {
-    const [activeKategori, setActiveKategori] = useState(1);
+    const [activeKategori, setActiveKategori] = useState();
     const [categoriesList, setCategoriesList] = useState<any>([])
     const setLoading = useLoading((state) => state.setLoading)
     const [paginateData, setPaginateData] = useState<any>({
@@ -51,6 +51,7 @@ export default function Regulasi() {
     useEffect(() => {
         Promise.all([fetchData(), FetchData.GetKategori(`?menu_tujuan=Regulasi`)]).then((res) => {
             setLoading(false)
+            setActiveKategori(res[1]?.data[0]?.id)
             setCategoriesList(res[1]?.data || [])
         })
     }, [])
