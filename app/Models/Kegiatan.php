@@ -17,6 +17,7 @@ class Kegiatan extends Model
         'url_video',
         'cover_image',
         'cover_image_thumb',
+        'is_active'
     ];
 
     protected $hidden = [

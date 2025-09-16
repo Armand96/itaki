@@ -133,6 +133,7 @@ class HomeController extends Controller
             ->when($req->filled('detail'), fn($q) => $q->where('detail', 'like', "%{$req->detail}%"))
             ->when($req->filled('tgl_event'), fn($q) => $q->where('tgl_event', '=', "%{$req->tgl_event}%"))
             ->when($req->filled('status_event'), fn($q) => $q->where('status_event', '=', "%{$req->status_event}%"))
+            ->when($req->filled('is_active'), fn($q) => $q->where('is_active', '=', "{$req->is_active}"))
             ->orderBy('id', 'desc')
             ->paginate($dataPerPage);
 

@@ -13,6 +13,7 @@ class KegiatanUpdateReq extends ApiRequest
     public string $tgl_event;
     public string $status_event;
     public string $url_video;
+    public string $is_active;
     public mixed $image;
 
     /**
@@ -29,6 +30,7 @@ class KegiatanUpdateReq extends ApiRequest
             'detail' => 'required|string',
             'tgl_event' => 'required|date',
             'status_event' => 'required|boolean',
+            'is_active' => 'boolean',
             'url_video' => 'string',
             'image' => 'image',
         ];

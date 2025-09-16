@@ -23,6 +23,7 @@ return new class extends Migration
             $table->date('tgl_event');
             $table->text('url_video')->nullable();
             $table->boolean('status_event')->nullable();
+            $table->boolean('is_active')->default(true);
             $table->timestamps();
         });
     }
