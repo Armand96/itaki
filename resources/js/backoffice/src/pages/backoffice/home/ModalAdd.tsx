@@ -165,7 +165,7 @@ export const ModalAdd = ({ isOpen, toggleModal, isCreate, setLoading, detailData
                         <label className="mb-2" htmlFor="choices-text-remove-button">
                             Upload Image (max ukuran image {import.meta.env.VITE_REACT_APP_MAX_UPLOAD_SIZE}MB)
                         </label>
-                        <FileUploader onFileDelete={newFileDelete} detailData={detailData} handleDeletePrevImage={handlePrevImage} prevData={oldImages} maxSizeParms={2} onFileUpload={onFileUpload} icon="ri-upload-cloud-line text-4xl text-gray-300 dark:text-gray-200" text=" klik untuk upload. " />
+                        <FileUploader   acceptedTypes={["image/jpeg", "image/jpg", "image/png"]} required={true}  onFileDelete={newFileDelete} detailData={detailData} handleDeletePrevImage={handlePrevImage} prevData={oldImages} maxSizeParms={2} onFileUpload={onFileUpload} icon="ri-upload-cloud-line text-4xl text-gray-300 dark:text-gray-200" text=" klik untuk upload. " />
                     </div>
 
                 </div>

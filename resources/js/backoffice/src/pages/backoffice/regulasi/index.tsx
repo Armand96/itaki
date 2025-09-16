@@ -117,11 +117,23 @@ const Index = () => {
                                 <h4 className="card-title mb-1">File</h4>
                             </div>
 
-                            <FileUploader singleFile multipleUploads={false} onFileUpload={onFileUpload} icon="ri-upload-cloud-line text-4xl text-gray-300 dark:text-gray-200" text=" klik untuk upload." onFileDelete={function (index: any): void {
-                                throw new Error('Function not implemented.');
-                            }} handleDeletePrevImage={function (parms: any, idx: any): void {
-                                throw new Error('Function not implemented.');
-                            }} detailData={undefined} />
+                            <FileUploader
+                                singleFile
+                                multipleUploads={false}
+                                onFileUpload={onFileUpload}
+                                icon="ri-upload-cloud-line text-4xl text-gray-300 dark:text-gray-200"
+                                text=" klik untuk upload PDF."
+                                required={true}
+                                 acceptedTypes={["application/pdf"]}   // ✅ hanya bisa pilih PDF
+                                onFileDelete={(index: any) => {
+                                    throw new Error('Function not implemented.');
+                                }}
+                                handleDeletePrevImage={(parms: any, idx: any) => {
+                                    throw new Error('Function not implemented.');
+                                }}
+                                detailData={undefined}
+                            />
+
 
                             <div className="px-4">
 

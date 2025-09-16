@@ -28,6 +28,8 @@ type ChildrenProps = {
     maxSizeParms?: any;
     handleDeletePrevImage: (parms: any, idx: any) => void;
     detailData: any
+        acceptedTypes?: string[]; // <--- NEW
+    required?: boolean;       // <--- NEW
 };
 
 const FileUploader = ({
@@ -42,25 +44,33 @@ const FileUploader = ({
     prevData,
     handleDeletePrevImage,
     detailData = '',
+     acceptedTypes = ["image/jpeg", "image/jpg", "image/png"], // default
+         required = false,
+
 }: FileUploaderProps) => {
-    const { selectedFiles, handleAcceptedFiles, removeFile } =
+  const { selectedFiles, handleAcceptedFiles, removeFile } =
         useFileUploader(showPreview);
-    const maxSize = maxSizeParms * 1024 * 1024; // 2MB in bytes
+    const maxSize = maxSizeParms * 1024 * 1024;
 
     const validateFiles = (acceptedFiles: File[]) => {
-        const validFiles = acceptedFiles.filter((file) => file.size <= maxSize);
+        const validFiles = acceptedFiles.filter(
+            (file) =>
+                file.size <= maxSize &&
+                acceptedTypes.includes(file.type) // ✅ cek format
+        );
+
         const invalidFiles = acceptedFiles.filter(
-            (file) => file.size > maxSize,
+            (file) =>
+                file.size > maxSize || !acceptedTypes.includes(file.type)
         );
 
         if (invalidFiles.length > 0) {
             Swal.fire(
                 "warning",
-                `Beberapa file tidak diunggah karena ukurannya lebih dari ${import.meta.env.VITE_REACT_APP_MAX_UPLOAD_SIZE}MB.`,
-                "warning",
+                `Beberapa file tidak diunggah karena tidak sesuai format (${acceptedTypes.join(", ")}) atau ukurannya lebih dari ${import.meta.env.VITE_REACT_APP_MAX_UPLOAD_SIZE}MB.`,
+                "warning"
             );
         }
-
 
         handleAcceptedFiles(validFiles, onFileUpload);
     };
@@ -69,9 +79,14 @@ const FileUploader = ({
 
     return (
         <>
-            <Dropzone
-                disabled={singleFile ? selectedFiles?.length > 0  || prevData?.length > 0 : false}
+              <Dropzone
+                disabled={
+                    singleFile
+                        ? selectedFiles?.length > 0 || prevData?.length > 0
+                        : false
+                }
                 multiple={multipleUploads}
+                accept={acceptedTypes.join(",")} // ✅ enforce MIME types
                 onDropAccepted={(acceptedFiles) => validateFiles(acceptedFiles)}
             >
                 {({ getRootProps, getInputProps }) => (
@@ -85,19 +100,14 @@ const FileUploader = ({
                                 name="file"
                                 type="file"
                                 multiple
+                                required={required} // ✅ kalau dari parent wajib isi
                             />
                         </div>
                         <div
                             className="dz-message needsclick"
                             {...getRootProps()}
                         >
-                            <div
-                                className="mb-3"
-                                style={{
-                                    display: "flex",
-                                    justifyContent: "center",
-                                }}
-                            >
+                            <div className="mb-3 flex justify-center">
                                 <i className={icon}></i>
                             </div>
                             <h5 className="text-xl text-gray-600 dark:text-gray-200">

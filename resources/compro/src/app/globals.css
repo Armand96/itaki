@@ -67,6 +67,12 @@
     height: 400px ;
 }
 
+.breadcrumb-title-kegiatan {
+    font-size: 32px ;
+        letter-spacing: 2px ;
+
+}
+
 
 @media (max-width: 768px) {
   .ql-size-large {
@@ -89,10 +95,18 @@
 }
 
 .breadcrumb-title-kegiatan {
-    font-size: 16px ;
+    font-size: 24px ;
+    letter-spacing: 3px ;
 }
 
 }
 
 
+@media (max-width: 768px) {
+.rdt_TableCol_Sortable,
+  .rdt_TableCell {
+    white-space: normal !important;
+    word-break: break-word !important;
+  }
+}
 

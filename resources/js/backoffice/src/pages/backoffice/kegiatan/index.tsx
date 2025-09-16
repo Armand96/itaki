@@ -58,11 +58,13 @@ const Index = () => {
     };
 
     const columns = [
-        { name: 'Nama kegiatan', row: (cell: any) => <div>{cell.judul}</div> },
+        { name: 'Kegiatan', row: (cell: any) => <div  className="w-[300px] whitespace-normal" style={{ wordWrap: 'break-word', whiteSpace: 'pre-wrap' }}>{cell.judul}</div> },
         { name: 'Jenis Event', row: (cell: any) => <div>{cell.kategori}</div> },
         { name: 'Deksripsi singkat', row: (cell: any) => <div>{cell.short_desc}</div> },
         { name: 'Tanggal Event', row: (cell: any) => <div>{cell.tgl_event}</div> },
-        { name: 'Status Event', row: (cell: any) => <div>{cell?.status_event ? "sedang berjalan" : "tidak aktif"}</div> },
+        { name: 'Status Event', row: (cell: any) => <div>{cell?.status_event ? "sedang berjalan" : "sudah selesai / belum berjalan"}</div> },
+                { name: 'Status', row: (cell: any) => <div>{cell?.status ? "Aktif" : "tidak aktif"}</div> },
+
         {
             name: 'Action', row: (cell: any) => (
                 <button className='btn bg-primary text-white' onClick={() => handleEdit(cell)}>
@@ -140,7 +142,7 @@ const Index = () => {
                                 <h4 className="card-title mb-1">Image</h4>
                             </div>
 
-                            <FileUploader singleFile multipleUploads={false} onFileUpload={onFileUpload} icon="ri-upload-cloud-line text-4xl text-gray-300 dark:text-gray-200" text=" klik untuk upload." />
+                            <FileUploader  required={true} acceptedTypes={["image/jpeg", "image/jpg", "image/png"]} singleFile multipleUploads={false} onFileUpload={onFileUpload} icon="ri-upload-cloud-line text-4xl text-gray-300 dark:text-gray-200" text=" klik untuk upload." />
 
                             <div className={`mt-6 mb-20`} >
                                 <div className="flex justify-between items-center">
@@ -151,6 +153,15 @@ const Index = () => {
                                     <ReactQuill defaultValue={`input deskripsi disini`} theme="snow" modules={modules} style={{ height: 300 }} value={formData.detail} onChange={handleDesc} />
                                 </div>
                             </div>
+
+                            {!isCreate && (
+                                <div className='mb-2'>
+                                    <h6 className='text-sm mb-2'>Status</h6>
+                                    <input type='checkbox' checked={formData.is_active === 1 ? true : false} onChange={(e) => setFormData({ ...formData, is_active: e.target.checked ? 1 : 0 })} />
+                                    <label className='ml-2'>Aktif</label>
+                                </div>
+                            )}
+
                         </div>
 
 

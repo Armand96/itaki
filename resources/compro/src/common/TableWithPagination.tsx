@@ -79,6 +79,9 @@ const customStyles = {
       fontWeight: "bold",
       borderRight: "2px solid #ccc",
       borderBottom: "2px solid #ccc",
+      whiteSpace: "normal", // biar bisa wrap
+      wordBreak: "break-word", // pecah kata panjang
+
     },
   },
   rows: {
@@ -91,6 +94,8 @@ const customStyles = {
     style: {
       fontSize: "15px",
       borderRight: "1.5px solid #ccc",
+      whiteSpace: "normal", // biar wrap juga di body
+      wordBreak: "break-word",
     },
   },
 };
