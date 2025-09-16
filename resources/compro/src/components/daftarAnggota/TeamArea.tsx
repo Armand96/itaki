@@ -52,10 +52,10 @@ const TeamArea = () => {
     }, [])
 
     const columns = [
-        { key: "nama", label: "Nama", sortable: true, width: "20%" },
-        { key: "jabatan", label: "Jabatan Kerja SKK", sortable: true, },
-        { key: "jenjang", label: "Jenjang", sortable: true, },
-        { key: "nomor_kta", label: "Nomor KTA", sortable: true, },
+        { key: "nama", label: "Nama", sortable: true, width: "30%" },
+        { key: "jabatan", label: "Jabatan Kerja SKK", sortable: true,},
+        { key: "jenjang", label: "Jenjang", sortable: true,},
+        { key: "nomor_kta", label: "Nomor KTA", sortable: true,  },
         { key: "nomor_registrasi", label: "Nomor Registrasi", sortable: true, },
 
     ];
@@ -133,7 +133,7 @@ const TeamArea = () => {
 
 
                 <div className="row mt-5">
-                    <TableWithPagination
+                          <TableWithPagination
                         columns={columns}
                         data={paginateData?.data}
                         onChangeRows={setCurrentPageRows}
@@ -142,6 +142,7 @@ const TeamArea = () => {
                         lastPage={paginateData?.last_page}
                         onPageChange={setCurrentPage}
                     />
+
 
                 </div>
             </div>

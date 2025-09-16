@@ -76,13 +76,12 @@ const Index = () => {
 
 
     const columns = [
-        { name: 'Nama', row: (cell: any) => <div>{cell.nama}</div> },
+        { name: 'Nama', row: (cell: any) => <div className="w-[300px] whitespace-normal" style={{ wordWrap: 'break-word', whiteSpace: 'pre-wrap' }}>{cell.nama}</div> },
         { name: 'Jabatan', row: (cell: any) => <div>{cell.jabatan}</div> },
         { name: 'Nomor KTA', row: (cell: any) => <div>{cell.nomor_kta}</div> },
         { name: 'Nomor Registrasi', row: (cell: any) => <div>{cell.nomor_registrasi}</div> },
         { name: 'Jenjang', row: (cell: any) => <div>{cell.jenjang}</div> },
         { name: 'Status', row: (cell: any) => <div>{cell.is_active === 1 ? "Aktif" : "Tidak Aktif"}</div> },
-
         {
             name: 'Action', row: (cell: any) => (
                 <button className='btn bg-primary text-white' onClick={() => { setModal(true); setFormData({ ...cell, oldImage: cell?.image, is_show: cell?.urutan }); setIsCreate(false); }}>
