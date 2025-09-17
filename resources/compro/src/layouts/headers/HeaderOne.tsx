@@ -26,8 +26,8 @@ export default function HeaderOne() {
                             <Link href="/" className="header-logo1 py-3 " style={{ display: "flex", alignItems: "center" }}>
                                 <Image width={60} height={60} src={logo_dark} alt="logo" />
                                 <p className="d-flex flex-column ps-2 m-0" style={{ fontWeight: "bold" }}>
-                                    <span style={{ fontSize: "24px", lineHeight: "1",  }}>ITAKI</span>
-                                    <span style={{ fontSize: "12px", lineHeight: "1.2", fontWeight: "normal" }}>
+                                    <span style={{ fontSize: "24px", lineHeight: "1", color: "#2916a3" }} >ITAKI</span>
+                                    <span style={{ fontSize: "12px", lineHeight: "1.2", fontWeight: "normal", color: "black" }}>
                                         Ikatan Tenaga Ahli <br /> Kontruksi Indonesia
                                     </span>
                                 </p>                            </Link>
