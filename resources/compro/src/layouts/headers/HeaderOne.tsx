@@ -25,8 +25,12 @@ export default function HeaderOne() {
                         <div className="col-8 col-sm-auto ">
                             <Link href="/" className="header-logo1 py-3 " style={{ display: "flex", alignItems: "center" }}>
                                 <Image width={60} height={60} src={logo_dark} alt="logo" />
-                                <p className='ps-4' style={{ fontSize: "28px", fontWeight: "bold", marginLeft: "-10px" }}>ITAKI</p>
-                            </Link>
+                                <p className="d-flex flex-column ps-2 m-0" style={{ fontWeight: "bold" }}>
+                                    <span style={{ fontSize: "24px", lineHeight: "1",  }}>ITAKI</span>
+                                    <span style={{ fontSize: "12px", lineHeight: "1.2", fontWeight: "normal" }}>
+                                        Ikatan Tenaga Ahli <br /> Kontruksi Indonesia
+                                    </span>
+                                </p>                            </Link>
 
                         </div>
 
@@ -72,13 +76,13 @@ export default function HeaderOne() {
                                     </nav>
                                 </div>
 
-                                   <div className="luminix-header-menu">
-                                <nav className="navbar site-navbar justify-content-between">
-                                    <button className="luminix-menu-toggle d-inline-block d-xl-none" onClick={() => setOpenMenu(!openMenu)}>
-                                        <span></span>
-                                    </button>
-                                </nav>
-                            </div>
+                                <div className="luminix-header-menu">
+                                    <nav className="navbar site-navbar justify-content-between">
+                                        <button className="luminix-menu-toggle d-inline-block d-xl-none" onClick={() => setOpenMenu(!openMenu)}>
+                                            <span></span>
+                                        </button>
+                                    </nav>
+                                </div>
 
                             </div>
 

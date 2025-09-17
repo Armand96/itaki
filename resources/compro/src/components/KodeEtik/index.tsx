@@ -12,6 +12,13 @@ const KodeEtik = () => {
   const setLoading = useLoading((state) => state.setLoading);
   const [pdfUrl, setPdfUrl] = useState<string | null>(null);
 
+      const images = [
+        "/assets/images/hero/hero-01.png",
+        "/assets/images/hero/hero-02.jpg",
+        "/assets/images/hero/hero-01.png",
+    ];
+
+
   useEffect(() => {
     FetchData.GetKodeEtik().then(async (res) => {
       try {
@@ -32,7 +39,7 @@ const KodeEtik = () => {
       <Breadcrumb
         title="Kode Etik"
         subtitle="Struktur Organisasi"
-        bg_img="about-breadcrumb-bg"
+       images={images}
       />
 
       <div

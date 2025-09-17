@@ -6,10 +6,17 @@ import GaleriArea from "./galeri";
 
 
 const Galeri = () => {
+
+           const images = [
+        "/assets/images/hero/hero-01.png",
+        "/assets/images/hero/hero-02.jpg",
+        "/assets/images/hero/hero-01.png",
+    ];
+
 	return (
 		<Wrapper>
 			<HeaderOne />
-			<Breadcrumb title="Galeri" subtitle="Galeri" bg_img="about-breadcrumb-bg" />
+			<Breadcrumb title="Galeri" subtitle="Galeri"  images={images}/>
             <GaleriArea />
 			<FooterTwo />
 		</Wrapper>

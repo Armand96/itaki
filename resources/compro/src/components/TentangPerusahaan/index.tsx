@@ -14,6 +14,12 @@ const Aboutus = () => {
         const setLoading = useLoading((state) => state.setLoading)
     const [dataList, setDataList] = useState<any>(null)
 
+    const images = [
+        "/assets/images/hero/hero-01.png",
+        "/assets/images/hero/hero-02.jpg",
+        "/assets/images/hero/hero-01.png",
+    ];
+
         useEffect(() => {
         Promise.all([FetchData.GetSejarah(), FetchData.GetMisi(), FetchData.GetVisi(), FetchData.GetAnggota(`?urutan_non_null=1`)]).then((res) => {
             setLoading(false)
@@ -29,7 +35,7 @@ const Aboutus = () => {
 	return (
 		<Wrapper>
 			<HeaderOne />
-			<Breadcrumb title="Tentang Kami" subtitle="Tentang Kami" bg_img="about-breadcrumb-bg" />
+			<Breadcrumb title="Tentang Kami" subtitle="Tentang Kami" images={images}/>
             <AboutArea dataList={dataList} />
 			{/* <TeamHomeOne style_2={true} team={dataList?.team}/> */}
 			<FooterTwo />

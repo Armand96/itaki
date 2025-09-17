@@ -5623,7 +5623,8 @@ blockquote img {
 }
 
 .luminix-hero-section {
-  padding: 180px 0;
+  /* padding: 180px 0; */
+
   position: relative;
   z-index: 0;
 }
@@ -5631,12 +5632,12 @@ blockquote img {
 
 @media (max-width: 991px) {
   .luminix-hero-section {
-    padding: 160px 0;
+    /* padding: 160px 0; */
   }
 }
 @media (max-width: 767px) {
   .luminix-hero-section {
-    padding: 130px 0 100px;
+    /* padding: 130px 0 100px; */
   }
 }
 
@@ -5647,7 +5648,7 @@ blockquote img {
   width: 100%;
   height: 100%;
   position: absolute;
-  background: linear-gradient(90deg, #001A3D 0%, rgba(0, 26, 61, 0) 100%);
+  /* background: linear-gradient(90deg, #001A3D 0%, rgba(0, 26, 61, 0) 100%); */
 }
 .luminix-hero-content {
   position: relative;
