@@ -1,4 +1,3 @@
-
 @import url('https://fonts.googleapis.com/css2?family=Fira+Sans:ital,wght@0,100..900;1,100..900&family=Instrument+Sans:ital,wght@0,400..700;1,400..700&family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&family=Ubuntu:ital,wght@0,300..700;1,300..700&display=swap');
 
 @import "bootstrap/dist/css/bootstrap.min.css";
@@ -16,45 +15,45 @@
 @import "../../public/assets/css/main.css";
 
 * {
-      font-family: "Plus Jakarta Sans", sans-serif;
+    font-family: "Plus Jakarta Sans", sans-serif;
 }
 
 .container-header {
-    width: 90% ;
+    width: 90%;
     margin: 0 auto;
 }
 
 
 .new-hero h1 {
-    color: white ;
-    font-size: 46px ;
-     word-spacing: 7px ;
+    color: white;
+    font-size: 46px;
+    word-spacing: 7px;
 }
 
 @media (max-width: 1200px) {
-.luminix-header-btn {
-    display: none;
-}
+    .luminix-header-btn {
+        display: none;
+    }
 
 
 }
 
 .luminix-main-menu-item {
-    margin-right: 120px ;
+    margin-right: 120px;
 }
 
 
 @media (max-width: 1400px) {
-.luminix-main-menu-item {
-       margin-right: 10px ;
+    .luminix-main-menu-item {
+        margin-right: 10px;
 
-}
+    }
 }
 
 @media (max-width: 1200px) {
-.luminix-main-menu-item {
-    display: none ;
-}
+    .luminix-main-menu-item {
+        display: none;
+    }
 }
 
 .table-primary th {
@@ -63,92 +62,103 @@
 }
 
 .btn-outline-primary:hover {
-        background-color: #2920D2 !important;
+    background-color: #2920D2 !important;
 
 }
 
 .iframe-yt {
-    border: 0px ;
-    width: 65% ;
-    height: 400px ;
+    border: 0px;
+    width: 65%;
+    height: 400px;
 }
 
 .breadcrumb-title-kegiatan {
-    font-size: 32px ;
-        letter-spacing: 2px ;
+    font-size: 32px;
+    letter-spacing: 2px;
 
 }
 
 
 .new-breadcrumb h1 {
-    color: white ;
-    font-size: 46px ;
-     word-spacing: 7px ;
+    color: white;
+    font-size: 46px;
+    word-spacing: 7px;
 }
+
+.table-anggota {}
 
 @media (max-width: 768px) {
-  .ql-size-large {
-    font-size: 18px !important;
-}
+    .table-anggota tr td {
+        font-size: 13px !important;
+        width: 39px !important;
+    }
 
-.carousel-hero-size {
-    height: 120vh !important ;
-}
+    .ql-size-large {
+        font-size: 18px !important;
+    }
 
-.new-hero {
-    margin-top: -130px ;
-}
+    .carousel-hero-size {
+        height: 100vh !important;
+    }
 
-.new-breadcrumb  {
-       margin-top: 30px  !important;
-}
+    .hero-mobile {
+        bottom: 400px  !important;
+    }
 
-.new-breadcrumb h1  {
-       font-size: 44px !important;
-}
+    .new-hero {
+        margin-top: -130px;
+    }
 
-.new-hero h1 {
-  font-size: 22px; /* lebih pas untuk mobile */
-  line-height: 1.4; /* rapat tapi tetap enak dibaca */
-  font-weight: 600;
-}
+    .new-breadcrumb {
+        margin-top: 30px !important;
+    }
 
-.new-hero p {
-  font-size: 14px;
-  line-height: 1.6; /* nyaman untuk paragraf panjang */
-  font-weight: 400;
-  max-width: 500px; /* biar teks nggak kepanjangan di layar lebar */
-  margin: 0 auto;   /* center kalau ada max-width */
-}
+    .new-breadcrumb h1 {
+        font-size: 44px !important;
+    }
 
-.img-responsive {
-    width: 450px;
-    height: 350px;
-}
+    .new-hero h1 {
+        font-size: 22px;
+        line-height: 1.4;
+        font-weight: 600;
+    }
 
-.img-responsive2 {
-    width: 300px;
-    height: 100px;
-}
+    .new-hero p {
+        font-size: 14px;
+        line-height: 1.6;
+        font-weight: 400;
+        max-width: 500px;
+        margin: 0 auto;
+    }
 
-.iframe-yt {
-    width: 100% ;
-    height: 300px ;
-}
+    .img-responsive {
+        width: 450px;
+        height: 350px;
+    }
 
-.breadcrumb-title-kegiatan {
-    font-size: 24px ;
-    letter-spacing: 3px ;
-}
+    .img-responsive2 {
+        width: 300px;
+        height: 100px;
+    }
+
+    .iframe-yt {
+        width: 100%;
+        height: 300px;
+    }
+
+    .breadcrumb-title-kegiatan {
+        font-size: 24px;
+        letter-spacing: 3px;
+    }
 
 }
 
 
 @media (max-width: 768px) {
-.rdt_TableCol_Sortable,
-  .rdt_TableCell {
-    white-space: normal !important;
-    word-break: break-word !important;
-  }
-}
 
+    .rdt_TableCol_Sortable,
+    .rdt_TableCell {
+        white-space: normal !important;
+        word-break: break-word !important;
+    }
+}

@@ -1,27 +1,20 @@
 "use client";
 import React, { useEffect } from "react";
-import AOS from "aos";
 import "aos/dist/aos.css";
 import { Carousel } from "react-bootstrap";
 
 export default function HeroHomeOne() {
-    //   useEffect(() => {
-    //     AOS.init({
-    //       duration: 1000,
-    //       once: true,
-    //     });
-    //   }, []);
 
     const images = [
         "/assets/images/hero/hero-01.png",
         "/assets/images/hero/hero-02.jpg",
-        "/assets/images/hero/hero-01.png",
+        "/assets/images/hero/hero-03.jpg",
     ];
 
     return (
         <div className="luminix-hero-section section position-relative">
             {/* Background Carousel */}
-            <Carousel fade controls={false} indicators={false} interval={1000} >
+            <Carousel fade controls={false} indicators={false} interval={3000} >
                 {images.map((img, idx) => (
                     <Carousel.Item key={idx}>
                         <div
@@ -40,7 +33,7 @@ export default function HeroHomeOne() {
 
             {/* Content Overlay */}
            <div
-  className="container position-absolute top-50 start-50 translate-middle"
+  className="container position-absolute top-50 start-50 translate-middle  hero-mobile"
   style={{ zIndex: 9999 }}
 >
   <div className="new-hero text-white text-center">

@@ -6,7 +6,7 @@ import LoadingScreen from '../../../components/Loading/loading';
 import { ModalLayout } from '../../../components/HeadlessUI';
 import TablePaginate from '../../../components/Table/tablePaginate';
 import ModalPreview from '../../../components/ModalPreviewImage/ModalPreview';
-import { getAnggota, PostAnggota } from '../../../helpers';
+import { exportData, getAnggota, PostAnggota } from '../../../helpers';
 import { useDebounce } from 'use-debounce';
 
 const Index = () => {
@@ -74,6 +74,10 @@ const Index = () => {
         setFormData({ ...formData, image: val[0] })
     }
 
+    const handleExport = () => {
+         window.location.href = `${import.meta.env.VITE_REACT_APP_API_URL}daftar_anggota/export`;
+    }
+
 
     const columns = [
         { name: 'Nama', row: (cell: any) => <div className="w-[300px] whitespace-normal" style={{ wordWrap: 'break-word', whiteSpace: 'pre-wrap' }}>{cell.nama}</div> },
@@ -103,6 +107,7 @@ const Index = () => {
                             <button className='h-8 w-8' onClick={() => setModal(false)}>
                                 <i className='ri-close-line text-2xl' />
                             </button>
+
                         </div>
                         <div className='p-4 h-[70vh] overflow-y-auto w-[70vw]'>
                             <FormInput name='nama' label='Nama' value={formData.nama} onChange={(e) => setFormData({ ...formData, nama: e.target.value })} className='form-input mb-3' />
@@ -166,7 +171,11 @@ const Index = () => {
                 </div>
                 <div className='flex justify-between'>
                     <h3 className='text-2xl font-bold'>Anggota</h3>
-                    <button className='btn bg-primary mb-4 text-white' onClick={() => { setModal(true); setIsCreate(true); setFormData({ name: '', image_file: '', is_active: 1 }); }}>Tambah Data</button>
+                    <div className="flex gap-x-2">
+                        <button className='btn bg-primary mb-4 text-white' onClick={() => { setModal(true); setIsCreate(true); setFormData({ name: '', image_file: '', is_active: 1 }); }}>Tambah Data</button>
+                        <button className='btn bg-primary mb-4 text-white' onClick={handleExport} >Export Data</button>
+
+                    </div>
                 </div>
                 <p className='mb-2'>Total Data : {dataPaginate?.total}</p>
                 <TablePaginate totalPage={dataPaginate?.last_page || 0} data={dataPaginate?.data} columns={columns} onPageChange={(val) => fetchData(val?.current_page as any + 1)} />

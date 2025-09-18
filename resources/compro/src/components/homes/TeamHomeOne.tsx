@@ -9,28 +9,6 @@ interface StyleProps {
     team?: any;
 }
 
-interface TeamMember {
-  name: string;
-  role: string;
-  image: any; // bisa pakai StaticImageData kalau mau ketat
-  delay: number;
-  hasSocial?: boolean;
-}
-
-// images import
-import team1_img from "@/assets/images/direksi/1. Ketua Umum.jpg";
-import team2_img from "@/assets/images/direksi/2. Direktur Eksekutif.png";
-import team3_img from "@/assets/images/direksi/3. Direktur Keuangan.jpg";
-import team4_img from "@/assets/images/direksi/4. Administrasi dan Manajemen.png";
-import team5_img from "@/assets/images/direksi/5. Administrasi Sertifikasi.jpg";
-
-const teamMembers: TeamMember[] = [
-  { name: " HEBER LOLO SIMBOLON, ST, SE, M.Sc", role: "Ketua Umum", image: team1_img, delay: 500, hasSocial: false },
-  { name: "  RIRIN M SIHOTANG, S. Ak", role: "   DIREKTUR EKSEKUTIF", image: team2_img, delay: 700, hasSocial: true },
-  { name: " DERMAWATI SIMANJUNTAK, SE", role: "KEUANGAN", image: team3_img, delay: 900, hasSocial: true },
-  { name: "", role: " ADMINISTRASI DAN MANAGEMENT", image: team4_img, delay: 1100, hasSocial: true },
-    { name: "", role: " ADMINISTRASI DAN SERTIFIKASI", image: team5_img, delay: 1100, hasSocial: true },
-];
 
 export default function TeamHomeOne({ style_2, team }: StyleProps) {
   return (

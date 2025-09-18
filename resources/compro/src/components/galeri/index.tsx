@@ -7,12 +7,9 @@ import GaleriArea from "./galeri";
 
 const Galeri = () => {
 
-           const images = [
-        "/assets/images/hero/hero-01.png",
-        "/assets/images/hero/hero-02.jpg",
-        "/assets/images/hero/hero-01.png",
+      const images = [
+        "/assets/images/kegiatan/galleri.jpg",
     ];
-
 	return (
 		<Wrapper>
 			<HeaderOne />

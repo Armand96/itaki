@@ -12,4 +12,9 @@ function getAnggota(params:any = "") {
     return api.get(baseUrl).then((res) => res.data)
 }
 
-export { PostAnggota, getAnggota }
+function exportData(params:any = "") {
+    const baseUrl = `daftar_anggota/export${params}`
+    return api.get(baseUrl).then((res) => res.data)
+}
+
+export { PostAnggota, getAnggota, exportData }

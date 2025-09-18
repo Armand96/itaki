@@ -7,10 +7,8 @@ import Regulasi from "./regulasi";
 
 const Aboutus = () => {
 
-       const images = [
-        "/assets/images/hero/hero-01.png",
-        "/assets/images/hero/hero-02.jpg",
-        "/assets/images/hero/hero-01.png",
+    const images = [
+        "/assets/images/regulasi/regulasi.jpg",
     ];
 
 

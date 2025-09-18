@@ -15,11 +15,8 @@ const TeamArea = () => {
             const res = await FetchData.GetAnggota(
                 `?nama=${searchName}&nomor_kta=${searchKta}`
             );
-            if (res?.total === 1) {
-                setResult(res.data[0]);
-            } else {
-                setResult(null);
-            }
+                setResult(res);
+
         } finally {
             setLoading(false);
         }
@@ -49,14 +46,14 @@ const TeamArea = () => {
                         onChange={(e) => setSearchName(e.target.value)}
                     />
 
-                    <input
+                    {/* <input
                         type="text"
                         className="form-control mb-2 border px-4"
                         placeholder="NO KTA"
                         value={searchKta}
 
                         onChange={(e) => setSearchKta(e.target.value)}
-                    />
+                    /> */}
 
                     <button className="btn btn-primary mt-2" onClick={handleSearch}>
                         SEARCH
@@ -65,9 +62,11 @@ const TeamArea = () => {
                 </div>
 
                 {/* Result Section */}
-                {result ? (
-                    <div
-                        className="mt-4"
+                <div className="row px-4 ">
+                      {result ? (
+                 result?.data?.map((item: any) => (
+                       <div
+                        className="mt-4 col-lg-6"
                         style={{
                             border: "1px solid #dcdcdc",
                             borderRadius: "8px",
@@ -80,11 +79,11 @@ const TeamArea = () => {
                         }}
                     >
                         {/* Foto Anggota */}
-                        {result.foto && (
+                        {item.foto && (
                             <div className="mb-3">
                                 <img
-                                    src={result.foto} // pastikan field API namanya sesuai
-                                    alt={result.nama}
+                                    src={item.foto}
+                                    alt={item.nama}
                                     style={{
                                         width: "300px",
                                         height: "300px",
@@ -96,38 +95,40 @@ const TeamArea = () => {
                         )}
 
                         {/* Detail Anggota */}
-                        <table style={{ width: "100%" }}>
+                        <table style={{ width: "100%" }} className="table-anggota">
                             <tbody>
                                 <tr>
-                                    <td style={{ width: "180px", fontWeight: "bold" }}>NAMA</td>
+                                    <td style={{ width: "180px", fontWeight: "bold", textAlign: 'left' }}>NAMA</td>
                                     <td style={{ width: "10px" }}>:</td>
-                                    <td>{result.nama}</td>
+                                    <td>{item.nama}</td>
                                 </tr>
                                 <tr>
-                                    <td style={{ fontWeight: "bold" }}>JABATAN KERJA SK</td>
+                                    <td style={{ fontWeight: "bold", textAlign: 'left' }}>JABATAN KERJA SK</td>
                                     <td>:</td>
-                                    <td>{result.jabatan}</td>
+                                    <td>{item.jabatan}</td>
                                 </tr>
                                 <tr>
-                                    <td style={{ fontWeight: "bold" }}>JENJANG</td>
+                                    <td style={{ fontWeight: "bold", textAlign: 'left' }}>JENJANG</td>
                                     <td>:</td>
-                                    <td>{result.jenjang}</td>
+                                    <td>{item.jenjang}</td>
                                 </tr>
                                 <tr>
-                                    <td style={{ fontWeight: "bold" }}>NOMOR KTA</td>
+                                    <td style={{ fontWeight: "bold", textAlign: 'left' }}>NOMOR KTA</td>
                                     <td>:</td>
-                                    <td>{result.nomor_kta}</td>
+                                    <td>{item.nomor_kta}</td>
                                 </tr>
                                 <tr>
-                                    <td style={{ fontWeight: "bold" }}>NO REGISTRASI</td>
+                                    <td style={{ fontWeight: "bold", textAlign: 'left' }}>NO REGISTRASI</td>
                                     <td>:</td>
-                                    <td>{result.nomor_registrasi}</td>
+                                    <td>{item.nomor_registrasi}</td>
                                 </tr>
                             </tbody>
                         </table>
                     </div>
-                ) : <p style={{ textAlign: 'center'}}>Data tidak ditemukan</p>}
+                 ))
+                ) : !result || !searchName ?  <p style={{ textAlign: 'center'}}>Silahkan Cari Anggota Berdasarkan Nama</p> : <p style={{ textAlign: 'center'}}>Data tidak ditemukan</p>}
 
+                </div>
             </div>
         </div>
     );

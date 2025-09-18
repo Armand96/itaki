@@ -15,9 +15,7 @@ const Aboutus = () => {
     const [dataList, setDataList] = useState<any>(null)
 
     const images = [
-        "/assets/images/hero/hero-01.png",
-        "/assets/images/hero/hero-02.jpg",
-        "/assets/images/hero/hero-01.png",
+        "/assets/images/about-us/tentang-kami.jpg",
     ];
 
         useEffect(() => {

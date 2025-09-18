@@ -13,28 +13,28 @@ const Breadcrumb = ({ title, subtitle, images }: BreadcrumbProps) => {
   return (
     <div className="position-relative">
       {/* Carousel Background */}
-      <Carousel
+      {/* <Carousel
         fade
         controls={false}
         indicators={false}
         interval={3000}
         pause={false}
-      >
+      > */}
         {images.map((img, idx) => (
-          <Carousel.Item key={idx}>
+        //   <Carousel.Item key={idx}>
             <div
               className="d-block w-100"
               style={{
                 backgroundImage: `linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url(${img})`,
                 backgroundSize: "cover",
                 backgroundPosition: "center",
-                height: "50vh",
+                height: "70vh",
                 // minHeight: "400px",
               }}
             ></div>
-          </Carousel.Item>
+        //   </Carousel.Item>
         ))}
-      </Carousel>
+      {/* </Carousel> */}
 
       {/* Overlay Content */}
       <div
