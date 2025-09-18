@@ -23,14 +23,13 @@ Route::get('/storagez/{path}', function ($path) {
     ]);
 })->where('path', '.*');
 
+Route::get('/daftar_anggota/export', [DaftarAnggotaController::class, 'export']);
 
 Route::prefix('/admin')->group(function () {
     Route::get('/{any?}', function () {
         return view('backoffice.dashboard');
     })->where('any', '.*'); // Menangkap semua path setelah /admin
 });
-
-Route::get('/daftar_anggota/export', [DaftarAnggotaController::class, 'export']);
 
 
 Route::get('/{any?}', function ($any = null) {
