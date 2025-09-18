@@ -19,7 +19,7 @@ class GalleryCreateReq extends ApiRequest
     {
         return [
             'category' => 'required|string',
-            'description' => 'required|string',
+            'description' => 'string',
             'image' => 'image',
         ];
     }
