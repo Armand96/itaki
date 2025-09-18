@@ -1,12 +1,7 @@
 
-import RightArrawWhitIcon from '@/svg/RightArrawWhitIcon'
 import Image from 'next/image'
-import Link from 'next/link'
 
 
-// images import
-import about_img from "@/assets/images/direksi/1. Ketua Umum.jpg"
-import icon1_img from "@/assets/images/about-us/icon1.svg"
 
 export default function AboutHomeOne({ sambutan, team }: { sambutan: any, team: any }) {
     console.log(team)
@@ -16,7 +11,7 @@ export default function AboutHomeOne({ sambutan, team }: { sambutan: any, team: 
                 <div className="container">
                     <div className="row">
                         <div className="col-lg-4">
-                            <div className="luminix-about-thumb" data-aos="fade-up" data-aos-duration="700">
+                            <div className="luminix-about-thumb">
                                 <Image width={450} height={600} className='img-responsive' style={{ objectFit: "cover", objectPosition: "top"}} src={`${process.env.NEXT_PUBLIC_URL}storage/${team?.filter((x: any) => x.urutan == 1)[0]?.image}`} alt="here is theme image" />
                                 <div className="luminix-about-card">
                                     <h4 className="text-white">{team?.filter((x: any) => x.urutan == 1)[0]?.jabatan}</h4>

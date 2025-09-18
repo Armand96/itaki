@@ -1,150 +1,133 @@
-"use client"
+"use client";
 import useLoading from "@/store/useLoading";
 import { useEffect, useState } from "react";
 import FetchData from "../../../services/FetchData";
-import { useDebounce } from 'use-debounce';
-import TableWithPagination from "@/common/TableWithPagination";
-
 
 const TeamArea = () => {
-    const [searchName, setSearchName] = useState("");
     const setLoading = useLoading((state) => state.setLoading);
-    const [searchDebounceName] = useDebounce(searchName, 500)
-    const [firstLoading, setFirstLoading] = useState(false)
-    const [paginateData, setPaginateData] = useState<any>({
-        data: [],
-        last_page: 1,
-        current_page: 1,
-        per_page: 10,
-    })
+    const [searchName, setSearchName] = useState("");
+    const [searchKta, setSearchKta] = useState("");
+    const [result, setResult] = useState<any | null>(null);
 
-    const fetchData = (page: number = 1, page_size= 10, nama: any = '') => {
-        setLoading(true)
-        FetchData.GetAnggota(`?page=${page}&data_per_page=${page_size}&nama=${nama}`).then((res) => {
-            setLoading(false)
-            setPaginateData(res)
-        })
-    }
-
-    const setCurrentPage = (page: number) => {
-        fetchData(page, paginateData?.per_page)
-
-    }
-
-       const setCurrentPageRows = (page: number) => {
-        fetchData(1, page)
-
-    }
-
-
-    useEffect(() => {
-        if (firstLoading) {
-            fetchData(1, paginateData?.per_page, searchDebounceName)
+    const handleSearch = async () => {
+        setLoading(true);
+        try {
+            const res = await FetchData.GetAnggota(
+                `?nama=${searchName}&nomor_kta=${searchKta}`
+            );
+            if (res?.total === 1) {
+                setResult(res.data[0]);
+            } else {
+                setResult(null);
+            }
+        } finally {
+            setLoading(false);
         }
-    }, [searchDebounceName])
-
+    };
 
     useEffect(() => {
-        Promise.all([fetchData()]).then((res) => {
-            setLoading(false)
-            setFirstLoading(true)
-        })
+        setLoading(false)
     }, [])
-
-    const columns = [
-        { key: "nama", label: "Nama", sortable: true, width: "30%" },
-        { key: "jabatan", label: "Jabatan Kerja SKK", sortable: true,},
-        { key: "jenjang", label: "Jenjang", sortable: true,},
-        { key: "nomor_kta", label: "Nomor KTA", sortable: true,  },
-        { key: "nomor_registrasi", label: "Nomor Registrasi", sortable: true, },
-
-    ];
-
 
     return (
         <div className="luminix-padding-section4">
             <div className="container">
-                <div className="luminix-section-title center">
-                    {/* <h2>Daftar Anggota</h2> */}
-                </div>
-
                 {/* Filter Section */}
                 <div
-                    className="filter-wrapper d-flex justify-content-center align-items-center mb-4"
+                    className="filter-wrapper d-flex flex-column align-items-center mb-4"
                     style={{
-                        border: "1px solid #ccc",
-                        borderRadius: "6px",
-                        overflow: "hidden",
                         maxWidth: "420px",
                         margin: "0 auto",
                     }}
                 >
-                    {/* Dropdown
-                    <div style={{ flex: "1 1 50%", minWidth: "150px" }}>
-                        <Select
-                            options={wilayahOptions}
-                            value={wilayah}
-                            onChange={setWilayah}
-                            placeholder="Wilayah"
-                            isClearable
-                            menuPortalTarget={document.body} // pindahkan dropdown ke body
-                            styles={{
-                                control: (base) => ({
-                                    ...base,
-                                    border: "none",
-                                    boxShadow: "none",
-                                    minHeight: "38px",
-                                }),
-                                menuPortal: (base) => ({ ...base, zIndex: 9999 }), // pastikan di atas semua elemen
-                            }}
-                        />
-                    </div> */}
-
-                    {/* Input */}
                     <input
                         type="text"
-                        className="form-control"
-                        placeholder="Nama Anggota"
-                        style={{
-                            // flex: "1 1 50%",
-                            border: "none",
-                            height: "38px",
-                            padding: "0 10px",
-                        }}
+                        className="form-control mb-2 border px-4"
+                        placeholder="NAMA ANGGOTA"
                         value={searchName}
+
                         onChange={(e) => setSearchName(e.target.value)}
                     />
-                    {/* <input
+
+                    <input
                         type="text"
-                        className="form-control"
-                        placeholder="Nama Jabatan"
-                        style={{
-                            // flex: "1 1 50%",
-                            border: "none",
-                            height: "38px",
-                            borderLeft: "1px solid #001A3D",
-                            padding: "0 10px",
-                            boxShadow: "none",
-                        }}
-                        value={searchName}
-                        onChange={(e) => setSearchName(e.target.value)}
-                    /> */}
-                </div>
+                        className="form-control mb-2 border px-4"
+                        placeholder="NO KTA"
+                        value={searchKta}
 
-
-                <div className="row mt-5">
-                          <TableWithPagination
-                        columns={columns}
-                        data={paginateData?.data}
-                        onChangeRows={setCurrentPageRows}
-                        currentPage={paginateData?.current_page}
-                        pageCount={paginateData?.per_page}
-                        lastPage={paginateData?.last_page}
-                        onPageChange={setCurrentPage}
+                        onChange={(e) => setSearchKta(e.target.value)}
                     />
 
+                    <button className="btn btn-primary mt-2" onClick={handleSearch}>
+                        SEARCH
+                    </button>
 
                 </div>
+
+                {/* Result Section */}
+                {result ? (
+                    <div
+                        className="mt-4"
+                        style={{
+                            border: "1px solid #dcdcdc",
+                            borderRadius: "8px",
+                            padding: "20px",
+                            maxWidth: "600px",
+                            margin: "0 auto",
+                            background: "#fff",
+                            boxShadow: "0 2px 6px rgba(0,0,0,0.05)",
+                            textAlign: "center",
+                        }}
+                    >
+                        {/* Foto Anggota */}
+                        {result.foto && (
+                            <div className="mb-3">
+                                <img
+                                    src={result.foto} // pastikan field API namanya sesuai
+                                    alt={result.nama}
+                                    style={{
+                                        width: "300px",
+                                        height: "300px",
+                                        objectFit: "cover",
+                                        border: "2px solid #ccc",
+                                    }}
+                                />
+                            </div>
+                        )}
+
+                        {/* Detail Anggota */}
+                        <table style={{ width: "100%" }}>
+                            <tbody>
+                                <tr>
+                                    <td style={{ width: "180px", fontWeight: "bold" }}>NAMA</td>
+                                    <td style={{ width: "10px" }}>:</td>
+                                    <td>{result.nama}</td>
+                                </tr>
+                                <tr>
+                                    <td style={{ fontWeight: "bold" }}>JABATAN KERJA SK</td>
+                                    <td>:</td>
+                                    <td>{result.jabatan}</td>
+                                </tr>
+                                <tr>
+                                    <td style={{ fontWeight: "bold" }}>JENJANG</td>
+                                    <td>:</td>
+                                    <td>{result.jenjang}</td>
+                                </tr>
+                                <tr>
+                                    <td style={{ fontWeight: "bold" }}>NOMOR KTA</td>
+                                    <td>:</td>
+                                    <td>{result.nomor_kta}</td>
+                                </tr>
+                                <tr>
+                                    <td style={{ fontWeight: "bold" }}>NO REGISTRASI</td>
+                                    <td>:</td>
+                                    <td>{result.nomor_registrasi}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                ) : <p style={{ textAlign: 'center'}}>Data tidak ditemukan</p>}
+
             </div>
         </div>
     );

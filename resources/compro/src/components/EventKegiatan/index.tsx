@@ -8,10 +8,18 @@ import EventKegiatan from "./EventKegiatanArea";
 
 const Seminar = () => {
 
+        const images = [
+        "/assets/images/hero/hero-01.png",
+        "/assets/images/hero/hero-02.jpg",
+        "/assets/images/hero/hero-01.png",
+    ];
+
+
+
 	return (
 		<Wrapper>
 			<HeaderOne />
-			<Breadcrumb title="Event Kegiatan" subtitle="" bg_img="about-breadcrumb-bg" />
+			<Breadcrumb title="Event Kegiatan" subtitle=""  images={images}/>
             <EventKegiatan />
 			<FooterTwo />
 		</Wrapper>

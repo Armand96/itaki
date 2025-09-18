@@ -16,6 +16,7 @@ const HomeOne = () => {
     const setLoading = useLoading((state) => state.setLoading)
     const [dataList, setDataList] = useState<any>(null)
 
+
    useEffect(() => {
         Promise.all([FetchData.GetSambutan(), FetchData.GetKlienList(), FetchData.GetAnggota(`?urutan_non_null=1`)]).then((res) => {
             setLoading(false)

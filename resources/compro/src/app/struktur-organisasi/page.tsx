@@ -2,7 +2,7 @@ import dynamic from "next/dynamic";
 import Loading from "../loading";
 
 export const metadata = {
-  title: "Tentang Perusahaan",
+  title: "Struktur Organisasi",
 };
 
 const StrukturOrganisasi = dynamic(() => import('@/components/StrukturOrganisasi'), {

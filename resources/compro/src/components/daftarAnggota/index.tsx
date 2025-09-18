@@ -6,10 +6,16 @@ import FooterOne from "@/layouts/footers/FooterOne";
 
 
 const Aboutus = () => {
+       const images = [
+        "/assets/images/hero/hero-01.png",
+        "/assets/images/hero/hero-02.jpg",
+        "/assets/images/hero/hero-01.png",
+    ];
+
 	return (
 		<Wrapper>
 			<HeaderOne />
-			<Breadcrumb title="Daftar Anggota" subtitle="" bg_img="about-breadcrumb-bg" />
+			<Breadcrumb title="Daftar Anggota" subtitle="" images={images} />
 			<TeamArea  />
 			<FooterOne />
 		</Wrapper>

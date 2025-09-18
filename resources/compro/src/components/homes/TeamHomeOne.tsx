@@ -46,7 +46,7 @@ export default function TeamHomeOne({ style_2, team }: StyleProps) {
         <div className="row">
           {team?.map((member, idx) => (
             <div key={idx} className="col-xl-3 col-lg-6 col-md-6">
-              <div className="luminix-team-wrap" data-aos="fade-up" data-aos-duration={member.delay}>
+              <div className="luminix-team-wrap"  data-aos-duration={member.delay}>
                 <div className="luminix-team-thumb">
                   <Image width={306} height={400} style={{ objectFit: "cover", }}   src={member?.image ? `${process.env.NEXT_PUBLIC_URL}storage/${member?.image}` : "/assets/images/team/team1.png"} alt={member.nama} />
                   <div className="luminix-team-content">

@@ -6,10 +6,17 @@ import SkemaSertifikasi from "./Sertifikasi";
 
 
 const Aboutus = () => {
+
+           const images = [
+        "/assets/images/hero/hero-01.png",
+        "/assets/images/hero/hero-02.jpg",
+        "/assets/images/hero/hero-01.png",
+    ];
+
 	return (
 		<Wrapper>
 			<HeaderOne />
-			<Breadcrumb title="Sertifikasi" subtitle="Sertifikasi" bg_img="about-breadcrumb-bg" />
+			<Breadcrumb title="Sertifikasi" subtitle="Sertifikasi" images={images}  />
             <SkemaSertifikasi />
 			<FooterTwo />
 		</Wrapper>

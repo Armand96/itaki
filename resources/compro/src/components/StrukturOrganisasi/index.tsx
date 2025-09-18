@@ -8,6 +8,13 @@ import { useEffect, useState } from "react";
 import FetchData from "../../../services/FetchData";
 
 const Aboutus = () => {
+        const images = [
+        "/assets/images/hero/hero-01.png",
+        "/assets/images/hero/hero-02.jpg",
+        "/assets/images/hero/hero-01.png",
+    ];
+
+
       const setLoading = useLoading((state) => state.setLoading);
         const [image, setImage] = useState<any>()
 
@@ -32,7 +39,7 @@ const Aboutus = () => {
       <Breadcrumb
         title="Struktur Organisasi"
         subtitle="Struktur Organisasi"
-        bg_img="about-breadcrumb-bg"
+       images={images}
       />
       <div
         className="container"

@@ -6,10 +6,17 @@ import PublikasiIlmiahTable from "./PublikasiIlmiah";
 
 
 const PublikasiIlmiah = () => {
+           const images = [
+        "/assets/images/hero/hero-01.png",
+        "/assets/images/hero/hero-02.jpg",
+        "/assets/images/hero/hero-01.png",
+    ];
+
+
 	return (
 		<Wrapper>
 			<HeaderOne />
-			<Breadcrumb title="Publikasi Ilmiah" subtitle="Publikasi Ilmiah" bg_img="about-breadcrumb-bg" />
+			<Breadcrumb title="Publikasi Ilmiah" subtitle="Publikasi Ilmiah"  images={images} />
                 <PublikasiIlmiahTable />
 			<FooterTwo />
 		</Wrapper>

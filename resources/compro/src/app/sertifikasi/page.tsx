@@ -2,7 +2,7 @@ import dynamic from "next/dynamic";
 import Loading from "../loading";
 
 export const metadata = {
-  title: "Tentang Perusahaan",
+  title: "Sertifikasi",
 };
 
 const Sertifikasi = dynamic(() => import('@/components/Sertifikasi'), {

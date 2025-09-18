@@ -25,12 +25,18 @@
 }
 
 
-
+.new-hero h1 {
+    color: white ;
+    font-size: 46px ;
+     word-spacing: 7px ;
+}
 
 @media (max-width: 1200px) {
 .luminix-header-btn {
     display: none;
 }
+
+
 }
 
 .luminix-main-menu-item {
@@ -74,9 +80,45 @@
 }
 
 
+.new-breadcrumb h1 {
+    color: white ;
+    font-size: 46px ;
+     word-spacing: 7px ;
+}
+
 @media (max-width: 768px) {
   .ql-size-large {
     font-size: 18px !important;
+}
+
+.carousel-hero-size {
+    height: 120vh !important ;
+}
+
+.new-hero {
+    margin-top: -130px ;
+}
+
+.new-breadcrumb  {
+       margin-top: 30px  !important;
+}
+
+.new-breadcrumb h1  {
+       font-size: 44px !important;
+}
+
+.new-hero h1 {
+  font-size: 22px; /* lebih pas untuk mobile */
+  line-height: 1.4; /* rapat tapi tetap enak dibaca */
+  font-weight: 600;
+}
+
+.new-hero p {
+  font-size: 14px;
+  line-height: 1.6; /* nyaman untuk paragraf panjang */
+  font-weight: 400;
+  max-width: 500px; /* biar teks nggak kepanjangan di layar lebar */
+  margin: 0 auto;   /* center kalau ada max-width */
 }
 
 .img-responsive {
