@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Exports\DaftarAnggotaExport;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\DaftarAnggota\DaftarAnggotaCreateReq;
 use App\Http\Requests\DaftarAnggota\DaftarAnggotaUpdateReq;
@@ -11,6 +12,7 @@ use App\Models\DaftarAnggota;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
+use Maatwebsite\Excel\Facades\Excel;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class DaftarAnggotaController extends Controller
@@ -136,5 +138,13 @@ class DaftarAnggotaController extends Controller
             ->paginate($dataPerPage);
 
         return $anggotas;
+    }
+
+    /*
+        Export Daftar Anggota Data
+    */
+    public function export()
+    {
+        return Excel::download(new DaftarAnggotaExport, 'daftar_anggota.xlsx');
     }
 }

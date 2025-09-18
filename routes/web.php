@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\DaftarAnggotaController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Response;
@@ -29,6 +30,7 @@ Route::prefix('/admin')->group(function () {
     })->where('any', '.*'); // Menangkap semua path setelah /admin
 });
 
+Route::get('/daftar_anggota/export', [DaftarAnggotaController::class, 'export']);
 
 
 Route::get('/{any?}', function ($any = null) {

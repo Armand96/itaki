@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('daftar_anggotas', function (Blueprint $table) {
             $table->id();
             $table->string("nama", 150);
-            $table->string("jabatan", 50);
+            $table->string("jabatan", 150);
             $table->integer("jenjang");
             $table->integer("nomor_kta");
             $table->string("nomor_registrasi", 150);
