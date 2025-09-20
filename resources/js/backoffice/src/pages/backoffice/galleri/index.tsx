@@ -7,7 +7,7 @@ import Swal from 'sweetalert2';
 import LoadingScreen from '../../../components/Loading/loading';
 import { ModalLayout } from '../../../components/HeadlessUI';
 import TablePaginate from '../../../components/Table/tablePaginate';
-import { getCategories, getGalleri, postGalleri } from '../../../helpers';
+import { deleteGalleri, getCategories, getGalleri, postGalleri } from '../../../helpers';
 import ModalPreview from '../../../components/ModalPreviewImage/ModalPreview';
 import Select from 'react-select'
 import { HelperFunction } from '../../../helpers/HelpersFunction';
@@ -65,12 +65,37 @@ const Index = () => {
         },
         {
             name: 'Action', row: (cell: any) => (
+               <>
                 <button className='btn bg-primary text-white' onClick={() => handleEdit(cell)}>
                     Edit
+                </button>&nbsp;
+                 <button className='btn bg-primary text-white' onClick={() => handleDelete(cell)}>
+                    Hapus Foto
                 </button>
+               </>
             )
         }
     ];
+
+
+    const handleDelete = (val: any) => {
+        Swal.fire({
+            title: "Hapus Foto",
+            text: "Anda Yakin ingin hapus Foto berikut",
+            showCancelButton: true,
+            cancelButtonText: "Tidak",
+            icon: 'warning'
+        }).then((res) => {
+            if(res.isConfirmed){
+                deleteGalleri({
+                    _method: "DELETE"
+                }, val?.id).then((res) => {
+                    Swal.fire('Success', 'Hapus gambar berhasil', 'success')
+                    fetchData()
+                })
+            }
+        })
+    }
 
     const onFileUpload = (val: any) => {
         console.log(val)

@@ -22,7 +22,7 @@ const EventKegiatanArea = () => {
     const fetchData = async (page: number = 1, append = false) => {
         setLoading(true);
         try {
-            const res = await FetchData.GetKegiatan(`?page=${page}`);
+            const res = await FetchData.GetKegiatan(`?page=${page}&is_active=1`);
             setPaginateData((prev: any) => ({
                 ...res,
                 data: append ? [...prev.data, ...res.data] : res.data,

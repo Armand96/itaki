@@ -63,7 +63,7 @@ const Index = () => {
         { name: 'Deksripsi singkat', row: (cell: any) => <div>{cell.short_desc}</div> },
         { name: 'Tanggal Event', row: (cell: any) => <div>{cell.tgl_event}</div> },
         { name: 'Status Event', row: (cell: any) => <div>{cell?.status_event ? "sedang berjalan" : "sudah selesai / belum berjalan"}</div> },
-                { name: 'Status', row: (cell: any) => <div>{cell?.status ? "Aktif" : "tidak aktif"}</div> },
+                { name: 'Status', row: (cell: any) => <div>{cell?.is_active == 1 ? "Aktif" : "tidak aktif"}</div> },
 
         {
             name: 'Action', row: (cell: any) => (
