@@ -59,7 +59,7 @@ const Index = () => {
         { name: 'Section', row: (cell: any) => <div>{cell.menu_tujuan}</div> },
         {
             name: 'Action', row: (cell: any) => (
-                <button className='btn bg-primary text-white' onClick={() => { setModal(true); setFormData(cell); setIsCreate(false); }}>
+                <button className='btn bg-primary text-white' onClick={() => { setModal(true); setFormData(cell); setIsCreate(false); setSelectedSections(sectionOptions?.filter((x) => x.value === cell?.menu_tujuan)) }}>
                     Edit
                 </button>
             )
