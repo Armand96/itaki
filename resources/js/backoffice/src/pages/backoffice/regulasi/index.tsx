@@ -86,7 +86,7 @@ const Index = () => {
         setModal(true);
         setFormData(evt);
         setIsCreate(false);
-        setSelectedKategori(kategoriOptions?.filter((x) => x.value === evt?.kategori))
+        setSelectedKategori(kategoriOptions?.filter((x) => x.value == evt?.kategori))
 
     }
 
