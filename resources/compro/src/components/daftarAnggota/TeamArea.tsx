@@ -103,7 +103,7 @@ const TeamArea = () => {
                                     <td>{item.nama}</td>
                                 </tr>
                                 <tr>
-                                    <td style={{ fontWeight: "bold", textAlign: 'left' }}>JABATAN KERJA SK</td>
+                                    <td style={{ fontWeight: "bold", textAlign: 'left' }}>JABATAN KERJA SAK</td>
                                     <td>:</td>
                                     <td>{item.jabatan}</td>
                                 </tr>

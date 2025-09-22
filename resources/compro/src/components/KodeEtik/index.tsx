@@ -36,7 +36,7 @@ const KodeEtik = () => {
       <HeaderOne />
       <Breadcrumb
         title="Kode Etik"
-        subtitle="Struktur Organisasi"
+        subtitle=""
        images={images}
       />
 

@@ -7,9 +7,7 @@ import GoogleMap from "./GoogleMap";
 
 export default function Contactus() {
           const images = [
-        "/assets/images/hero/hero-01.png",
         "/assets/images/hero/hero-02.jpg",
-        "/assets/images/hero/hero-01.png",
     ];
 
 
