@@ -28,7 +28,7 @@ export default function HeaderOne() {
                                 <p className="d-flex flex-column ps-2 m-0" style={{ fontWeight: "bold" }}>
                                     <span style={{ fontSize: "24px", lineHeight: "1", color: "#2916a3" }} >ITAKI</span>
                                     <span style={{ fontSize: "12px", lineHeight: "1.2", fontWeight: "normal", color: "black" }}>
-                                        Ikatan Tenaga Ahli <br /> Kontruksi Indonesia
+                                        Ikatan Tenaga Ahli <br /> Konstruksi Indonesia
                                     </span>
                                 </p>                            </Link>
 

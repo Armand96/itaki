@@ -50,10 +50,11 @@ const Index = () => {
             setModal(false);
             Swal.fire('Success', formData.id ? 'Update Regulasi Berhasil' : 'Input Regulasi Berhasil', 'success');
         }).catch((err) => {
-            setModal(false);
-            console.log(err)
-            Swal.fire('Error', err.name[0], 'error');
-        })
+                    setModal(false);
+                    setLoading(false)
+                    console.log(err)
+                    Swal.fire('Error', err, 'error');
+                })
         await fetchData();
         setModal(false);
     };

@@ -92,7 +92,12 @@ const Index = () => {
                 }, val?.id).then((res) => {
                     Swal.fire('Success', 'Hapus gambar berhasil', 'success')
                     fetchData()
-                })
+                }).catch((err) => {
+                            setModal(false);
+                            setLoading(false)
+                            console.log(err)
+                            Swal.fire('Error', err.name[0], 'error');
+                        })
             }
         })
     }

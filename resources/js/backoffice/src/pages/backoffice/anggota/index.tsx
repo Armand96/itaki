@@ -6,7 +6,7 @@ import LoadingScreen from '../../../components/Loading/loading';
 import { ModalLayout } from '../../../components/HeadlessUI';
 import TablePaginate from '../../../components/Table/tablePaginate';
 import ModalPreview from '../../../components/ModalPreviewImage/ModalPreview';
-import { exportData, getAnggota, PostAnggota } from '../../../helpers';
+import {  getAnggota, PostAnggota } from '../../../helpers';
 import { useDebounce } from 'use-debounce';
 
 const Index = () => {
@@ -63,7 +63,7 @@ const Index = () => {
             setModal(false);
             setLoading(false)
             console.log(err)
-            Swal.fire('Error', err.name[0], 'error');
+            Swal.fire('Error', err, 'error');
         })
 
         await fetchData();
@@ -112,7 +112,7 @@ const Index = () => {
                         <div className='p-4 h-[70vh] overflow-y-auto w-[70vw]'>
                             <FormInput name='nama' label='Nama' value={formData.nama} onChange={(e) => setFormData({ ...formData, nama: e.target.value })} className='form-input mb-3' />
                             <FormInput name='jabatan' label='Jabatan' value={formData.jabatan} onChange={(e) => setFormData({ ...formData, jabatan: e.target.value })} className='form-input mb-3' />
-                            <FormInput name='deskripsi_jabatan' label='Deksripsi Jabatan' value={formData.deskripsi_jabatan} type="textarea" onChange={(e) => setFormData({ ...formData, deskripsi_jabatan: e.target.value })} className='form-input mb-3' />
+                            <FormInput name='deskripsi_jabatan' label='Deskripsi Jabatan' value={formData.deskripsi_jabatan} type="textarea" onChange={(e) => setFormData({ ...formData, deskripsi_jabatan: e.target.value })} className='form-input mb-3' />
                             <FormInput name='jenjang' label='Jenjang' value={formData.jenjang} type="number" onChange={(e) => setFormData({ ...formData, jenjang: e.target.value })} className='form-input mb-3' />
                             <FormInput name='nomor_kta' label='Nomor KTA' value={formData.nomor_kta} type="number" onChange={(e) => setFormData({ ...formData, nomor_kta: e.target.value })} className='form-input mb-3' />
                             <FormInput name='nomor_registrasi' label='Nomor Registrasi' value={formData.nomor_registrasi} type="text" onChange={(e) => setFormData({ ...formData, nomor_registrasi: e.target.value })} className='form-input mb-3' />

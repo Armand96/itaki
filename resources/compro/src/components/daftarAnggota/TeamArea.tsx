@@ -55,7 +55,7 @@ const TeamArea = () => {
                         onChange={(e) => setSearchKta(e.target.value)}
                     /> */}
 
-                    <button className="btn btn-primary mt-2" onClick={handleSearch}>
+                    <button className="btn btn-primary mt-2" disabled={!searchName} onClick={handleSearch}>
                         SEARCH
                     </button>
 
@@ -63,7 +63,7 @@ const TeamArea = () => {
 
                 {/* Result Section */}
                 <div className="row px-4 ">
-                      {result ? (
+                      {result?.data?.length !== 0 ? (
                  result?.data?.map((item: any) => (
                        <div
                         className="mt-4 col-lg-6"
@@ -103,7 +103,7 @@ const TeamArea = () => {
                                     <td>{item.nama}</td>
                                 </tr>
                                 <tr>
-                                    <td style={{ fontWeight: "bold", textAlign: 'left' }}>JABATAN KERJA SAK</td>
+                                    <td style={{ fontWeight: "bold", textAlign: 'left' }}>JABATAN KERJA SKK</td>
                                     <td>:</td>
                                     <td>{item.jabatan}</td>
                                 </tr>
@@ -126,7 +126,7 @@ const TeamArea = () => {
                         </table>
                     </div>
                  ))
-                ) : !result || !searchName ?  <p style={{ textAlign: 'center'}}>Silahkan Cari Anggota Berdasarkan Nama</p> : <p style={{ textAlign: 'center'}}>Data tidak ditemukan</p>}
+                ) : result?.data?.length === 0  ? <p style={{ textAlign: 'center'}}>Data tidak ditemukan</p> : <p style={{ textAlign: 'center'}}>Silahkan Cari Anggota Berdasarkan Nama</p> }
 
                 </div>
             </div>

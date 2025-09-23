@@ -60,7 +60,7 @@ const Index = () => {
     const columns = [
         { name: 'Kegiatan', row: (cell: any) => <div  className="w-[300px] whitespace-normal" style={{ wordWrap: 'break-word', whiteSpace: 'pre-wrap' }}>{cell.judul}</div> },
         { name: 'Jenis Event', row: (cell: any) => <div>{cell.kategori}</div> },
-        { name: 'Deksripsi singkat', row: (cell: any) => <div>{cell.short_desc}</div> },
+        { name: 'Deskripsi singkat', row: (cell: any) => <div>{cell.short_desc}</div> },
         { name: 'Tanggal Event', row: (cell: any) => <div>{cell.tgl_event}</div> },
         { name: 'Status Event', row: (cell: any) => <div>{cell?.status_event ? "sedang berjalan" : "sudah selesai / belum berjalan"}</div> },
                 { name: 'Status', row: (cell: any) => <div>{cell?.is_active == 1 ? "Aktif" : "tidak aktif"}</div> },
@@ -127,7 +127,7 @@ const Index = () => {
 
                             </div>
 
-                            <FormInput name='Judul' label='Deksripsi singkat' value={formData.short_desc} onChange={(e) => setFormData({ ...formData, short_desc: e.target.value })} className='form-input mb-3' />
+                            <FormInput name='Judul' label='Deskripsi singkat' value={formData.short_desc} onChange={(e) => setFormData({ ...formData, short_desc: e.target.value })} className='form-input mb-3' />
                             <FormInput name='Judul' label='Tanggal Event' type='date' value={formData.tgl_event} onChange={(e) => setFormData({ ...formData, tgl_event: e.target.value })} className='form-input mb-3' />
                             <div className='mb-2'>
                                 <label className="mb-2" htmlFor="choices-text-remove-button">

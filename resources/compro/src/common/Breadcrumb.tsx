@@ -42,7 +42,7 @@ const Breadcrumb = ({ title, subtitle, images }: BreadcrumbProps) => {
         style={{ zIndex: 100 }}
       >
         <h1 className="breadcrumb-title fw-bold " style={{ fontSize: "85px", marginBottom: "40px"}}>{title}</h1>
-        <p className="lead mb-0">{subtitle}</p>
+        {/* <p className="lead mb-0">{subtitle}</p> */}
       </div>
     </div>
   );

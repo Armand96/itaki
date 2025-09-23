@@ -49,7 +49,7 @@ const Index = () => {
         }).catch((err) => {
             setModal(false);
             console.log(err)
-            Swal.fire('Error', err.name[0], 'error');
+            Swal.fire('Error', err, 'error');
         })
         await fetchData();
     };

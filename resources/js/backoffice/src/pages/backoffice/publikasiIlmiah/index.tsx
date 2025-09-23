@@ -43,10 +43,11 @@ const Index = () => {
             setModal(false);
             Swal.fire('Success', formData.id ? 'Update Publikasi Ilmiah Berhasil' : 'Input Publikasi Ilmiah Berhasil', 'success');
         }).catch((err) => {
-            setModal(false);
-            console.log(err)
-            Swal.fire('Error', err.name[0], 'error');
-        })
+                    setModal(false);
+                    setLoading(false)
+                    console.log(err)
+                    Swal.fire('Error', err, 'error');
+                })
         await fetchData();
         setModal(false);
     };
@@ -97,7 +98,7 @@ const Index = () => {
                         </div>
                         <div className='p-4 max-h-screen overflow-y-auto w-[70vw]'>
                             <FormInput name='Judul' label='judul' value={formData.judul} onChange={(e) => setFormData({ ...formData, judul: e.target.value })} className='form-input mb-3' />
-                            <FormInput name='Judul' label='Nama Pernebit' value={formData.penerbit} onChange={(e) => setFormData({ ...formData, penerbit: e.target.value })} className='form-input mb-3' />
+                            <FormInput name='Judul' label='Nama penerbit' value={formData.penerbit} onChange={(e) => setFormData({ ...formData, penerbit: e.target.value })} className='form-input mb-3' />
                             <FormInput name='Judul' label='Tanggal Terbit' type='date' value={formData.tahun_terbit} onChange={(e) => setFormData({ ...formData, tahun_terbit: e.target.value })} className='form-input mb-3' />
 
                             <div className="flex justify-between items-center">

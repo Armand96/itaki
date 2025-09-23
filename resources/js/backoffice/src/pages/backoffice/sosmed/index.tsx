@@ -41,10 +41,10 @@ const Index = () => {
             setModal(false);
             Swal.fire('Success', formData.id ? 'Update Sosial Media Berhasil' : 'Input Sosial Media Berhasil', 'success')
         }).catch((err) => {
-            setModal(false);
-            console.log(err)
-            Swal.fire('Error', err.name[0], 'error');
-        })
+                    setModal(false);
+                    console.log(err)
+                    Swal.fire('Error', err, 'error');
+                })
         await fetchData();
     };
 
