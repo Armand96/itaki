@@ -80,17 +80,17 @@ const Index = () => {
                             </button>
                         </div>
                         <div className='p-4 h-[30vh] overflow-y-auto w-[70vw]'>
-                            <FormInput name='name' label='Nama' value={formData.nama_kategori} onChange={(e) => setFormData({ ...formData, nama_kategori: e.target.value })} className='form-input mb-3' />
+                            <FormInput required name='name' label='Nama' value={formData.nama_kategori} onChange={(e) => setFormData({ ...formData, nama_kategori: e.target.value })} className='form-input mb-3' />
                             <div className='mb-2'>
                                 <label className="mb-2" htmlFor="choices-text-remove-button">
-                                    Sections
+                                    Sections *
                                 </label>
-                                <Select className="select2 z-5" options={sectionOptions} value={selectedSections} onChange={(e) => setSelectedSections(e)} />
+                                <Select  className="select2 z-5" options={sectionOptions} value={selectedSections} onChange={(e) => setSelectedSections(e)} />
                             </div>
                         </div>
                         <div className='flex justify-end p-4 border-t gap-x-4'>
                             <button className='btn bg-light text-gray-800' onClick={() => setModal(false)}>Close</button>
-                            <button className='btn bg-primary text-white' onClick={postData}>Submit</button>
+                            <button className='btn bg-primary text-white' disabled={!selectedSections?.value || !formData?.nama_kategori} onClick={postData}>Submit</button>
                         </div>
                     </div>
                 </ModalLayout>
@@ -99,10 +99,10 @@ const Index = () => {
             <div className='bg-white p-4'>
                 <div className='flex justify-between'>
                     <h3 className='text-2xl font-bold'>Categories</h3>
-                    <button className='btn bg-primary mb-4 text-white' onClick={() => { setModal(true); setIsCreate(true); setFormData({ name: '', image_file: '', is_active: 1 }); }}>Tambah Data</button>
+                    <button className='btn bg-primary mb-4 text-white'  onClick={() => { setModal(true); setIsCreate(true); setFormData({ name: '', image_file: '', is_active: 1 }); }}>Tambah Data</button>
                 </div>
                 <p className='mb-2'>Total Data : {dataPaginate?.total}</p>
-                <TablePaginate totalPage={dataPaginate?.last_page || 0} data={dataPaginate?.data} columns={columns} onPageChange={(val) => fetchData(val?.current_page as any + 1)} />
+                <TablePaginate totalPage={dataPaginate?.last_page || 0} data={dataPaginate?.data} columns={columns} onPageChange={(val) => fetchData(dataPaginate?.current_page + 1 == dataPaginate?.last_page ? 1 : dataPaginate?.current_page + 1)}/>
             </div>
         </>
     )

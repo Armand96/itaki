@@ -10,13 +10,27 @@ interface TablePaginateProps {
   data: any[];
   columns: Column[];
   totalPage: number;
-  onPageChange?: (params: {
-    current_page(current_page: any): void; selected: number
-  }) => void;
+  onPageChange: (parms: any) => void;
+  current_page?: number;
   paginate?: boolean
 }
 
-const TablePaginate: React.FC<TablePaginateProps> = ({ data, columns, totalPage, onPageChange, paginate = true }) => {
+const TablePaginate: React.FC<TablePaginateProps> = ({ data, current_page, columns, totalPage, onPageChange, paginate = true }) => {
+
+const handlePageChange = (selectedItem) => {
+  if (!selectedItem || selectedItem?.selected === undefined) return;
+
+  const newPage = selectedItem.selected + 1; // karena selected dimulai dari 0
+
+  // Validasi supaya tidak keluar dari batas totalPage
+  if (newPage < 1) {
+    onPageChange(1);
+  } else if (newPage > totalPage) {
+    onPageChange(totalPage);
+  } else if (newPage !== current_page) {
+    onPageChange(newPage);
+  }
+};
 
     return (
       <div className="card">
@@ -57,7 +71,7 @@ const TablePaginate: React.FC<TablePaginateProps> = ({ data, columns, totalPage,
                   <ReactPaginate
                     breakLabel="..."
                     nextLabel=">"
-                    onPageChange={onPageChange}
+          onPageChange={handlePageChange}
                     pageRangeDisplayed={2}
                     pageCount={totalPage}
                     previousLabel="<"

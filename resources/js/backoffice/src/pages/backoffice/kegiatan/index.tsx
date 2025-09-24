@@ -44,13 +44,14 @@ const Index = () => {
 
     const postData = async () => {
         setLoading(true);
-        const data = { ...formData, status_event: formData?.status_event ? 1 : 0, name: formData?.judul, tgl_event: dayjs(formData?.tgl_event).format("YYYY-MM-DD"), kategori: selectedKategori?.value || formData?.kategori, _method: formData.id ? 'PUT' : 'POST' };
+        const data = { ...formData, url_video: formData?.url_video ? formData?.url_video : "-", status_event: formData?.status_event ? 1 : 0, name: formData?.judul, tgl_event: dayjs(formData?.tgl_event).format("YYYY-MM-DD"), kategori: selectedKategori?.value || formData?.kategori, _method: formData.id ? 'PUT' : 'POST' };
         await PostKegiatan(data, formData?.id).then(() => {
             setModal(false);
             Swal.fire('Success', formData.id ? 'Update Kegiatan Berhasil' : 'Input Kegiatan Berhasil', 'success');
         }).catch((err) => {
             setModal(false);
             console.log(err)
+            setLoading(false);
             Swal.fire('Error', err.name[0], 'error');
         })
         await fetchData();
@@ -178,7 +179,7 @@ const Index = () => {
                     <h3 className='text-2xl font-bold'>Kegiatan</h3>
                     <button className='btn bg-primary mb-4 text-white' onClick={() => { setModal(true); setIsCreate(true); setFormData({ name: '', is_active: 1 }); }}>Tambah Data</button>
                 </div>
-                <TablePaginate totalPage={dataPaginate?.last_page || 0} data={dataPaginate?.data} columns={columns} onPageChange={(val) => fetchData(val?.current_page as any + 1)} />
+                <TablePaginate totalPage={dataPaginate?.last_page || 0} data={dataPaginate?.data} columns={columns} onPageChange={(val) => fetchData(dataPaginate?.current_page + 1 == dataPaginate?.last_page ? 1 : dataPaginate?.current_page + 1)} />
             </div>
         </>
     )

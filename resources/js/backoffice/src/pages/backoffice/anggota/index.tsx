@@ -81,7 +81,7 @@ const Index = () => {
 
     const columns = [
         { name: 'Nama', row: (cell: any) => <div className="w-[300px] whitespace-normal" style={{ wordWrap: 'break-word', whiteSpace: 'pre-wrap' }}>{cell.nama}</div> },
-        { name: 'Jabatan', row: (cell: any) => <div>{cell.jabatan}</div> },
+        { name: 'Jabatan', row: (cell: any) => <div  className="w-[200px] whitespace-normal" style={{ wordWrap: 'break-word', whiteSpace: 'pre-wrap' }}>{cell.jabatan}</div> },
         { name: 'Nomor KTA', row: (cell: any) => <div>{cell.nomor_kta}</div> },
         { name: 'Nomor Registrasi', row: (cell: any) => <div>{cell.nomor_registrasi}</div> },
         { name: 'Jenjang', row: (cell: any) => <div>{cell.jenjang}</div> },
@@ -110,12 +110,12 @@ const Index = () => {
 
                         </div>
                         <div className='p-4 h-[70vh] overflow-y-auto w-[70vw]'>
-                            <FormInput name='nama' label='Nama' value={formData.nama} onChange={(e) => setFormData({ ...formData, nama: e.target.value })} className='form-input mb-3' />
-                            <FormInput name='jabatan' label='Jabatan' value={formData.jabatan} onChange={(e) => setFormData({ ...formData, jabatan: e.target.value })} className='form-input mb-3' />
+                            <FormInput required name='nama' label='Nama' value={formData.nama} onChange={(e) => setFormData({ ...formData, nama: e.target.value })} className='form-input mb-3' />
+                            <FormInput required name='jabatan' label='Jabatan' value={formData.jabatan} onChange={(e) => setFormData({ ...formData, jabatan: e.target.value })} className='form-input mb-3' />
                             <FormInput name='deskripsi_jabatan' label='Deskripsi Jabatan' value={formData.deskripsi_jabatan} type="textarea" onChange={(e) => setFormData({ ...formData, deskripsi_jabatan: e.target.value })} className='form-input mb-3' />
-                            <FormInput name='jenjang' label='Jenjang' value={formData.jenjang} type="number" onChange={(e) => setFormData({ ...formData, jenjang: e.target.value })} className='form-input mb-3' />
-                            <FormInput name='nomor_kta' label='Nomor KTA' value={formData.nomor_kta} type="number" onChange={(e) => setFormData({ ...formData, nomor_kta: e.target.value })} className='form-input mb-3' />
-                            <FormInput name='nomor_registrasi' label='Nomor Registrasi' value={formData.nomor_registrasi} type="text" onChange={(e) => setFormData({ ...formData, nomor_registrasi: e.target.value })} className='form-input mb-3' />
+                            <FormInput required name='jenjang' label='Jenjang' value={formData.jenjang} type="number" onChange={(e) => setFormData({ ...formData, jenjang: e.target.value })} className='form-input mb-3' />
+                            <FormInput required name='nomor_kta' label='Nomor KTA' value={formData.nomor_kta} type="number" onChange={(e) => setFormData({ ...formData, nomor_kta: e.target.value })} className='form-input mb-3' />
+                            <FormInput required name='nomor_registrasi' label='Nomor Registrasi' value={formData.nomor_registrasi} type="text" onChange={(e) => setFormData({ ...formData, nomor_registrasi: e.target.value })} className='form-input mb-3' />
 
                             <div className='mt-5'>
                                 <input type='checkbox' checked={formData.is_show ? true : false} onChange={(e) => setFormData({ ...formData, is_show: e.target.checked })} />
@@ -124,7 +124,7 @@ const Index = () => {
 
                             <div className="mt-4">
                                 {
-                                    formData?.is_show && <FormInput name='urut' label='Urut di list' value={formData.urutan} onChange={(e) => setFormData({ ...formData, urutan: e.target.value })} className='form-input mb-3' />
+                                    formData?.is_show && <FormInput required  name='urut' label='Urut di list' value={formData.urutan} onChange={(e) => setFormData({ ...formData, urutan: e.target.value })} className='form-input mb-3' />
                                 }
                             </div>
 
@@ -133,7 +133,7 @@ const Index = () => {
                             {
                                 formData?.is_show && <>
                                     <div className="flex justify-between items-center">
-                                        <h4 className="card-title mb-1">Image</h4>
+                                        <h4 className="card-title mb-1">Image *</h4>
 
                                     </div>
                                     <FileUploader singleFile multipleUploads={false} onFileUpload={onFileUpload} icon="ri-upload-cloud-line text-4xl text-gray-300 dark:text-gray-200" text=" klik untuk upload." />
@@ -178,7 +178,7 @@ const Index = () => {
                     </div>
                 </div>
                 <p className='mb-2'>Total Data : {dataPaginate?.total}</p>
-                <TablePaginate totalPage={dataPaginate?.last_page || 0} data={dataPaginate?.data} columns={columns} onPageChange={(val) => fetchData(val?.current_page as any + 1)} />
+                <TablePaginate current_page={dataPaginate?.current_page} totalPage={dataPaginate?.last_page || 0} data={dataPaginate?.data} columns={columns} onPageChange={fetchData} />
             </div>
         </>
     )

@@ -23,7 +23,8 @@ const Index = () => {
     const [kategoriOptions, setKategoriOptions] = useState<any>([])
 
 
-    const fetchData = async (page = 1) => {
+    const fetchData = async (page: any = 1) => {
+        console
         setLoading(true);
         const res: any[] = await getGalleri(`?page=${page}&category=gallery`);
         setDataPaginate(res);
@@ -128,7 +129,7 @@ const Index = () => {
                             </button>
                         </div>
                         <div className='p-4 max-h-screen overflow-y-auto w-[70vw]'>
-                            <FormInput name='name' label='description' value={formData.description} onChange={(e) => setFormData({ ...formData, description: e.target.value })} className='form-input mb-3' />
+                            <FormInput  name='name' label='description' value={formData.description} onChange={(e) => setFormData({ ...formData, description: e.target.value })} className='form-input mb-3' />
                                {/* <div className='mb-2'>
                                 <label className="mb-2" htmlFor="choices-text-remove-button">
                                     Kategori
@@ -136,7 +137,7 @@ const Index = () => {
                                 <Select  className="select2 z-5" options={kategoriOptions} value={selectedKategori} onChange={(e) => setSelectedKategori(e)} />
                             </div> */}
                             <div className="flex justify-between items-center">
-                                <h4 className="card-title mb-1">Image</h4>
+                                <h4 className="card-title mb-1">Image *</h4>
                             </div>
                             <FileUploader  required={true} acceptedTypes={["image/jpeg", "image/jpg", "image/png"]} singleFile multipleUploads={false} onFileUpload={onFileUpload} icon="ri-upload-cloud-line text-4xl text-gray-300 dark:text-gray-200" text=" klik untuk upload." />
 
@@ -154,7 +155,7 @@ const Index = () => {
                         </div>
                         <div className='flex justify-end p-4 border-t gap-x-4'>
                             <button className='btn bg-light text-gray-800' onClick={() => setModal(false)}>Close</button>
-                            <button className='btn bg-primary text-white' onClick={postData}>Submit</button>
+                            <button className='btn bg-primary text-white' disabled={!formData?.image} onClick={postData}>Submit</button>
                         </div>
                     </div>
                 </ModalLayout>
@@ -166,7 +167,7 @@ const Index = () => {
                     <button className='btn bg-primary mb-4 text-white' onClick={() => { setModal(true); setIsCreate(true); setFormData({ name: '', image_file: '', is_active: 1 }); }}>Tambah Data</button>
                 </div>
                 <p className='mb-2'>Total Data : {dataPaginate?.total}</p>
-                <TablePaginate totalPage={dataPaginate?.last_page || 0} data={dataPaginate?.data} columns={columns} onPageChange={(val) => fetchData(val?.current_page as any + 1)} />
+                <TablePaginate current_page={dataPaginate?.current_page} totalPage={dataPaginate?.last_page || 0} data={dataPaginate?.data} columns={columns} onPageChange={fetchData} />
             </div>
         </>
     )

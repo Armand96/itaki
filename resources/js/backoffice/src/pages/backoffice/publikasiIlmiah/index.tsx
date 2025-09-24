@@ -97,12 +97,12 @@ const Index = () => {
                             </button>
                         </div>
                         <div className='p-4 max-h-screen overflow-y-auto w-[70vw]'>
-                            <FormInput name='Judul' label='judul' value={formData.judul} onChange={(e) => setFormData({ ...formData, judul: e.target.value })} className='form-input mb-3' />
-                            <FormInput name='Judul' label='Nama penerbit' value={formData.penerbit} onChange={(e) => setFormData({ ...formData, penerbit: e.target.value })} className='form-input mb-3' />
-                            <FormInput name='Judul' label='Tanggal Terbit' type='date' value={formData.tahun_terbit} onChange={(e) => setFormData({ ...formData, tahun_terbit: e.target.value })} className='form-input mb-3' />
+                            <FormInput required name='Judul' label='judul' value={formData.judul} onChange={(e) => setFormData({ ...formData, judul: e.target.value })} className='form-input mb-3' />
+                            <FormInput required name='Judul' label='Nama penerbit' value={formData.penerbit} onChange={(e) => setFormData({ ...formData, penerbit: e.target.value })} className='form-input mb-3' />
+                            <FormInput required name='Judul' label='Tanggal Terbit' type='date' value={formData.tahun_terbit} onChange={(e) => setFormData({ ...formData, tahun_terbit: e.target.value })} className='form-input mb-3' />
 
                             <div className="flex justify-between items-center">
-                                <h4 className="card-title mb-1">File</h4>
+                                <h4 className="card-title mb-1">File *</h4>
                             </div>
 
                             <FileUploader
@@ -156,7 +156,7 @@ const Index = () => {
                     <button className='btn bg-primary mb-4 text-white' onClick={() => { setModal(true); setIsCreate(true); setFormData({ name: '', is_active: 1 }); }}>Tambah Data</button>
                 </div>
                 <p className='mb-2'>Total Data : {dataPaginate?.total}</p>
-                <TablePaginate totalPage={dataPaginate?.last_page || 0} data={dataPaginate?.data} columns={columns} onPageChange={(val) => fetchData(val?.current_page as any + 1)} />
+                <TablePaginate current_page={dataPaginate?.current_page} totalPage={dataPaginate?.last_page || 0} data={dataPaginate?.data} columns={columns} onPageChange={fetchData} />
             </div>
         </>
     )

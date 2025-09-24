@@ -113,7 +113,7 @@ const Index = () => {
                 {/* Upload Image */}
                 <div className="mb-6">
                     <label className="mb-2 block">
-                        Upload Image (max ukuran image {import.meta.env.VITE_REACT_APP_MAX_UPLOAD_SIZE}MB)
+                        Upload Image (max ukuran image {import.meta.env.VITE_REACT_APP_MAX_UPLOAD_SIZE}MB) *
                     </label>
                     <FileUploader   onFileDelete={newFileDelete} handleDeletePrevImage={handlePrevImage} prevData={oldImages} required={true} acceptedTypes={["image/jpeg", "image/jpg", "image/png"]} singleFile multipleUploads={false} onFileUpload={onFileUpload} icon="ri-upload-cloud-line text-4xl text-gray-300 dark:text-gray-200" text=" klik untuk upload." />
 
@@ -121,7 +121,7 @@ const Index = () => {
 
                 {/* Deskripsi */}
                 <div className="mb-10">
-                    <h4 className="card-title mb-2">Deskripsi</h4>
+                    <h4 className="card-title mb-2">Deskripsi *</h4>
                     <ReactQuill
                         theme="snow"
                         modules={modules}

@@ -77,11 +77,11 @@ const Index = () => {
                         <div className='p-4 max-h-80 overflow-y-auto w-[70vw]'>
                             <FormInput name='name' label='Name' disabled value={formData.name} onChange={(e) => setFormData({ ...formData, name: e.target.value })} className='form-input mb-3' />
                             {
-                                ((!isCreate && formData?.type === "text") || isCreate) && <FormInput name='content' label='Content' value={formData.value} onChange={(e) => setFormData({ ...formData, value: e.target.value })} className={`form-input mb-3`} />
+                                ((!isCreate && formData?.type === "text") || isCreate) && <FormInput required name='content' label='Content' value={formData.value} onChange={(e) => setFormData({ ...formData, value: e.target.value })} className={`form-input mb-3`} />
                             }
                             <div className={`${(!isCreate && formData?.type === "file") || isCreate ? "block" : "hidden"} mb-2`} >
                                 <label className="mb-2" htmlFor="choices-text-remove-button">
-                                    Upload Image
+                                    Upload Image *
                                 </label>
                                 <FileUploader multipleUploads={false} onFileDelete={newFileDelete} prevData={null} detailData={null} handleDeletePrevImage={() => null} onFileUpload={onFileUpload} icon="ri-upload-cloud-line text-4xl text-gray-300 dark:text-gray-200" text=" klik untuk upload." />
                             </div>

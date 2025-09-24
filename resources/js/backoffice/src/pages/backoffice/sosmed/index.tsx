@@ -86,7 +86,7 @@ const Index = () => {
                         </div>
                         <div className='p-4 max-h-screen overflow-y-auto w-[70vw]'>
                             <FormInput name='name' label='Nama' value={formData.name} onChange={(e) => setFormData({ ...formData, name: e.target.value })} className='form-input mb-3' />
-                            <FormInput name='link' label='Link' value={formData.link} onChange={(e) => setFormData({ ...formData, link: e.target.value })} className='form-input mb-3' />
+                            <FormInput required name='link' label='Link' value={formData.link} onChange={(e) => setFormData({ ...formData, link: e.target.value })} className='form-input mb-3' />
                             {/* <div className="flex justify-between items-center">
                                 <h4 className="card-title mb-1">Image</h4>
                             </div>

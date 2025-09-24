@@ -61,9 +61,7 @@ const Index = () => {
             )}
             <PageBreadcrumb title='Tentang Kami' subName='Backoffice' />
             <div className='bg-white p-4 '>
-                <div className='flex justify-between'>
-                    <h3 className='text-2xl font-bold'>Tentang Kami </h3>
-                </div>
+
 
                 <p className='mb-2'>Total Data : {dataPaginate?.total}</p>
                 <TablePaginate totalPage={dataPaginate?.last_page || 0} data={dataPaginate?.data} columns={columns}  />

@@ -173,7 +173,7 @@ export const ModalAdd = ({ isOpen, toggleModal, isCreate, setLoading, detailData
 
                     <div className={`${["Visi", "Misi", "Sejarah ITAKI"].includes(detailData?.title) ? "block" : "hidden"} mb-20`} >
                         <div className="flex justify-between items-center">
-                            <h4 className="card-title">Deskripsi</h4>
+                            <h4 className="card-title">Deskripsi *</h4>
                         </div>
 
                         <div className="pt-3">

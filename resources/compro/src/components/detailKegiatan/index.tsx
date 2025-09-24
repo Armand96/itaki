@@ -67,7 +67,7 @@ const DetailSeminar = () => {
                         )}
 
                         {
-                            data?.url_video || data?.url_video !== null && (
+                            (data?.url_video || data?.url_video !== null || data?.url_video !== "-" ) && (
                                 <div className="mb-4 d-flex justify-content-center">
                                     <iframe
                                         width="560"
