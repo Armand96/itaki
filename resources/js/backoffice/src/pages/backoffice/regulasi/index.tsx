@@ -60,7 +60,7 @@ const Index = () => {
     };
 
     const columns = [
-        { name: 'Judul', row: (cell: any) => <div>{cell.judul}</div> },
+        { name: 'Judul', row: (cell: any) => <div className="w-[250px] whitespace-normal" style={{ wordWrap: 'break-word', whiteSpace: 'pre-wrap' }}>{cell.judul}</div> },
         { name: 'kategori', row: (cell: any) => <div>{kategoriOptions?.filter((x) => x.value == cell.kategori)[0]?.label}</div> },
         { name: 'Tahun Terbit', row: (cell: any) => <div>{cell.tahun_terbit}</div> },
         {

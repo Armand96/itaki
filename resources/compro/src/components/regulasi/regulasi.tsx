@@ -6,12 +6,6 @@ import { useEffect, useState } from "react";
 import ReactPaginate from "react-paginate";
 import FetchData from "../../../services/FetchData";
 
-// Data dummy
-const kategoriFilters = [
-    { label: "UU", value: "uu" },
-    { label: "Peraturan Pemerintah", value: "pp" },
-    { label: "Peraturan LPK", value: "lpk" },
-];
 
 interface RegulasiData {
     no: number;
@@ -49,11 +43,14 @@ export default function Regulasi() {
     }
 
     useEffect(() => {
-        Promise.all([fetchData(), FetchData.GetKategori(`?menu_tujuan=Regulasi`)]).then((res) => {
-            setLoading(false)
-            setActiveKategori(res[1]?.data[0]?.id)
-            setCategoriesList(res[1]?.data || [])
-        })
+        FetchData.GetKategori(`?menu_tujuan=Regulasi`).then((kategoriRes) => {
+            const kategoriId = kategoriRes?.data[0]?.id;
+            setActiveKategori(kategoriId);
+            setCategoriesList(kategoriRes?.data || []);
+            fetchData(1, paginateData?.per_page, kategoriId);
+        }).finally(() => {
+            setLoading(false);
+        });
     }, [])
 
     const handleKategoriChange = (kategoriId: number) => {

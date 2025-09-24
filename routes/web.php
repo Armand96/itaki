@@ -40,14 +40,16 @@ Route::get('/{any?}', function ($any = null) {
 
     $fullPath = public_path("compro/{$any}");
 
+       $htmlPath = public_path("compro/{$any}.html");
+    if (File::exists($htmlPath)) {
+        return Response::file($htmlPath);
+    }
+
     if (File::exists($fullPath)) {
         return Response::file($fullPath);
     }
 
-    $htmlPath = public_path("compro/{$any}.html");
-    if (File::exists($htmlPath)) {
-        return Response::file($htmlPath);
-    }
+
 
     $txtPath = public_path("compro/{$any}.txt");
     if (File::exists($txtPath)) {

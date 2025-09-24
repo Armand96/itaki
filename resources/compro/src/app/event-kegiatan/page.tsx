@@ -6,7 +6,8 @@ export const metadata = {
 };
 
 const Seminar = dynamic(() => import('@/components/EventKegiatan'), {
-  loading: () => <Loading />
+  loading: () => <Loading />,
+  ssr: true
 });
 
 export default function Page() {

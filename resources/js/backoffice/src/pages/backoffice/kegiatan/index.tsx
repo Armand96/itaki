@@ -6,7 +6,7 @@ import Swal from 'sweetalert2';
 import LoadingScreen from '../../../components/Loading/loading';
 import { ModalLayout } from '../../../components/HeadlessUI';
 import TablePaginate from '../../../components/Table/tablePaginate';
-import { getCategories, getKegiatan, getKegiatanEnum, getPublikasiIlmiah, PostKegiatan, PostPublikasiIlmiah } from '../../../helpers';
+import { getKegiatan, getKegiatanEnum, PostKegiatan } from '../../../helpers';
 import dayjs from 'dayjs';
 import Select from 'react-select';
 import { HelperFunction } from '../../../helpers/HelpersFunction';
@@ -60,7 +60,6 @@ const Index = () => {
     const columns = [
         { name: 'Kegiatan', row: (cell: any) => <div  className="w-[300px] whitespace-normal" style={{ wordWrap: 'break-word', whiteSpace: 'pre-wrap' }}>{cell.judul}</div> },
         { name: 'Jenis Event', row: (cell: any) => <div>{cell.kategori}</div> },
-        { name: 'Deskripsi singkat', row: (cell: any) => <div>{cell.short_desc}</div> },
         { name: 'Tanggal Event', row: (cell: any) => <div>{cell.tgl_event}</div> },
         { name: 'Status Event', row: (cell: any) => <div>{cell?.status_event ? "sedang berjalan" : "sudah selesai / belum berjalan"}</div> },
                 { name: 'Status', row: (cell: any) => <div>{cell?.is_active == 1 ? "Aktif" : "tidak aktif"}</div> },
@@ -127,7 +126,6 @@ const Index = () => {
 
                             </div>
 
-                            <FormInput name='Judul' label='Deskripsi singkat' value={formData.short_desc} onChange={(e) => setFormData({ ...formData, short_desc: e.target.value })} className='form-input mb-3' />
                             <FormInput name='Judul' label='Tanggal Event' type='date' value={formData.tgl_event} onChange={(e) => setFormData({ ...formData, tgl_event: e.target.value })} className='form-input mb-3' />
                             <div className='mb-2'>
                                 <label className="mb-2" htmlFor="choices-text-remove-button">
@@ -169,7 +167,7 @@ const Index = () => {
 
                         <div className='flex justify-end p-4 border-t gap-x-4'>
                             <button className='btn bg-light text-gray-800' onClick={() => setModal(false)}>Close</button>
-                            <button className='btn bg-primary text-white' disabled={!formData?.judul || !selectedKategori?.value || !formData?.short_desc || !formData?.tgl_event || !formData?.detail } onClick={postData}>Submit</button>
+                            <button className='btn bg-primary text-white' disabled={!formData?.judul || !selectedKategori?.value  || !formData?.tgl_event || !formData?.detail } onClick={postData}>Submit</button>
                         </div>
                     </div>
                 </ModalLayout>

@@ -117,25 +117,26 @@ export default function GaleriArea() {
         </div>
       </div>
 
-      <Modal show={showModal} onHide={handleClose} centered size="lg">
-        <Modal.Body className="text-center">
-          {selectedImage && (
-            <Image
-              src={selectedImage}
-              alt="Preview"
-              width={900}
-              height={900}
-              className="img-fluid"
-            />
-          )}
-          {selectedDesc && <p className="mt-3">{selectedDesc}</p>}
-        </Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
-            Tutup
-          </Button>
-        </Modal.Footer>
-      </Modal>
+ <Modal
+  show={showModal}
+  onHide={handleClose}
+  centered
+  size="xl"
+  dialogClassName="modal-lg"
+>
+  <Modal.Body className="p-0 text-center">
+    {selectedImage && (
+      <Image
+        src={selectedImage}
+        alt="Preview"
+        width={1920}
+        height={1080}
+        className="w-100 h-auto"
+        style={{ objectFit: "contain" }}
+      />
+    )}
+  </Modal.Body>
+</Modal>
     </>
   );
 }
