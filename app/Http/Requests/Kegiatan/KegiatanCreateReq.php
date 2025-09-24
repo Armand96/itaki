@@ -31,7 +31,7 @@ class KegiatanCreateReq extends ApiRequest
             'tgl_event' => 'required|date',
             'status_event' => 'required|boolean',
             'is_active' => 'boolean',
-            'url_video' => '',
+            'url_video' => 'string',
             'image' => 'image',
         ];
     }
