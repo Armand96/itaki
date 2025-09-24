@@ -10,7 +10,7 @@ class Kegiatan extends Model
     protected $fillable = [
         'judul',
         'kategori',
-        'short_desc',
+        // 'short_desc',
         'detail',
         'tgl_event',
         'status_event',
