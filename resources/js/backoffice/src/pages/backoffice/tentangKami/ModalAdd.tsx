@@ -64,7 +64,7 @@ export const ModalAdd = ({ isOpen, toggleModal, isCreate, setLoading, detailData
 
         try {
             if (["Sejarah ITAKI", "Visi", "Misi"].includes(detailData?.title)) {
-                if (formData?.oldDesc) {
+                if (formData?.oldDesc || formData?.id) {
                     await PostGenerals({
                         category: detailData?.key,
                         title: slug,

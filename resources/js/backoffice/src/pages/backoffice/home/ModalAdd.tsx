@@ -71,7 +71,7 @@ export const ModalAdd = ({ isOpen, toggleModal, isCreate, setLoading, detailData
                 })
             }
             if (detailData?.key === "sambutan") {
-                if (formData?.oldDesc) {
+                if (formData?.oldDesc  || formData?.id) {
                     PostGenerals({
                         category: "sambutan",
                         title: "sambutan",
